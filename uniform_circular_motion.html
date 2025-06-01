@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniform Circular Motion: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams' // Automatic equation numbering for AMS environments
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.5rem; 
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4B5563; /* Tailwind gray-600 */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list):not(.problem-solving-steps) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+         .problem-solving-steps li {
+            margin-bottom: 0.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+            min-height: 100px; 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6; /* Tailwind gray-100 */
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .revision-questions-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6;
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6;
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6;
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .answer-container.expanded {
+            display: block;
+            max-height: 2000px; /* Increased for potentially longer answers */
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">Uniform Circular Motion: KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro-ucm" class="nav-link">1. Introduction to UCM</a></li>
+                <li><a href="#angular-quantities" class="nav-link">2. Angular Quantities</a></li>
+                <li><a href="#centripetal-acceleration" class="nav-link">3. Centripetal Acceleration</a></li>
+                <li><a href="#centripetal-force" class="nav-link">4. Centripetal Force</a></li>
+                <li><a href="#applications-ucm" class="nav-link">5. Applications of UCM</a></li>
+                <li><a href="#problem-solving-ucm" class="nav-link">6. Problem Solving in UCM</a></li>
+                <li><a href="#summary-kcse-focus" class="nav-link">7. Summary & KCSE Focus</a></li>
+                <li><a href="#revision-questions-ucm" class="nav-link">8. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro-ucm" class="content-section">
+                <h2>1. Introduction to Uniform Circular Motion</h2>
+                <p>Uniform circular motion describes a specific type of movement where an object travels along a circular path at a constant speed. This definition, while seemingly straightforward, underpins a fascinating area of physics that explains phenomena from planetary orbits to the workings of a simple centrifuge. The term "uniform" in this context refers specifically to the constancy of the object's speed, which is the magnitude of its velocity.</p>
+                <h3>Defining Uniform Circular Motion</h3>
+                <p>An object is said to be in uniform circular motion if it satisfies two primary conditions:</p>
+                <ol>
+                    <li>Its path of motion is a circle (or an arc of a circle).</li>
+                    <li>Its speed along this path remains constant.</li>
+                </ol>
+                <p>It is crucial to distinguish this from uniform linear motion. In uniform linear motion, an object moves in a straight line with constant velocity (both constant speed and constant direction). However, in uniform circular motion, while the speed is constant, the direction of the object's motion is continuously changing. At any point on the circular path, the instantaneous velocity is tangential to the circle at that point. As the object moves, this tangent continuously changes direction. Since velocity is a vector quantity, possessing both magnitude (speed) and direction, a change in direction implies a change in velocity, even if the speed remains the same. This continuous change in velocity is fundamental to understanding that objects in uniform circular motion are, in fact, accelerating. This acceleration, known as centripetal acceleration, is always directed towards the center of the circular path and is caused by a net force, the centripetal force.</p>
+                <h3>Distinction from Linear Motion</h3>
+                <p>The distinction between uniform circular motion and uniform linear motion is significant. In uniform linear motion, if an object's velocity is constant, its acceleration is zero, and consequently, the net force acting on it is zero, according to Newton's First Law of Motion. The term "uniform" here implies no change in the state of motion.</p>
+                <p>However, the use of "uniform" in "uniform circular motion" can sometimes be misconstrued by students to imply a similar state of zero net force. This is not the case. As established, the direction of velocity in circular motion is constantly changing. This change in velocity signifies that there is an acceleration present. According to Newton's Second Law of Motion, if there is an acceleration, there must be a net force causing it. This force, responsible for maintaining the circular path by continuously changing the direction of the velocity, is the centripetal force. Therefore, unlike uniform linear motion, uniform circular motion inherently involves a continuous acceleration and a continuous net force, despite the speed remaining constant. Understanding this difference is pivotal for grasping the dynamics of circular motion.</p>
+            </section>
+
+            <section id="angular-quantities" class="content-section hidden-section">
+                <h2>2. Angular Quantities in Circular Motion</h2>
+                <p>To describe circular motion effectively, a set of angular quantities is used, paralleling the linear quantities used for straight-line motion. The Kenya Certificate of Secondary Education (KCSE) syllabus emphasizes the understanding and application of these quantities.</p>
+                <h3>Angular Displacement ($\theta$) and the Radian</h3>
+                <p>Angular displacement, denoted by the Greek letter theta ($\theta$), is defined as the angle swept through by the radius connecting the center of the circular path to the object, as the object moves along an arc. In physics, particularly in the context of circular motion, angles are predominantly measured in <strong>radians</strong> rather than degrees.</p>
+                <p>A <strong>radian</strong> is defined as the angle subtended at the center of a circle by an arc whose length is equal to the radius of the circle. The relationship between the arc length ($S$), the radius ($r$), and the angular displacement ($\theta$ in radians) is given by the simple formula:
+                $$\theta = \frac{S}{r}$$</p>
+                <p>This equation highlights a key reason for using radians: it expresses the angle as a ratio of two lengths, making the radian a dimensionless quantity if $S$ and $r$ have the same units. This simplifies many formulas in rotational dynamics.</p>
+                <p>For a complete circle, the arc length is the circumference ($2\pi r$). Therefore, the angular displacement for one full revolution is:
+                $$\theta = \frac{2\pi r}{r} = 2\pi \text{ radians}$$</p>
+                <p>Since one full revolution is also $360^\circ$, the conversion factor between radians and degrees is $2\pi \text{ radians} = 360^\circ$, or $\pi \text{ radians} = 180^\circ$. The use of radians is standard in physics because it leads to more straightforward forms of equations for angular motion, such as $v = r\omega$ and $a_c = r\omega^2$, without the need for cumbersome conversion factors that would arise if degrees were used.</p>
+                <h3>Angular Velocity ($\omega$)</h3>
+                <p>Angular velocity, denoted by the Greek letter omega ($\omega$), is defined as the rate of change of angular displacement with time. It quantifies how quickly the angular position of an object is changing. The SI unit for angular velocity is radians per second (rad/s or rad s⁻¹).</p>
+                <p>Mathematically, for an angular displacement $\Delta\theta$ occurring in a time interval $\Delta t$, the average angular velocity is:
+                $$\omega = \frac{\Delta\theta}{\Delta t}$$</p>
+                <p>The instantaneous angular velocity is the limit of this ratio as $\Delta t$ approaches zero.</p>
+                <p>A crucial relationship exists between the linear (or tangential) velocity ($v$) of an object in circular motion and its angular velocity ($\omega$). The linear velocity $v$ is the speed at which the object moves along the circumference of the circle, and its direction is always tangential to the path at any given point. This relationship can be derived from the definition of angular displacement. Since $S = r\theta$, dividing by time $t$ (or considering small changes $\Delta S = r\Delta\theta$ in time $\Delta t$) gives:
+                $$\frac{\Delta S}{\Delta t} = r \frac{\Delta\theta}{\Delta t}$$</p>
+                <p>Recognizing that $\frac{\Delta S}{\Delta t}$ is the linear speed $v$ and $\frac{\Delta\theta}{\Delta t}$ is the angular velocity $\omega$, we get the important formula:
+                $$v = r\omega$$</p>
+                <p>This equation shows that for a given angular velocity, points farther from the center of rotation (larger $r$) have a greater linear tangential speed. The fact that the direction of this tangential velocity $v$ is constantly changing is what leads to centripetal acceleration.</p>
+                <h3>Period ($T$) and Frequency ($f$)</h3>
+                <p>Two other important quantities used to describe uniform circular motion are the period and frequency:</p>
+                <ul>
+                    <li><strong>Period ($T$)</strong>: The period is defined as the time taken for an object to complete one full revolution around the circular path. Its SI unit is the second (s).</li>
+                    <li><strong>Frequency ($f$)</strong>: Frequency is defined as the number of complete revolutions an object makes per unit time. Its SI unit is Hertz (Hz), which is equivalent to revolutions per second (s⁻¹).</li>
+                </ul>
+                <p>Period and frequency are reciprocals of each other:
+                $$T = \frac{1}{f}$$</p>
+                <p>These quantities are also directly related to angular velocity. Since one revolution corresponds to an angular displacement of $2\pi$ radians and takes a time $T$ (the period), the angular velocity can be expressed as:
+                $$ \omega = \frac{\text{angular displacement for one revolution}}{\text{time for one revolution}} = \frac{2\pi}{T} $$</p>
+                <p>Substituting $T = 1/f$ into this equation, we also get:
+                $$ \omega = 2\pi f $$</p>
+                <p>These relationships highlight the interconnectedness of $\omega$, $T$, and $f$. Proficiency in converting between these quantities is essential. For instance, revolutions per minute (rpm) can be converted to rad/s using $\omega (\text{rad/s}) = \text{rpm} \times \frac{2\pi}{60}$.</p>
+                
+                <h4>Table 1: Summary of Angular and Linear Quantities</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Symbol</th>
+                            <th>SI Unit</th>
+                            <th>Defining Formula/Relationship</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Linear Displacement (arc length)</td>
+                            <td>$S$</td>
+                            <td>metre (m)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Angular Displacement</td>
+                            <td>$\theta$</td>
+                            <td>radian (rad)</td>
+                            <td>$\theta = \frac{S}{r}$</td>
+                        </tr>
+                        <tr>
+                            <td>Linear Velocity (speed)</td>
+                            <td>$v$</td>
+                            <td>metre/second (m/s)</td>
+                            <td>$v = \frac{\Delta S}{\Delta t}$</td>
+                        </tr>
+                        <tr>
+                            <td>Angular Velocity</td>
+                            <td>$\omega$</td>
+                            <td>radian/second (rad/s)</td>
+                            <td>$\omega = \frac{\Delta\theta}{\Delta t}$; $v = r\omega$</td>
+                        </tr>
+                        <tr>
+                            <td>Period</td>
+                            <td>$T$</td>
+                            <td>second (s)</td>
+                            <td>Time for one revolution; $T = \frac{1}{f}$; $T = \frac{2\pi}{\omega}$</td>
+                        </tr>
+                        <tr>
+                            <td>Frequency</td>
+                            <td>$f$</td>
+                            <td>Hertz (Hz)</td>
+                            <td>Revolutions per unit time; $f = \frac{1}{T}$; $f = \frac{\omega}{2\pi}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="centripetal-acceleration" class="content-section hidden-section">
+                <h2>3. Centripetal Acceleration ($a_c$)</h2>
+                <p>An object moving in uniform circular motion, despite having a constant speed, is continuously accelerating. This might seem counterintuitive, as acceleration is often first introduced in the context of changing speed. However, acceleration is formally defined as the rate of change of velocity, and velocity is a vector quantity with both magnitude (speed) and direction.</p>
+                <h3>Concept: Why there's acceleration despite constant speed</h3>
+                <p>In uniform circular motion, the magnitude of the velocity (the speed) is constant. However, the direction of the velocity vector, which is always tangential to the circular path, is continuously changing as the object moves around the circle. Any change in velocity, whether in magnitude, direction, or both, constitutes an acceleration. Therefore, an object in uniform circular motion is always accelerating because its direction of motion is constantly changing.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating changing velocity vector in UCM.</div>
+                <h3>Direction of Centripetal Acceleration</h3>
+                <p>The acceleration experienced by an object in uniform circular motion is known as <strong>centripetal acceleration</strong>. The term "centripetal" means "center-seeking." This acceleration is always directed radially inward, towards the center of the circular path. It is this acceleration that is responsible for continuously "pulling" the object away from a straight-line path (which it would follow due to inertia) and forcing it into a circular trajectory.</p>
+                <p>A key characteristic of centripetal acceleration is that it is always perpendicular to the instantaneous tangential velocity of the object. Since a radius is perpendicular to the tangent at any point on a circle, $a_c$ is always perpendicular to $v$. If the acceleration had a component parallel to the velocity, the speed of the object would change. Because the speed is constant in uniform circular motion, the acceleration must be solely responsible for changing the direction of the velocity.</p>
+                <h3>Derivation and Formulas: $a_c = \frac{v^2}{r}$ and $a_c = r\omega^2$</h3>
+                <p>The magnitude of the centripetal acceleration can be derived geometrically (refer to standard physics texts for full derivation using similar triangles, e.g., Figure 2.4 in KLB Physics Book 4). The key formulas are:</p>
+                <p>$$a_c = \frac{v^2}{r}$$</p>
+                <p>This is the fundamental formula for centripetal acceleration in terms of linear speed $v$ and radius $r$.</p>
+                <p>We can also express centripetal acceleration in terms of angular velocity $\omega$. Since $v = r\omega$, substituting this into the equation for $a_c$:
+                $$a_c = \frac{(r\omega)^2}{r} = \frac{r^2\omega^2}{r}$$
+                $$a_c = r\omega^2$$</p>
+                <p>Both formulas, $a_c = \frac{v^2}{r}$ and $a_c = r\omega^2$, are essential for solving problems related to uniform circular motion.</p>
+            </section>
+
+            <section id="centripetal-force" class="content-section hidden-section">
+                <h2>4. Centripetal Force ($F_c$)</h2>
+                <p>According to Newton's Second Law of Motion, if an object is accelerating, there must be a net force acting on it. Since an object in uniform circular motion experiences centripetal acceleration, it must also be subject to a net force that causes this acceleration. This net force is known as the centripetal force.</p>
+                <h3>Definition and Necessity of Centripetal Force</h3>
+                <p>Centripetal force is the net force required to keep an object moving in a circular path. This force is always directed towards the center of the circle, in the same direction as the centripetal acceleration. Without this force, the object would continue in a straight line tangential to the circle at the point where the force ceased to act, due to inertia.</p>
+                <p>It is critically important to understand that centripetal force is not a new, fundamental type of force. Instead, "centripetal force" is a label given to the <em>net force</em> that fulfills the role of causing the circular motion. This net force is provided by one or more identifiable physical forces. For example:</p>
+                <ul>
+                    <li>For a stone whirled on a string, the tension in the string provides the centripetal force.</li>
+                    <li>For a planet orbiting the Sun, the gravitational force provides the centripetal force.</li>
+                    <li>For a car rounding a flat curve, static friction provides the centripetal force.</li>
+                </ul>
+                <h3>Direction of Centripetal Force</h3>
+                <p>The centripetal force is always directed radially inward, towards the center of the circular path.</p>
+                <h3>Formulas: $F_c = \frac{mv^2}{r}$ and $F_c = mr\omega^2$</h3>
+                <p>From Newton's Second Law, $F_{net} = ma$. For uniform circular motion, $F_{net} = F_c$ and $a = a_c$.
+                $$F_c = m a_c$$</p>
+                <p>Substituting the expressions for $a_c$:</p>
+                <ol>
+                    <li>Using $a_c = \frac{v^2}{r}$:
+                    $$F_c = \frac{mv^2}{r}$$</li>
+                    <li>Using $a_c = r\omega^2$:
+                    $$F_c = mr\omega^2$$</li>
+                </ol>
+                <p>These formulas are fundamental for calculating the magnitude of the centripetal force.</p>
+                <h3>Experimental Illustration and Investigation of Centripetal Force</h3>
+                <p>The KCSE syllabus requires an understanding of simple experiments to illustrate centripetal force and its dependencies. Factors affecting centripetal force are mass ($m$), angular velocity ($\omega$) or linear speed ($v$), and radius ($r$).</p>
+                <h4>Experiment: Relationship between $F$ and $\omega$ (constant $r, m$)</h4>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram for Experiment 2.1 (F vs $\omega^2$) from KLB Physics Book 4.</div>
+                <ul>
+                    <li><strong>Observation:</strong> A graph of $F$ against $\omega^2$ yields a straight line through the origin.</li>
+                    <li><strong>Conclusion:</strong> $F \propto \omega^2$ (when $m$ and $r$ are constant).</li>
+                </ul>
+                <h4>Experiment: Variation of $v$ with $r$ (constant $F, m$)</h4>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram for Experiment 2.2 ($v^2$ vs $r$) from KLB Physics Book 4.</div>
+                <ul>
+                    <li><strong>Observation:</strong> A graph of $v^2$ against $r$ yields a straight line through the origin.</li>
+                    <li><strong>Conclusion:</strong> $v^2 \propto r$ (when $F$ and $m$ are constant), consistent with $F = \frac{mv^2}{r}$.</li>
+                </ul>
+                <h4>Table 2: Summary of Centripetal Acceleration and Force</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Symbol</th>
+                            <th>Direction</th>
+                            <th>Formula(s)</th>
+                            <th>Key Dependencies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Centripetal Acceleration</td>
+                            <td>$a_c$</td>
+                            <td>Towards the center</td>
+                            <td>$a_c = \frac{v^2}{r}$; $a_c = r\omega^2$</td>
+                            <td>$v, r, \omega$</td>
+                        </tr>
+                        <tr>
+                            <td>Centripetal Force</td>
+                            <td>$F_c$</td>
+                            <td>Towards the center</td>
+                            <td>$F_c = \frac{mv^2}{r}$; $F_c = mr\omega^2$</td>
+                            <td>$m, v, r, \omega$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="applications-ucm" class="content-section hidden-section">
+                <h2>5. Applications of Uniform Circular Motion</h2>
+                <p>The principles of uniform circular motion are evident in many natural phenomena and technological applications.</p>
+                <h3>Motion on a Level Circular Bend (e.g., a car)</h3>
+                <p>The centripetal force is provided by static friction between tires and road. $F_c = \frac{mv^2}{r} \le \mu_s mg$. If $\frac{mv^2}{r} > \mu_s mg$, the car skids.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of car on a level bend showing forces.</div>
+                <h3>Motion on Banked Tracks</h3>
+                <p>Banking allows a component of the normal force ($N\sin\theta$) to provide the centripetal force, reducing reliance on friction. For design speed, $\tan\theta = \frac{v^2}{rg}$. (Calculations on banked tracks not required for KCSE).</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of car on a banked track showing forces.</div>
+                <h3>Aircraft Banking</h3>
+                <p>The horizontal component of the lift force provides the centripetal force for an aircraft to turn.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of aircraft banking.</div>
+                <h3>Cyclist Rounding a Bend</h3>
+                <p>A cyclist leans inwards. Friction provides the centripetal force. Leaning helps balance torques. $\tan\theta = \frac{v^2}{rg}$.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of cyclist leaning into a bend.</div>
+                <h3>The Conical Pendulum</h3>
+                <p>A mass on a string swings in a horizontal circle. The horizontal component of tension ($T\sin\theta$) provides the centripetal force ($F_c = T\sin\theta = mr\omega^2$). Vertical component ($T\cos\theta$) balances weight $mg$. (Qualitative understanding for KCSE).</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a conical pendulum.</div>
+                <h3>Motion in a Vertical Circle</h3>
+                <p>For an object whirled on a string:</p>
+                <ul>
+                    <li><strong>At the top:</strong> $F_c = T_A + mg = \frac{mv^2}{r} \Rightarrow T_A = \frac{mv^2}{r} - mg$. Minimum speed for string to be taut ($T_A=0$) is $v_{min} = \sqrt{rg}$.</li>
+                    <li><strong>At the bottom:</strong> $F_c = T_B - mg = \frac{mv^2}{r} \Rightarrow T_B = \frac{mv^2}{r} + mg$.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of motion in a vertical circle showing forces at top and bottom.</div>
+                <h3>The Centrifuge</h3>
+                <p>Separates substances of different densities by rapid rotation. Denser particles experience a greater effective outward "push" relative to the fluid due to inertia and the required centripetal force ($F_c = mr\omega^2$).</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating centrifuge principle.</div>
+                <h3>Satellites in Orbit</h3>
+                <p>Gravitational force provides the centripetal force: $\frac{GMm}{r^2} = \frac{mv^2}{r}$. Orbital speed $v = \sqrt{\frac{GM}{r}}$.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of satellite orbiting Earth.</div>
+                <h3>Speed Governors</h3>
+                <p>Rotating masses move outwards with increasing speed, mechanically controlling fuel/steam supply to maintain constant engine speed. (Qualitative understanding for KCSE).</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a speed governor.</div>
+                <h4>Table 3: Forces Providing Centripetal Force in Various Applications</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Application</th>
+                            <th>Agent(s) of Centripetal Force</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Stone whirled on a string (horizontal)</td><td>Tension in the string</td></tr>
+                        <tr><td>Car rounding a level (flat) circular bend</td><td>Static Frictional force between tires and road</td></tr>
+                        <tr><td>Satellite orbiting a planet</td><td>Gravitational force between satellite and planet</td></tr>
+                        <tr><td>Car rounding a banked track (design speed)</td><td>Horizontal component of the Normal force from the road</td></tr>
+                        <tr><td>Object at the top of a vertical circle (string)</td><td>Tension in the string + Gravitational force (weight)</td></tr>
+                        <tr><td>Object at the bottom of a vertical circle (string)</td><td>Tension in the string - Gravitational force (weight) (Net is $T-mg$)</td></tr>
+                        <tr><td>Electron orbiting a nucleus (Bohr model)</td><td>Electrostatic force of attraction</td></tr>
+                        <tr><td>Cyclist leaning into a turn</td><td>Static Frictional force; component of Normal force may contribute</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="problem-solving-ucm" class="content-section hidden-section">
+                <h2>6. Problem Solving in Uniform Circular Motion</h2>
+                <p>Solving numerical problems is key for KCSE.</p>
+                <h3>Strategies and Tips for Solving Numerical Problems</h3>
+                <ol class="problem-solving-steps">
+                    <li>Identify object and path radius.</li>
+                    <li>Draw a Free-Body Diagram.</li>
+                    <li>Identify the centripetal force ($F_c$).</li>
+                    <li>Choose correct formulas (angular, $a_c$, $F_c$).</li>
+                    <li>Ensure SI unit consistency. Convert rpm to rad/s: $\omega (\text{rad/s}) = \text{rpm} \times \frac{2\pi}{60}$.</li>
+                    <li>Solve for the unknown.</li>
+                    <li>Check for reasonableness.</li>
+                </ol>
+                <h3>Worked Examples</h3>
+                <p><strong>Example 1:</strong> A turntable rotates at 45 rev/min. What is its angular velocity in rad s⁻¹?</p>
+                <p><em>Solution:</em> $f = 45 \text{ rev/min} \times \frac{1 \text{ min}}{60 \text{ s}} = 0.75 \text{ Hz}$. $\omega = 2\pi f = 2\pi \times 0.75 \text{ rad/s} = 1.5\pi \text{ rad/s} \approx 4.71 \text{ rad/s}$.</p>
+                <p><strong>Example 2:</strong> A model car moves round a circular track of radius 0.4 m at 2 revolutions per second. What is its: (i) period $T$? (ii) angular velocity $\omega$? (iii) speed $v$?</p>
+                <p><em>Solution:</em> $r = 0.4 \text{ m}$, $f = 2 \text{ Hz}$. (i) $T = \frac{1}{f} = \frac{1}{2} \text{ s} = 0.5 \text{ s}$. (ii) $\omega = 2\pi f = 2\pi \times 2 = 4\pi \text{ rad/s} \approx 12.57 \text{ rad/s}$. (iii) $v = r\omega = 0.4 \times 4\pi = 1.6\pi \text{ m/s} \approx 5.027 \text{ m/s}$.</p>
+                <p><strong>Example 3:</strong> A point on the rim of a wheel has a velocity of 5.6 m/s. If the rim has a radius of 0.4 m, calculate: (a) $\omega$. (b) $a_c$.</p>
+                <p><em>Solution:</em> $v = 5.6 \text{ m/s}$, $r = 0.4 \text{ m}$. (a) $\omega = \frac{v}{r} = \frac{5.6}{0.4} = 14 \text{ rad/s}$. (b) $a_c = \frac{v^2}{r} = \frac{(5.6)^2}{0.4} = 78.4 \text{ m/s}^2$.</p>
+                <p><strong>Example 4:</strong> A body of mass 0.5 kg is tied to a string and whirled in a horizontal circle of radius 2 m with a speed of 3.16 m/s. Calculate: (a) $a_c$. (b) Tension $T$.</p>
+                <p><em>Solution:</em> $m = 0.5 \text{ kg}$, $r = 2 \text{ m}$, $v = 3.16 \text{ m/s}$. (a) $a_c = \frac{v^2}{r} = \frac{(3.16)^2}{2} \approx 4.99 \text{ m/s}^2$. (b) $T = F_c = ma_c = 0.5 \times 4.99 \approx 2.50 \text{ N}$.</p>
+                <p><strong>Example 5:</strong> A car travels over a humpback bridge of radius of curvature 40 m. Max speed if wheels stay in contact? ($g = 10 \text{ m/s}^2$).</p>
+                <p><em>Solution:</em> At top, $F_c = mg - N = \frac{mv^2}{r}$. For max speed, $N=0$. $mg = \frac{mv_{max}^2}{r} \Rightarrow v_{max} = \sqrt{gr} = \sqrt{10 \times 40} = \sqrt{400} = 20 \text{ m/s}$.</p>
+            </section>
+
+            <section id="summary-kcse-focus" class="content-section hidden-section">
+                <h2>7. Key Concepts Summary and KCSE Focus Points</h2>
+                <h3>Recap of Essential Definitions and Formulas</h3>
+                <ul>
+                    <li>Uniform Circular Motion: Motion in a circle at constant speed.</li>
+                    <li>Angular Displacement ($\theta$): $\theta = \frac{S}{r}$ (radians).</li>
+                    <li>Angular Velocity ($\omega$): $\omega = \frac{\Delta\theta}{\Delta t} = 2\pi f = \frac{2\pi}{T}$ (rad/s).</li>
+                    <li>Linear (Tangential) Velocity ($v$): $v = r\omega$ (m/s).</li>
+                    <li>Period ($T$): $T=\frac{1}{f}$ (s).</li>
+                    <li>Frequency ($f$): $f=\frac{1}{T}$ (Hz).</li>
+                    <li>Centripetal Acceleration ($a_c$): $a_c = \frac{v^2}{r} = r\omega^2$ (m/s²).</li>
+                    <li>Centripetal Force ($F_c$): $F_c = \frac{mv^2}{r} = mr\omega^2$ (N).</li>
+                </ul>
+                <h3>Highlighting Areas Commonly Tested in KCSE</h3>
+                <ol>
+                    <li>Definitions of angular quantities, $a_c$, $F_c$.</li>
+                    <li>Formulas and relationships (especially $v=r\omega$).</li>
+                    <li>Identification of centripetal force in various scenarios.</li>
+                    <li>Calculations involving $F_c = \frac{mv^2}{r}$ and $F_c = mr\omega^2$, including unit conversions.</li>
+                    <li>Motion in a vertical circle (tension, $v_{min} = \sqrt{rg}$).</li>
+                    <li>Applications (conceptual understanding): centrifuge, banked tracks (qualitative), conical pendulum (qualitative), satellites, speed governors.</li>
+                    <li>Experimental aspects: describing experiments for $F_c$ dependencies.</li>
+                </ol>
+                <p>Emphasis on both explanation and calculation questions is common in KCSE Physics.</p>
+            </section>
+
+            <section id="revision-questions-ucm" class="content-section hidden-section">
+                <h2>8. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. Define uniform circular motion, stating the two primary conditions that an object must satisfy.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Uniform circular motion is the movement of an object along a circular path at a constant speed. The two primary conditions are: (1) The path is a circle or an arc of a circle. (2) The speed along this path remains constant.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. How does uniform circular motion differ from uniform linear motion regarding velocity and acceleration?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> In uniform circular motion, speed is constant, but velocity continuously changes direction, leading to a non-zero centripetal acceleration. In uniform linear motion, velocity (both speed and direction) is constant, so acceleration is zero.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. Define angular displacement and state its SI unit.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Angular displacement ($\theta$) is the angle swept by the radius connecting the center to the object as it moves along the circle. Its SI unit is the radian (rad).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">4. Define a radian.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A radian is the angle subtended at the center of a circle by an arc whose length is equal to the radius of the circle.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. What is the angular displacement for one full revolution in radians?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $2\pi$ radians.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">6. Define angular velocity and state its SI unit.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Angular velocity ($\omega$) is the rate of change of angular displacement with time. Its SI unit is radians per second (rad/s).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. State the relationship between linear velocity ($v$), radius ($r$), and angular velocity ($\omega$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $v = r\omega$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. Define the period ($T$) of uniform circular motion and state its SI unit.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The period ($T$) is the time taken to complete one full revolution. Its SI unit is the second (s).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">9. Define the frequency ($f$) of uniform circular motion and state its SI unit.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Frequency ($f$) is the number of complete revolutions per unit time. Its SI unit is Hertz (Hz).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. State the relationship between period ($T$) and frequency ($f$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $T = \frac{1}{f}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. State the relationship between angular velocity ($\omega$) and period ($T$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $\omega = \frac{2\pi}{T}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. State the relationship between angular velocity ($\omega$) and frequency ($f$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $\omega = 2\pi f$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. Explain why an object moving in uniform circular motion is always accelerating despite having a constant speed.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Acceleration is the rate of change of velocity. Velocity is a vector with magnitude (speed) and direction. In UCM, speed is constant, but the direction of velocity is continuously changing (always tangential). A change in direction of velocity means velocity is changing, hence there is acceleration.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. What is the name given to the acceleration experienced by an object in uniform circular motion?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Centripetal acceleration.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">15. What is the direction of centripetal acceleration?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Radially inward, towards the center of the circular path.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. Explain the relationship between the direction of centripetal acceleration and the direction of the instantaneous tangential velocity.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Centripetal acceleration is always perpendicular to the instantaneous tangential velocity.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">17. State the formula for centripetal acceleration ($a_c$) in terms of linear speed ($v$) and radius ($r$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $a_c = \frac{v^2}{r}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. State the formula for centripetal acceleration ($a_c$) in terms of radius ($r$) and angular velocity ($\omega$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $a_c = r\omega^2$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. Define centripetal force ($F_c$) and explain its necessity for an object to move in a circular path.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Centripetal force ($F_c$) is the net force required to keep an object moving in a circular path, directed towards the center. It is necessary because an object in UCM is accelerating (due to changing direction of velocity), and by Newton's Second Law, a net force is required to cause this acceleration. Without it, the object would move in a straight line (inertia).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. What is the direction of centripetal force?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Radially inward, towards the center of the circular path.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. Explain why centripetal force is not considered a new, fundamental type of force.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Centripetal force is a label for the *net force* that causes circular motion. This net force is always provided by one or more identifiable physical forces like tension, gravity, friction, or a component of the normal force.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. State the formula for centripetal force ($F_c$) in terms of mass ($m$), linear speed ($v$), and radius ($r$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $F_c = \frac{mv^2}{r}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">23. State the formula for centripetal force ($F_c$) in terms of mass ($m$), radius ($r$), and angular velocity ($\omega$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $F_c = mr\omega^2$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">24. Name the force that provides the centripetal force for a stone whirled on a string.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Tension in the string.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">25. Name the force that provides the centripetal force for a planet orbiting the Sun.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Gravitational force.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">26. Name the force that provides the centripetal force for a car rounding a flat circular bend.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Static friction between the tires and the road.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">27. Identify the factors that affect the magnitude of the centripetal force.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Mass of the object ($m$), its linear speed ($v$) or angular velocity ($\omega$), and the radius of the circular path ($r$).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">28. Describe an experiment to show that centripetal force ($F$) is proportional to the square of angular velocity ($\omega^2$) when mass and radius are constant. State the expected observation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An experiment might involve a turntable with a mass attached by a spring to a central peg. The turntable's speed is varied. The force (spring extension) is measured for different angular velocities ($\omega$) at which the mass maintains a constant radius. Expected observation: A graph of $F$ against $\omega^2$ yields a straight line through the origin.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">29. Explain how a banked track helps a car round a bend without relying solely on friction.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> On a banked track, the road surface is tilted. The normal force exerted by the road on the car has a horizontal component directed towards the center of the curve. This horizontal component of the normal force provides some or all of the necessary centripetal force, reducing the reliance on friction.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">30. For an object moving in a vertical circle at the top, write the equation relating tension ($T_A$), weight ($mg$), mass ($m$), speed ($v$), and radius ($r$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $T_A + mg = \frac{mv^2}{r}$ or $T_A = \frac{mv^2}{r} - mg$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">31. What is the minimum speed required for an object on a string to complete a vertical circle without the string becoming slack at the top?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $v_{min} = \sqrt{rg}$. This occurs when tension at the top is zero.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">32. Explain the working principle of a centrifuge.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A centrifuge spins a mixture at high speeds. Denser particles require a greater centripetal force ($F_c = mr\omega^2$) to maintain circular motion at a given radius and angular velocity compared to less dense particles. Effectively, the denser particles are "flung" outwards to larger radii, separating them from the less dense components which are displaced inwards.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">33. A turntable rotates at 60 revolutions per minute. Calculate its angular velocity in radians per second.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $f = 60 \text{ rev/min} = 1 \text{ rev/s} = 1 \text{ Hz}$. $\omega = 2\pi f = 2\pi \times 1 = 2\pi \text{ rad/s} \approx 6.28 \text{ rad/s}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">34. A ball of mass 0.2 kg is whirled in a horizontal circle of radius 0.5 m at a constant speed of 2 m/s. Calculate its centripetal acceleration.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $a_c = \frac{v^2}{r} = \frac{(2 \text{ m/s})^2}{0.5 \text{ m}} = \frac{4 \text{ m}^2/\text{s}^2}{0.5 \text{ m}} = 8 \text{ m/s}^2$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">35. For the ball in question 34, calculate the centripetal force acting on it.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $F_c = ma_c = 0.2 \text{ kg} \times 8 \text{ m/s}^2 = 1.6 \text{ N}$.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Uniform Circular Motion. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0;
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+             // After updating section visibility, tell MathJax to look for new math
+            if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer');
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    answerContainer.classList.remove('hidden-answer');
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                     // If MathJax is loaded, typeset the newly expanded answer
+                    if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise([answerContainer]);
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+    </script>
+</body>
+</html>

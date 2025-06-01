@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thin Lenses: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) { /* Avoid applying to revision question list directly if it has specific styling */
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        /* Styles for expandable questions */
+        .revision-questions-list {
+            list-style-type: none; /* Remove default list styling */
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb; /* Tailwind gray-200 */
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6; /* Tailwind blue-500 */
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb; /* Tailwind gray-50 */
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6; /* Tailwind blue-500 */
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Smooth transition */
+        }
+        .answer-container.expanded {
+            display: block; /* Make it visible to allow transition */
+            max-height: 1000px; /* Adjust as needed for max answer height */
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">Thin Lenses: A Comprehensive KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro" class="nav-link">1. Introduction</a></li>
+                <li><a href="#types" class="nav-link">2. Types of Lenses</a></li>
+                <li><a href="#terms" class="nav-link">3. Terminology</a></li>
+                <li><a href="#ray-diagrams" class="nav-link">4. Ray Diagrams</a></li>
+                <li><a href="#image-converging" class="nav-link">5. Images (Converging)</a></li>
+                <li><a href="#image-diverging" class="nav-link">6. Images (Diverging)</a></li>
+                <li><a href="#lens-formula" class="nav-link">7. Lens Formula & Magnification</a></li>
+                <li><a href="#power" class="nav-link">8. Power of a Lens</a></li>
+                <li><a href="#focal-length-exp" class="nav-link">9. Determining Focal Length</a></li>
+                <li><a href="#applications" class="nav-link">10. Applications</a></li>
+                <li><a href="#revision-questions" class="nav-link">11. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro" class="content-section">
+                 <h2>1. Introduction to Thin Lenses</h2>
+                <p>A <strong>lens</strong> is typically a transparent material, such as glass, clear plastic, or perspex, with at least one curved surface. Its main function is to <strong>refract</strong> (bend) light as it passes through it, altering the direction of light rays to form images or modify the characteristics of a beam of light.</p>
+                <p>A <strong>thin lens</strong> is one where its thickness is considered negligible compared to its focal length and radii of curvature. This simplification is crucial for applying the thin lens formula and constructing accurate ray diagrams, as it allows us to assume that all refraction occurs at a single plane within the lens.</p>
+                <p>Lenses are fundamental components in a vast array of optical instruments, including cameras, spectacles (eyeglasses), microscopes, and telescopes. The human eye itself operates on principles similar to those of a lens, making the study of lenses essential for understanding vision.</p>
+                <p>The behavior of lenses is governed by the principles of <strong>refraction of light</strong>, which include Snell's Law and the concept of refractive index. Understanding how light bends when it passes from air into the lens material and then back into air is key to comprehending lens function.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram showing light refracting through a generic lens.</div>
+            </section>
+
+            <section id="types" class="content-section hidden-section">
+                <h2>2. Types of Thin Lenses</h2>
+                <p>Thin lenses are primarily categorized into two types based on how they affect parallel rays of light:</p>
+                <h3>Converging (Convex) Lenses</h3>
+                <ul>
+                    <li>They are <strong>thicker at the centre and thinner at the edges</strong>.</li>
+                    <li>They cause parallel rays of light to <strong>converge</strong> (come together) at a common point after passing through the lens.</li>
+                    <li>Examples include:
+                        <ul>
+                            <li><strong>Bi-convex:</strong> Both surfaces are convex.</li>
+                            <li><strong>Plano-convex:</strong> One surface is flat (plane), the other is convex.</li>
+                            <li><strong>Convex (converging) meniscus:</strong> One surface is convex, the other is concave, but the convex curvature is greater, resulting in a net converging effect.</li>
+                        </ul>
+                    </li>
+                    <li>Their converging effect can be visualized by imagining the lens as an assembly of prisms stacked base to base. The light rays bend towards the thicker part (base) of each conceptual prism segment, leading to overall convergence.</li>
+                </ul>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Diagram showing different types of converging lenses and their action on parallel light rays.</div>
+
+                <h3>Diverging (Concave) Lenses</h3>
+                <ul>
+                    <li>They are <strong>thinner at the centre and thicker at the edges</strong>.</li>
+                    <li>They cause parallel rays of light to <strong>diverge</strong> (spread out) as if they originated from a common point behind the lens (on the same side as the incident light).</li>
+                    <li>Examples include:
+                        <ul>
+                            <li><strong>Bi-concave:</strong> Both surfaces are concave.</li>
+                            <li><strong>Plano-concave:</strong> One surface is flat (plane), the other is concave.</li>
+                            <li><strong>Concave (diverging) meniscus:</strong> One surface is convex, the other is concave, but the concave curvature is greater, resulting in a net diverging effect.</li>
+                        </ul>
+                    </li>
+                    <li>Their diverging effect can be visualized by imagining the lens as an assembly of prisms stacked apex to apex. The light rays bend towards the base of each conceptual prism segment (which is at the edges of the lens), leading to overall divergence from the central axis.</li>
+                </ul>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Diagram showing different types of diverging lenses and their action on parallel light rays.</div>
+            </section>
+
+            <section id="terms" class="content-section hidden-section">
+                <h2>3. Essential Terminology</h2>
+                <div class="placeholder-img w-full h-72 my-4">Placeholder: Diagram illustrating all the key terms on both converging and diverging lenses.</div>
+                <ul>
+                    <li><strong>Centre of Curvature (C):</strong> The centre of the sphere from which a lens surface is a part. A lens generally has two centres of curvature, C1 and C2, one for each surface.</li>
+                    <li><strong>Radius of Curvature (r):</strong> The radius of the sphere of which the lens surface is a part (r1 and r2).</li>
+                    <li><strong>Principal Axis:</strong> An imaginary straight line passing through the optical centre and perpendicular to the lens. For lenses with curved surfaces, it passes through the centres of curvature.</li>
+                    <li><strong>Optical Centre (O):</strong> A point on the principal axis within a thin lens such_that a ray of light passing through it emerges undeviated (does not change its direction).</li>
+                    <li><strong>Principal Focus (F)</strong> (also Focal Point):
+                        <ul>
+                            <li>For a <strong>converging lens</strong>, it's the point on the principal axis where rays initially parallel and close to the principal axis (paraxial rays) converge after refraction. This is a <strong>real focus</strong>.</li>
+                            <li>For a <strong>diverging lens</strong>, it's the point on the principal axis from which rays initially parallel and close to the principal axis (paraxial rays) appear to diverge after refraction. This is a <strong>virtual focus</strong>.</li>
+                            <li>A thin lens has two principal foci, one on each side, usually equidistant from the optical centre if the medium on both sides is the same. The concept of paraxial rays (rays close to and making small angles with the principal axis) is important as the simple lens formulas are most accurate for these rays.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Focal Length (f):</strong> The distance between the optical centre (O) and the principal focus (F).
+                        <ul>
+                            <li>It is <strong>positive (+) for converging lenses</strong>.</li>
+                            <li>It is <strong>negative (-) for diverging lenses</strong> (according to the Real-is-Positive sign convention commonly used).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Focal Plane:</strong> A plane perpendicular to the principal axis that passes through the principal focus. Parallel rays of light that are not parallel to the principal axis converge to (or appear to diverge from) a point on this focal plane.</li>
+                </ul>
+            </section>
+
+            <section id="ray-diagrams" class="content-section hidden-section">
+                <h2>4. Ray Diagrams and Image Formation</h2>
+                <p>Ray diagrams are graphical tools used to determine the position, size, and nature (real or virtual, inverted or erect) of an image formed by a lens. They are constructed using specific "principal rays" whose paths are known. Usually, drawing two of these rays accurately is sufficient to locate the image, with the third serving as a useful check.</p>
+                <h3>Rules for Principal Rays:</h3>
+                <ol class="list-decimal ml-4">
+                    <li><strong>Ray parallel to the Principal Axis:</strong>
+                        <ul class="list-disc ml-4">
+                            <li>For a <strong>converging lens</strong>, this ray, after refraction, passes through the principal focus (F) on the other side of the lens.</li>
+                            <li>For a <strong>diverging lens</strong>, this ray, after refraction, appears to diverge from the principal focus (F) on the same side as the incident light.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ray passing through the Optical Centre (O):</strong> This ray passes through the lens undeviated (its direction does not change). This applies to both converging and diverging lenses.</li>
+                    <li><strong>Ray passing through (or directed towards) the Principal Focus (F):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>For a <strong>converging lens</strong>, a ray that passes through the principal focus (F) on its way to the lens emerges parallel to the principal axis after refraction.</li>
+                            <li>For a <strong>diverging lens</strong>, a ray that is directed towards the principal focus (F) on the far side of the lens emerges parallel to the principal axis after refraction.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="placeholder-img w-full h-72 my-4">Placeholder: Diagrams illustrating the three principal rays for both converging and diverging lenses.</div>
+                <h3>Conventions:</h3>
+                <ul class="list-disc ml-4">
+                    <li><strong>Real rays and real images</strong> are shown with <strong>solid lines</strong>. Real images can be formed on a screen.</li>
+                    <li><strong>Virtual rays and virtual images</strong> are shown with <strong>broken (dashed) lines</strong>. Virtual images cannot be formed on a screen but can be seen by an observer.</li>
+                </ul>
+            </section>
+
+            <section id="image-converging" class="content-section hidden-section">
+                <h2>5. Image Characteristics for a Converging Lens</h2>
+                <p>The characteristics of the image formed by a converging lens depend on the position of the object relative to the lens, specifically its principal focus (F) and twice the focal length (2F).</p>
+                <ol class="list-decimal ml-4">
+                    <li><strong>Object at Infinity:</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: At F (on the focal plane).</li>
+                            <li>Nature: Real.</li>
+                            <li>Orientation: Inverted.</li>
+                            <li>Size: Highly diminished (point-like).</li>
+                            <li>Application: Objective lens of a telescope.</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object at infinity (converging lens).</div>
+                    </li>
+                    <li><strong>Object Beyond 2F (u > 2f):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: Between F and 2F on the other side.</li>
+                            <li>Nature: Real.</li>
+                            <li>Orientation: Inverted.</li>
+                            <li>Size: Diminished.</li>
+                            <li>Application: Camera lens, human eye.</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object beyond 2F (converging lens).</div>
+                    </li>
+                    <li><strong>Object at 2F (u = 2f):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: At 2F on the other side.</li>
+                            <li>Nature: Real.</li>
+                            <li>Orientation: Inverted.</li>
+                            <li>Size: Same size as the object.</li>
+                            <li>Application: Some photocopiers, inverting lenses.</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object at 2F (converging lens).</div>
+                    </li>
+                    <li><strong>Object Between F and 2F (f < u < 2f):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: Beyond 2F on the other side.</li>
+                            <li>Nature: Real.</li>
+                            <li>Orientation: Inverted.</li>
+                            <li>Size: Magnified.</li>
+                            <li>Application: Projector lens, objective lens of a compound microscope.</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object between F and 2F (converging lens).</div>
+                    </li>
+                    <li><strong>Object at F (u = f):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: At infinity (rays emerge parallel).</li>
+                            <li>Nature: (Considered real, formed at infinity).</li>
+                            <li>Orientation: (Not clearly defined, image is at infinity).</li>
+                            <li>Size: Highly magnified (image is at infinity).</li>
+                            <li>Application: Searchlights, spotlights (source at F).</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object at F (converging lens).</div>
+                    </li>
+                    <li><strong>Object Between F and the Lens (u < f):</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Image position: On the same side as the object.</li>
+                            <li>Nature: Virtual.</li>
+                            <li>Orientation: Erect (upright).</li>
+                            <li>Size: Magnified.</li>
+                            <li>Application: Magnifying glass, eyepiece of a microscope or telescope.</li>
+                            <li>Reason for virtual image: Rays from the object diverge after passing through the lens, so they do not meet to form a real image. Their backward extensions appear to meet, forming the virtual image.</li>
+                        </ul>
+                        <div class="placeholder-img w-full h-40 my-2">Placeholder: Ray diagram for object between F and lens (converging lens).</div>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="image-diverging" class="content-section hidden-section">
+                <h2>6. Image Characteristics for a Diverging Lens</h2>
+                <p>For any position of a real object, a diverging lens always forms an image with the following characteristics:</p>
+                <ul class="list-disc ml-4">
+                    <li><strong>Nature:</strong> Virtual.</li>
+                    <li><strong>Orientation:</strong> Erect (upright).</li>
+                    <li><strong>Size:</strong> Diminished (smaller than the object).</li>
+                    <li><strong>Location:</strong> Between the principal focus (F) and the optical centre (O), on the same side of the lens as the object.</li>
+                </ul>
+                <p>This consistent behavior occurs because a diverging lens always spreads out light rays. Therefore, the refracted rays can never meet to form a real image; only their backward extensions can intersect.</p>
+                <p>Applications include correcting short-sightedness (myopia) and in peepholes of doors (providing a wide field of view).</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Ray diagram showing image formation by a diverging lens for any object position.</div>
+            </section>
+
+            <section id="lens-formula" class="content-section hidden-section">
+                <h2>7. Lens Formula and Magnification</h2>
+                <p>Quantitative analysis of image formation by thin lenses involves the lens formula and the magnification formula. These formulas are based on certain assumptions, such as the lens being truly thin and the light rays being paraxial (close to the principal axis and making small angles with it).</p>
+                <h3>Lens Formula:</h3>
+                <p>The relationship between the object distance (u), image distance (v), and focal length (f) of a thin lens is given by:</p>
+                <p class="text-center text-xl font-semibold bg-gray-100 p-3 rounded-md">
+                    <sup>1</sup>&frasl;<sub>f</sub> = <sup>1</sup>&frasl;<sub>u</sub> + <sup>1</sup>&frasl;<sub>v</sub>
+                </p>
+                <h3>Sign Convention (Real-is-Positive):</h3>
+                <p>It's crucial to use a consistent sign convention. The "Real-is-Positive" convention is commonly used in KCSE:</p>
+                <ul class="list-disc ml-4">
+                    <li><strong>f (focal length):</strong>
+                        <ul class="list-disc ml-4">
+                            <li><strong>Positive (+)</strong> for a converging (convex) lens.</li>
+                            <li><strong>Negative (-)</strong> for a diverging (concave) lens.</li>
+                        </ul>
+                    </li>
+                    <li><strong>u (object distance):</strong>
+                        <ul class="list-disc ml-4">
+                            <li><strong>Positive (+)</strong> for real objects (usually the case). Light rays diverge from a real object.</li>
+                            <li>Negative (-) for virtual objects (less common, e.g., when the object is an image formed by another lens).</li>
+                        </ul>
+                    </li>
+                    <li><strong>v (image distance):</strong>
+                        <ul class="list-disc ml-4">
+                            <li><strong>Positive (+)</strong> for real images (formed on the side of the lens opposite to the incident light; can be projected onto a screen).</li>
+                            <li><strong>Negative (-)</strong> for virtual images (formed on the same side of the lens as the incident light; cannot be projected onto a screen).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>Linear Magnification (m):</h3>
+                <p>Linear magnification is the ratio of the height of the image (h<sub>i</sub>) to the height of the object (h<sub>o</sub>). It is also related to the image distance (v) and object distance (u):</p>
+                <p class="text-center text-xl font-semibold bg-gray-100 p-3 rounded-md">
+                    m = <sup>Image height (h<sub>i</sub>)</sup>&frasl;<sub>Object height (h<sub>o</sub>)</sub> = <sup>Image distance (v)</sup>&frasl;<sub>Object distance (u)</sub>
+                </p>
+                <ul class="list-disc ml-4">
+                    <li>If <strong>|m| > 1</strong>, the image is magnified.</li>
+                    <li>If <strong>|m| < 1</strong>, the image is diminished.</li>
+                    <li>If <strong>|m| = 1</strong>, the image is the same size as the object.</li>
+                </ul>
+            </section>
+
+            <section id="power" class="content-section hidden-section">
+                <h2>8. Power of a Lens</h2>
+                <h3>Definition:</h3>
+                <p>The <strong>power of a lens (P)</strong> is a measure of its ability to converge or diverge light. A lens with a shorter focal length has a greater power because it bends light more strongly. It's a useful quantity for opticians when prescribing corrective lenses.</p>
+                <h3>Formula:</h3>
+                <p>Power is defined as the reciprocal of the focal length (f), where <strong>f must be expressed in metres (m)</strong>.</p>
+                <p class="text-center text-xl font-semibold bg-gray-100 p-3 rounded-md">
+                    P = <sup>1</sup>&frasl;<sub>f (in metres)</sub>
+                </p>
+                <h3>Unit:</h3>
+                <p>The SI unit of power for a lens is the <strong>Dioptre (D)</strong>.
+                <br>1 Dioptre (1 D) is the power of a lens that has a focal length of 1 metre.</p>
+                <h3>Sign:</h3>
+                <ul class="list-disc ml-4">
+                    <li>Power is <strong>positive (+)</strong> for a converging (convex) lens.</li>
+                    <li>Power is <strong>negative (-)</strong> for a diverging (concave) lens.</li>
+                </ul>
+                <p>For example, a converging lens with f = 20 cm (0.2 m) has P = 1/0.2 = +5 D.
+                <br>A diverging lens with f = -50 cm (-0.5 m) has P = 1/(-0.5) = -2 D.</p>
+            </section>
+
+            <section id="focal-length-exp" class="content-section hidden-section">
+                <h2>9. Experimental Determination of Focal Length (Converging Lens)</h2>
+                <p>Several methods can be used to experimentally determine the focal length of a converging lens. Common sources of error in these experiments include parallax error in judging image sharpness or coincidence, errors in measuring distances with a metre rule, and the assumption that the lens is perfectly thin.</p>
+                <h3>1. Estimation Method (Distant Object Method)</h3>
+                <ul class="list-disc ml-4">
+                    <li><strong>Principle:</strong> Rays from a very distant object are nearly parallel. A converging lens will focus these parallel rays to form a real, inverted image at its principal focus.</li>
+                    <li><strong>Procedure:</strong> Focus a distant object onto a screen using the lens. The lens-screen distance is 'f'. This method is quick but less precise due to the object not being at true infinity.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating the distant object method.</div>
+                <h3>2. Plane Mirror Method (Auto-collimation / No-Parallax Method)</h3>
+                <ul class="list-disc ml-4">
+                    <li><strong>Principle:</strong> Object at F, rays emerge parallel, reflect from mirror, re-enter lens, image forms at F.</li>
+                    <li><strong>Procedure:</strong> Adjust object pin until its image (via lens and mirror) coincides with it (no parallax). Lens-pin distance is 'f'. This method can be very accurate if parallax is carefully eliminated.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram illustrating the plane mirror method.</div>
+                <h3>3. Lens Formula Method (Object and Screen)</h3>
+                <ul class="list-disc ml-4">
+                    <li><strong>Principle:</strong> Use 1/f = 1/u + 1/v.</li>
+                    <li><strong>Procedure:</strong> Measure various (u,v) pairs for real images. Calculate f or use graphical analysis (e.g., plotting 1/v vs 1/u). Taking multiple readings and averaging or using a graph helps minimize random errors.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating the lens formula method setup.</div>
+                <h3>4. Displacement Method (for Converging Lens)</h3>
+                <ul class="list-disc ml-4">
+                    <li><strong>Principle:</strong> For fixed object-screen distance D (>4f), two lens positions give sharp images.</li>
+                    <li><strong>Procedure:</strong> Find two lens positions (distance 'd' apart). Calculate f = (D² - d²) / 4D. This method avoids the need to precisely locate the optical centre of the lens.</li>
+                </ul>
+                 <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram illustrating the displacement method.</div>
+            </section>
+
+            <section id="applications" class="content-section hidden-section">
+                <h2>10. Applications of Lenses</h2>
+                Lenses are integral to many optical devices and vision correction.
+                <h3>1. The Human Eye</h3>
+                <ul class="list-disc ml-4">
+                    <li>The eye acts like a natural camera. It has a <strong>converging lens system</strong> (cornea and crystalline lens) that focuses light to form a real, inverted, and diminished image on the light-sensitive <strong>retina</strong>. The brain then interprets this inverted image as upright.</li>
+                    <li><strong>Accommodation:</strong> The remarkable ability of the eye to focus on objects at different distances. This is achieved by the ciliary muscles changing the curvature (and thus the focal length) of the crystalline lens. This allows clear vision from the far point (infinity for normal vision) to the near point (about 25cm).</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of the human eye.</div>
+                <h4>Defects of Vision and their Correction:</h4>
+                <ul class="list-disc ml-4">
+                    <li><strong>Short Sight (Myopia):</strong> Distant objects blurred (focused in front of retina). Corrected with a diverging (concave) lens, which spreads out incoming rays before they enter the eye.</li>
+                    <div class="placeholder-img w-full h-48 my-2">Placeholder: Myopia & correction.</div>
+                    <li><strong>Long Sight (Hypermetropia):</strong> Near objects blurred (focused behind retina). Corrected with a converging (convex) lens, which adds to the eye's converging power.</li>
+                    <div class="placeholder-img w-full h-48 my-2">Placeholder: Hypermetropia & correction.</div>
+                </ul>
+                <h3>2. Simple Microscope (Magnifying Glass)</h3>
+                <ul class="list-disc ml-4"><li>A single converging lens used to produce a magnified, virtual, and erect image of a small object. The object is placed <strong>within the focal length</strong> of the lens. It works by increasing the angle subtended by the object at the eye.</li></ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Ray diagram of a simple microscope.</div>
+                <h3>3. Compound Microscope</h3>
+                <ul class="list-disc ml-4"><li>Uses <strong>two converging lenses</strong> (objective and eyepiece) to achieve much higher magnification. The objective lens (short f<sub>o</sub>) forms a real, magnified intermediate image. The eyepiece lens (short f<sub>e</sub>) then acts as a simple magnifier for this intermediate image, producing a final, highly magnified virtual image.</li></ul>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Ray diagram of a compound microscope.</div>
+                <h3>4. Camera</h3>
+                <ul class="list-disc ml-4"><li>Uses a <strong>converging lens system</strong> to form a real, inverted, and usually diminished image on a sensor/film. Focusing is achieved by adjusting the lens-to-sensor distance. The aperture controls light intensity, and the shutter controls exposure time.</li></ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a simple camera.</div>
+                <h3>5. Telescope</h3>
+                <ul class="list-disc ml-4"><li>Used to view distant objects by collecting more light and increasing the apparent angular size. An astronomical telescope typically uses a long focal length converging objective lens to form a real, intermediate image, which is then magnified by a shorter focal length converging eyepiece.</li></ul>
+                 <div class="placeholder-img w-full h-64 my-4">Placeholder: Ray diagram of an astronomical telescope.</div>
+                <h3>6. Projector</h3>
+                <ul class="list-disc ml-4"><li>A converging lens projects a real, inverted, and highly magnified image of a slide or digital display onto a distant screen. The object (slide) is placed just beyond the focal length of the projection lens.</li></ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a slide projector.</div>
+            </section>
+
+            <section id="revision-questions" class="content-section">
+                <h2>11. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. Define a thin lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A thin lens is one where its thickness is considered negligible compared to its focal length and radii of curvature. This simplification allows refraction to be considered as occurring at a single central plane of the lens.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. State the primary function of a lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The primary function of a lens is to refract (bend) light that passes through it, typically to form an image or to modify the divergence or convergence of a beam of light.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. Name the two main types of thin lenses and describe their physical shape.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong></p>
+                            <ul class="list-disc ml-4">
+                                <li><strong>Converging (Convex) Lenses:</strong> Thicker at the centre and thinner at the edges.</li>
+                                <li><strong>Diverging (Concave) Lenses:</strong> Thinner at the centre and thicker at the edges.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">4. Explain how a converging lens affects parallel rays of light.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A converging lens causes parallel rays of light incident on it to bend inwards (converge) and meet at a common point called the principal focus (F) after passing through the lens.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. Explain how a diverging lens affects parallel rays of light.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A diverging lens causes parallel rays of light incident on it to bend outwards (diverge) as if they are coming from a common point called the principal focus (F) located on the same side of the lens as the incident light.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">6. Describe how the converging effect of a convex lens can be understood in terms of prisms.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A convex lens can be thought of as a series of prisms stacked with their bases towards the centre of the lens. Since light bends towards the base of a prism, parallel rays passing through different parts of the lens are all bent inwards, converging towards the principal axis.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. Describe how the diverging effect of a concave lens can be understood in terms of prisms.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A concave lens can be thought of as a series of prisms stacked with their apexes towards the centre of the lens (bases outwards). Since light bends towards the base of a prism, parallel rays passing through different parts of the lens are all bent outwards, diverging away from the principal axis.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. Define the principal axis of a lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The principal axis is an imaginary straight line passing through the optical centre of the lens and perpendicular to its surfaces (or through the centres of curvature for a lens with two curved surfaces).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">9. Define the optical centre (O) of a thin lens and state its key property regarding light rays.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The optical centre (O) is a point on the principal axis of a thin lens such that any ray of light passing through it emerges undeviated (does not change its direction).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. Define the principal focus (F) for a converging lens, stating whether it is real or virtual.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> For a converging lens, the principal focus (F) is the point on the principal axis where rays initially parallel to the principal axis converge after refraction. It is a <strong>real focus</strong>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. Define the principal focus (F) for a diverging lens, stating whether it is real or virtual.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> For a diverging lens, the principal focus (F) is the point on the principal axis from which rays initially parallel to the principal axis appear to diverge after refraction. It is a <strong>virtual focus</strong>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. Define the focal length (f) of a lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The focal length (f) of a lens is the distance between its optical centre (O) and its principal focus (F).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. State the sign convention for the focal length of converging and diverging lenses using the Real-is-Positive convention.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Using the Real-is-Positive convention:
+                                <br>- Focal length (f) is <strong>positive (+)</strong> for a converging (convex) lens.
+                                <br>- Focal length (f) is <strong>negative (-)</strong> for a diverging (concave) lens.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. Define the focal plane.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The focal plane is a plane perpendicular to the principal axis that passes through the principal focus of the lens. Parallel rays not parallel to the principal axis converge to (or appear to diverge from) a point on this plane.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">15. State the rule for drawing a ray diagram involving a ray parallel to the principal axis for a converging lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> For a converging lens, a ray incident parallel to the principal axis, after refraction, passes through the principal focus (F) on the other side of the lens.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. State the rule for drawing a ray diagram involving a ray parallel to the principal axis for a diverging lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> For a diverging lens, a ray incident parallel to the principal axis, after refraction, appears to diverge from the principal focus (F) on the same side of the lens as the incident light.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">17. State the rule for drawing a ray diagram involving a ray passing through the optical centre for any thin lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> For any thin lens, a ray passing through the optical centre (O) continues in a straight line without any deviation.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. State the rule for drawing a ray diagram involving a ray passing through or directed towards the principal focus.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- For a converging lens: An incident ray that passes through the principal focus (F) emerges parallel to the principal axis after refraction.
+                                <br>- For a diverging lens: An incident ray that is directed towards the principal focus (F) on the far side of the lens emerges parallel to the principal axis after refraction.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. Describe the nature, orientation, and size of the image formed by a converging lens when the object is placed beyond 2F.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> When the object is placed beyond 2F for a converging lens, the image formed is:
+                                <br>- Nature: Real
+                                <br>- Orientation: Inverted
+                                <br>- Size: Diminished
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. Describe the nature, orientation, and size of the image formed by a converging lens when the object is placed between F and 2F.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> When the object is placed between F and 2F for a converging lens, the image formed is:
+                                <br>- Nature: Real
+                                <br>- Orientation: Inverted
+                                <br>- Size: Magnified
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. Describe the nature, orientation, and size of the image formed by a converging lens when the object is placed between F and the lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> When the object is placed between F and the lens for a converging lens, the image formed is:
+                                <br>- Nature: Virtual
+                                <br>- Orientation: Erect
+                                <br>- Size: Magnified
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. State the characteristics (nature, orientation, size) of the image always formed by a diverging lens, regardless of object position.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Regardless of object position, a diverging lens always forms an image that is:
+                                <br>- Nature: Virtual
+                                <br>- Orientation: Erect
+                                <br>- Size: Diminished
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">23. Define linear magnification (m) in terms of image and object heights.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Linear magnification (m) is defined as the ratio of the height of the image (h<sub>i</sub>) to the height of the object (h<sub>o</sub>):  m = h<sub>i</sub> / h<sub>o</sub>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">24. Relate linear magnification (m) to image distance (v) and object distance (u).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Linear magnification (m) is also related to the image distance (v) and object distance (u) by the formula: m = v / u.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">25. State the sign convention for image distance (v) using the Real-is-Positive convention.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Using the Real-is-Positive convention:
+                                <br>- Image distance (v) is <strong>positive (+)</strong> for real images.
+                                <br>- Image distance (v) is <strong>negative (-)</strong> for virtual images.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">26. State the lens formula relating object distance (u), image distance (v), and focal length (f).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The lens formula is: 1/f = 1/u + 1/v.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">27. An object is placed 15 cm in front of a convex lens of focal length 10 cm. Calculate the image distance and magnification. State the nature of the image.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>Given: u = +15 cm, f = +10 cm (convex lens)
+                                <br>Using lens formula: 1/f = 1/u + 1/v
+                                <br>1/10 = 1/15 + 1/v
+                                <br>1/v = 1/10 - 1/15 = (3 - 2)/30 = 1/30
+                                <br>v = +30 cm
+                                <br>Magnification (m) = v/u = 30/15 = 2
+                                <br>Image distance = <strong>30 cm</strong>. Magnification = <strong>2</strong>.
+                                <br>Nature of image: Since v is positive, the image is <strong>real</strong>. (It is also inverted and magnified).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">28. An object is placed 4 cm in front of a convex lens of focal length 6 cm. Calculate the image distance and magnification. State the nature of the image.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>Given: u = +4 cm, f = +6 cm (convex lens)
+                                <br>Using lens formula: 1/f = 1/u + 1/v
+                                <br>1/6 = 1/4 + 1/v
+                                <br>1/v = 1/6 - 1/4 = (2 - 3)/12 = -1/12
+                                <br>v = -12 cm
+                                <br>Magnification (m) = v/u = -12/4 = -3. (Magnitude of magnification is 3)
+                                <br>Image distance = <strong>-12 cm</strong>. Magnification = <strong>3</strong> (in magnitude).
+                                <br>Nature of image: Since v is negative, the image is <strong>virtual</strong>. (It is also erect and magnified).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">29. An object is placed 20 cm in front of a diverging lens of focal length 30 cm. Calculate the image distance. State the nature of the image.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>Given: u = +20 cm, f = -30 cm (diverging lens)
+                                <br>Using lens formula: 1/f = 1/u + 1/v
+                                <br>1/(-30) = 1/20 + 1/v
+                                <br>-1/30 = 1/20 + 1/v
+                                <br>1/v = -1/30 - 1/20 = (-2 - 3)/60 = -5/60 = -1/12
+                                <br>v = -12 cm
+                                <br>Image distance = <strong>-12 cm</strong>.
+                                <br>Nature of image: Since v is negative, the image is <strong>virtual</strong>. (It is also erect and diminished).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">30. Define the power of a lens (P) and state its SI unit.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The power of a lens (P) is a measure of its ability to converge or diverge light. It is defined as the reciprocal of its focal length (f) when f is expressed in metres.
+                                <br>The SI unit of power is the <strong>Dioptre (D)</strong>.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">31. Calculate the power of a converging lens with a focal length of 25 cm.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>Given: f = 25 cm = 0.25 m (converging lens, so f is positive)
+                                <br>Power (P) = 1/f (in metres)
+                                <br>P = 1 / 0.25 = +4.0 D
+                                <br>The power of the lens is <strong>+4.0 Dioptres</strong>.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">32. Calculate the focal length of a diverging lens with a power of -2.0 Dioptres.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>Given: P = -2.0 D (diverging lens)
+                                <br>Power (P) = 1/f  =>  f = 1/P
+                                <br>f = 1 / (-2.0) = -0.5 m
+                                <br>f = -0.5 m * 100 cm/m = -50 cm
+                                <br>The focal length of the lens is <strong>-50 cm</strong> (or -0.5 m).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">33. Describe the procedure to estimate the focal length of a converging lens using a distant object.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>1. Hold the converging lens.
+                                <br>2. Use a screen (e.g., a piece of paper).
+                                <br>3. Direct the lens towards a very distant object (e.g., a window, tree, or building far away).
+                                <br>4. Adjust the distance between the lens and the screen until a sharp, clear, inverted image of the distant object is formed on the screen.
+                                <br>5. Measure the distance between the lens and the screen. This distance is an approximation of the focal length (f).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">34. Explain the principle behind the plane mirror method (auto-collimation) for determining the focal length of a converging lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The principle is that if an object is placed at the principal focus (F) of a converging lens, rays emerging from the lens after refraction will be parallel. If these parallel rays strike a plane mirror placed perpendicularly behind the lens, they reflect back along their original paths (still parallel). These returning parallel rays, upon passing through the lens again, converge to form an image at the same position as the original object (i.e., at F). At this point, there is no parallax between the object and its image.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">35. Describe the no-parallax method using an object pin and a plane mirror to find the focal length of a converging lens.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>1. Set up the converging lens, an object pin in front of it, and a plane mirror directly behind the lens, perpendicular to the principal axis.
+                                <br>2. Adjust the position of the object pin along the principal axis while viewing its image (formed after light passes through the lens, reflects off the mirror, and passes back through the lens).
+                                <br>3. Continue adjusting until the image of the pin is sharp, inverted, and appears to be at the same location as the object pin itself.
+                                <br>4. Confirm this by checking for no parallax: when the observer moves their head from side to side, the object pin and its image should not move relative to each other.
+                                <br>5. Measure the distance from the object pin to the optical centre of the lens. This distance is the focal length (f).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">36. State one condition necessary for using the lens formula method (object and screen) to determine the focal length of a converging lens, and mention one graphical method that can be used for analysis.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- Condition: A real, sharp image must be formed on the screen. This means the object distance (u) must generally be greater than the focal length (f).
+                                <br>- Graphical method: Plot a graph of 1/v against 1/u. The intercepts on both axes will be equal to 1/f. (Alternatively, plot uv against u+v, where the slope is f, or plot (u+v) against uv, where the slope is 1/f).
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">37. Explain the phenomenon of accommodation in the human eye.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Accommodation is the ability of the human eye to adjust its focal length to focus on objects at different distances, ensuring a sharp image is always formed on the retina. This is achieved by the ciliary muscles changing the curvature (and thus the converging power) of the crystalline lens.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">38. Describe the cause of short sight (myopia) and how it is corrected using a lens, mentioning the type of lens used.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- Cause of Myopia: The eyeball is too long, or the eye lens is too powerful (converges light too strongly). Light from distant objects focuses in front of the retina.
+                                <br>- Correction: A <strong>diverging (concave) lens</strong> is used. It spreads out the incoming rays from distant objects before they enter the eye, so the eye's lens system can then focus them correctly onto the retina.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">39. Describe the cause of long sight (hypermetropia) and how it is corrected using a lens, mentioning the type of lens used.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- Cause of Hypermetropia: The eyeball is too short, or the eye lens is not powerful enough (converges light too weakly). Light from near objects focuses (or would focus) behind the retina.
+                                <br>- Correction: A <strong>converging (convex) lens</strong> is used. It adds to the converging power of the eye, helping to focus rays from near objects onto the retina.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">40. Compare the human eye and a camera in terms of their lens type and focusing mechanism.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- <strong>Lens Type:</strong>
+                                    <br>  - Human Eye: Has a flexible, converging crystalline lens (along with the cornea which also contributes to convergence).
+                                    <br>  - Camera: Uses a rigid converging lens or a system of lenses (which can include diverging elements as part of the overall converging system).
+                                <br>- <strong>Focusing Mechanism:</strong>
+                                    <br>  - Human Eye: Focuses by accommodation – the ciliary muscles change the shape (curvature) and thus the focal length of the crystalline lens.
+                                    <br>  - Camera: Focuses by changing the distance between the lens and the film/sensor. The focal length of a simple camera lens is fixed (though zoom lenses can vary focal length).
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Thin Lenses. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0; // To keep track of the current section index
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Function to update the displayed section and navigation states
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        // Script for expandable answers
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer'); // Re-add for future toggles if needed
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    // Optional: Close other open answers
+                    // document.querySelectorAll('.answer-container.expanded').forEach(openAnswer => {
+                    //     openAnswer.classList.remove('expanded');
+                    //     openAnswer.previousElementSibling.querySelector('.toggle-icon').textContent = '+';
+                    //     openAnswer.previousElementSibling.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
+                    // });
+                    answerContainer.classList.remove('hidden-answer'); // Remove hidden to allow transition
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                }
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                // Ensure only the target section is visible on load
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Rays Learning Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-page {
+            display: none;
+        }
+        .content-page.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active-link {
+            background-color: #4A5568; /* gray-700 */
+            color: #FFFFFF;
+            transform: translateX(5px);
+        }
+        .diagram-placeholder {
+            width: 100%;
+            max-width: 500px;
+            height: 300px; /* Adjusted height for X-ray tube diagram */
+            background-color: #E2E8F0; /* gray-200 */
+            border: 2px dashed #A0AEC0; /* gray-400 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4A5568; /* gray-700 */
+            font-style: italic;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #1A202C; /* gray-900 */
+            border-bottom: 2px solid #718096; /* gray-500 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2D3748; /* gray-800 */
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: #4A5568; /* gray-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        strong {
+            color: #2C5282; /* blue-800 */
+        }
+        .question-container {
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; /* gray-200 */
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        .question-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background-color: #F7FAFC; /* gray-50 */
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid #E2E8F0; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .question-toggle:hover {
+            background-color: #EDF2F7; /* gray-100 */
+        }
+        .question-toggle span {
+            font-weight: 600; 
+            color: #2D3748; 
+        }
+        .question-toggle svg {
+            width: 1.25rem; 
+            height: 1.25rem; 
+            transition: transform 0.3s ease;
+            flex-shrink: 0; /* Prevents icon from shrinking */
+        }
+        .answer-content {
+            background-color: #FFFFFF; 
+            padding: 1rem; 
+        }
+        .answer-content.hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #CBD5E0; /* gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+            color: #4A5568; /* gray-700 */
+        }
+        th {
+            background-color: #F7FAFC; /* gray-50 */
+            font-weight: 600; /* semibold */
+            color: #2D3748; /* gray-800 */
+        }
+        code {
+            background-color: #EDF2F7; /* gray-100 */
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
+        <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">X-Rays Guide</h1>
+        <nav class="flex-grow overflow-y-auto">
+            <ul>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="0">1. Introduction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="1">2. Production of X-rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="2">3. Energy Changes</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="3">4. Properties of X-rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="4">5. Dangers & Safety</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="5">6. Uses of X-rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="6">7. Problem Solving</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="7">8. X-rays vs Cathode Rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="8">9. Revision Questions</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <button id="hamburger-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>1. Introduction to X-rays</h2>
+            <p>X-rays are a form of high-energy electromagnetic radiation with wavelengths ranging from approximately 0.01 to 10 nanometers. This places them between ultraviolet (UV) radiation and gamma rays in the electromagnetic spectrum. Their discovery by Wilhelm Conrad Roentgen in 1895 revolutionized medical diagnosis and opened up new avenues in scientific research. This guide will delve into the production, properties, applications, and safety considerations of X-rays as relevant to the KCSE Physics syllabus.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>2. Production of X-rays</h2>
+            <p>X-rays are produced when fast-moving electrons are suddenly stopped or decelerated. This process occurs in a specialized vacuum tube called an <strong>X-ray tube</strong>.</p>
+            <h3>The X-Ray Tube Components and Operation</h3>
+            <ul>
+                <li><strong>Cathode (Filament):</strong> A filament, typically made of tungsten, is heated by a low voltage supply. This heating causes <strong>thermionic emission</strong>, where electrons are released from the filament's surface. The cathode also includes a <strong>focusing cup</strong> that helps direct the emitted electrons towards the anode.</li>
+                <li><strong>Anode (Target):</strong> The anode is a metal target, often made of tungsten or molybdenum, embedded in a copper block. Tungsten is chosen for its high atomic number (leading to more efficient X-ray production) and high melting point (to withstand the heat generated). The copper block helps to conduct heat away. Some X-ray tubes have <strong>rotating anodes</strong> to distribute the heat over a larger area.</li>
+                <li><strong>High Voltage Supply (EHT):</strong> A very high potential difference (Extra High Tension, typically tens to hundreds of kilovolts) is applied between the cathode and the anode. This accelerates the electrons to very high speeds.</li>
+                <li><strong>Evacuated Glass Envelope:</strong> The cathode and anode are enclosed in a highly evacuated glass tube. This vacuum prevents electron collisions with air molecules.</li>
+                <li><strong>Cooling System:</strong> Efficient cooling mechanisms (e.g., cooling fins, oil circulation) are essential as over 99% of the electron's kinetic energy is converted to heat at the anode.</li>
+                <li><strong>Lead Shielding:</strong> The X-ray tube is housed within a lead-lined casing to absorb stray X-rays.</li>
+            </ul>
+            <div class="diagram-placeholder">Diagram Placeholder: Labelled diagram of an X-ray Tube showing Cathode (filament, focusing cup), Anode (target, copper block, possibly rotating), EHT connections, Cooling fins, Glass envelope, and Lead shielding.</div>
+            
+            <h3>Process of X-ray Production</h3>
+            <ol>
+                <li>The filament (cathode) is heated, and electrons are emitted via thermionic emission.</li>
+                <li>The high potential difference accelerates these electrons towards the anode at high kinetic energies.</li>
+                <li>When these high-speed electrons strike the metal target (anode), they are rapidly decelerated. Their kinetic energy is converted into X-ray photons and heat.</li>
+                <li>Two main processes result in X-ray photon production:
+                    <ul>
+                        <li><strong>Bremsstrahlung (Braking Radiation):</strong> Incident electrons are deflected and slowed by the target atom's nucleus. The lost kinetic energy is emitted as an X-ray photon. This produces a continuous spectrum of X-ray energies.</li>
+                        <li><strong>Characteristic X-rays:</strong> An incident electron knocks out an inner-shell electron from a target atom. An electron from a higher energy level fills the vacancy, emitting an X-ray photon of specific energy characteristic of the target material.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>3. Energy Changes in an X-Ray Tube</h2>
+            <p>Several energy transformations occur within an X-ray tube:</p>
+            <ul>
+                <li>Electrical energy (low voltage) \(\rightarrow\) Heat energy (in filament for thermionic emission).</li>
+                <li>Electrical potential energy (high voltage) \(\rightarrow\) Kinetic energy (of accelerating electrons).</li>
+                <li>Kinetic energy of electrons (upon impact with anode) \(\rightarrow\) Heat energy (predominantly, >99%) + Electromagnetic energy (X-ray photons, <1\%).</li>
+            </ul>
+            <p>The maximum energy of an X-ray photon (\(E_{max}\)) produced by Bremsstrahlung is limited by the total kinetic energy of the incident electron (\(KE_e\)), which depends on the accelerating voltage (\(V\)). If an electron converts all its kinetic energy into a single X-ray photon:</p>
+            <p>\[ KE_e = eV \]
+            \[ E_{max} = hf_{max} = \frac{hc}{\lambda_{min}} \]
+            Thus, \(eV = hf_{max} = \frac{hc}{\lambda_{min}}\)</p>
+            <p>Where:</p>
+            <ul>
+                <li><code>e</code> = charge of an electron (\(1.6 \times 10^{-19}\) C)</li>
+                <li><code>V</code> = accelerating potential difference (Volts)</li>
+                <li><code>h</code> = Planck's constant (\(6.63 \times 10^{-34}\) Js)</li>
+                <li><code>f<sub>max</sub></code> = maximum frequency of the X-rays produced (Hz)</li>
+                <li><code>c</code> = speed of light (\(3.0 \times 10^8\) m/s)</li>
+                <li><code>&lambda;<sub>min</sub></code> = minimum wavelength of the X-rays produced (m)</li>
+            </ul>
+            <p><strong>Control of X-ray beam characteristics:</strong></p>
+            <ul>
+                <li><strong>Hardness (Penetrating Power):</strong> Increased by increasing the accelerating voltage (V or EHT). This results in higher \(f_{max}\) and lower \(\lambda_{min}\).</li>
+                <li><strong>Intensity (Quantity of X-rays):</strong> Increased by increasing the tube current (mA), which is controlled by the filament current (heater current). More electrons hitting the target per second result in more X-ray photons.</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>4. Properties of X-rays</h2>
+            <ul>
+                <li><strong>Electromagnetic Waves:</strong> They are EM radiation with very short wavelengths (0.01 nm to 10 nm) and high frequencies.</li>
+                <li><strong>Travel in Straight Lines:</strong> Propagate rectilinearly at the speed of light in a vacuum.</li>
+                <li><strong>Not Deflected by Electric or Magnetic Fields:</strong> Being uncharged, they are unaffected by these fields.</li>
+                <li><strong>Penetrating Power:</strong> Can pass through materials opaque to visible light. Penetration increases with X-ray energy (hardness) and decreases with material density and atomic number.</li>
+                <li><strong>Differential Absorption:</strong> Absorbed to different extents by different materials, forming the basis of X-ray imaging (e.g., bones absorb more than soft tissue).</li>
+                <li><strong>Ionization:</strong> They are ionizing radiation, capable of knocking electrons out of atoms/molecules, leading to biological effects.</li>
+                <li><strong>Photographic Effect:</strong> Affect photographic film, causing blackening, used for radiographs.</li>
+                <li><strong>Fluorescence:</strong> Cause certain materials (e.g., zinc sulphide) to emit visible light. Used in fluoroscopy and intensifying screens.</li>
+                <li><strong>Diffraction and Interference:</strong> Can be diffracted by crystals, used in X-ray crystallography.</li>
+                <li><strong>No Charge:</strong> X-rays are electrically neutral.</li>
+            </ul>
+            <h3>Soft and Hard X-rays</h3>
+            <ul>
+                <li><strong>Soft X-rays:</strong> Longer wavelengths, lower energy, less penetrating. Produced at lower accelerating voltages.</li>
+                <li><strong>Hard X-rays:</strong> Shorter wavelengths, higher energy, more penetrating. Produced at higher accelerating voltages. The hardness is controlled by the EHT.</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>5. Dangers of X-rays and Safety Precautions</h2>
+            <p>The ionizing nature of X-rays makes them hazardous to living tissues.</p>
+            <h3>Dangers of X-ray Exposure:</h3>
+            <ul>
+                <li><strong>Cell Damage and Mutation:</strong> Can damage DNA, leading to mutations, cancer (carcinogenic effects), or cell death.</li>
+                <li><strong>Tissue Burns:</strong> High doses can cause skin burns and damage to deeper tissues.</li>
+                <li><strong>Genetic Effects:</strong> Damage to reproductive cells can cause mutations passed to offspring.</li>
+                <li><strong>Other Acute Effects:</strong> High exposures can cause radiation sickness (nausea, vomiting, etc.).</li>
+            </ul>
+            <h3>Safety Precautions (ALARA Principle: As Low As Reasonably Achievable):</h3>
+            <ul>
+                <li><strong>Minimizing Exposure Time:</strong> Reduce the duration of exposure.</li>
+                <li><strong>Maximizing Distance:</strong> Intensity decreases with the square of the distance from the source.</li>
+                <li><strong>Shielding:</strong> Use absorbing materials like lead aprons, thyroid collars, leaded gloves, lead glass screens, and lead-lined walls.</li>
+                <li><strong>Monitoring Exposure:</strong> Radiation workers wear dosimeters (e.g., film badges).</li>
+                <li><strong>Controlled Access:</strong> Restricted access to X-ray areas with warning signs.</li>
+                <li><strong>Proper Training:</strong> Operators must be trained in safety procedures.</li>
+                <li><strong>Equipment Maintenance:</strong> Regular inspection and maintenance of X-ray equipment.</li>
+                <li><strong>Patient Protection:</strong> Use minimum necessary exposures, shield sensitive body parts. Pregnant women and children should avoid unnecessary exposure.</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>6. Uses of X-rays</h2>
+            <ul>
+                <li><strong>Medical Diagnosis (Radiography):</strong>
+                    <ul>
+                        <li>Detecting bone fractures, dental problems (cavities, impacted teeth).</li>
+                        <li>Diagnosing lung conditions (pneumonia, tuberculosis, cancer).</li>
+                        <li>Identifying tumors, abnormal masses, foreign objects.</li>
+                        <li>Mammography (breast cancer screening).</li>
+                        <li>Contrast X-rays (using barium meals, iodine agents) to visualize soft tissues like the digestive system, blood vessels (angiography).</li>
+                        <li>Computed Tomography (CT) scans for detailed 3D cross-sectional images.</li>
+                    </ul>
+                </li>
+                <li><strong>Medical Treatment (Radiotherapy):</strong>
+                    <ul>
+                        <li>High-energy X-rays are used to kill cancer cells and shrink tumors.</li>
+                    </ul>
+                </li>
+                <li><strong>Industrial Applications:</strong>
+                    <ul>
+                        <li>Non-destructive testing (NDT) to find flaws in metal castings, welds.</li>
+                        <li>Inspecting packaged goods.</li>
+                        <li>Measuring material thickness.</li>
+                    </ul>
+                </li>
+                <li><strong>Security:</strong>
+                    <ul>
+                        <li>Scanning luggage and cargo at airports and checkpoints.</li>
+                    </ul>
+                </li>
+                <li><strong>Scientific Research (X-ray Crystallography):</strong>
+                    <ul>
+                        <li>Determining atomic/molecular structure of crystals (e.g., proteins, DNA).</li>
+                    </ul>
+                </li>
+                <li><strong>Astronomy:</strong>
+                    <ul>
+                        <li>X-ray telescopes detect X-rays from celestial objects (stars, galaxies, black holes).</li>
+                    </ul>
+                </li>
+                <li><strong>Art and Archaeology:</strong>
+                    <ul>
+                        <li>Examining paintings for underlying layers; analyzing artifacts.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>7. Problem Solving (Calculations)</h2>
+            <p>Constants to use: \(e = 1.6 \times 10^{-19} \text{ C}\), \(h = 6.63 \times 10^{-34} \text{ Js}\), \(c = 3.0 \times 10^8 \text{ m/s}\)</p>
+            
+            <h3>Example 1:</h3>
+            <p>An X-ray tube is operated at a potential difference of 50 kV. Calculate the minimum wavelength of the X-rays produced.</p>
+            <p><strong>Solution:</strong><br>
+            Given \(V = 50 \text{ kV} = 50 \times 10^3 \text{ V}\). Using \(\lambda_{min} = \frac{hc}{eV}\):<br>
+            \(\lambda_{min} = \frac{(6.63 \times 10^{-34}) \times (3.0 \times 10^8)}{(1.6 \times 10^{-19}) \times (50 \times 10^3)} = \frac{19.89 \times 10^{-26}}{8.0 \times 10^{-15}} = 2.48625 \times 10^{-11} \text{ m} = 0.0249 \text{ nm}\)</p>
+
+            <h3>Example 2:</h3>
+            <p>The minimum wavelength of X-rays produced by an X-ray tube is $0.05 \text{ nm}$. Calculate the accelerating potential difference applied to the tube.</p>
+            <p><strong>Solution:</strong><br>
+            Given \(\lambda_{min} = 0.05 \text{ nm} = 0.05 \times 10^{-9} \text{ m}\). Using \(V = \frac{hc}{e\lambda_{min}}\):<br>
+            \(V = \frac{(6.63 \times 10^{-34}) \times (3.0 \times 10^8)}{(1.6 \times 10^{-19}) \times (0.05 \times 10^{-9})} = \frac{19.89 \times 10^{-26}}{0.08 \times 10^{-28}} = 2.48625 \times 10^4 \text{ V} = 24.86 \text{ kV}\)</p>
+
+            <h3>Example 3:</h3>
+            <p>An X-ray tube operates with an accelerating potential of $60 \text{ kV}$. Calculate the maximum frequency of the X-rays produced.</p>
+            <p><strong>Solution:</strong><br>
+            Given \(V = 60 \text{ kV} = 60 \times 10^3 \text{ V}\). Using \(f_{max} = \frac{eV}{h}\):<br>
+            \(f_{max} = \frac{(1.6 \times 10^{-19}) \times (60 \times 10^3)}{6.63 \times 10^{-34}} = \frac{9.6 \times 10^{-15}}{6.63 \times 10^{-34}} \approx 1.45 \times 10^{19} \text{ Hz}\)</p>
+
+            <h3>Example 4:</h3>
+            <p>An X-ray tube operates at $40 \text{ kV}$ and the current flowing through it is $10 \text{ mA}$.<br>
+            (a) How many electrons strike the target per second?<br>
+            (b) Calculate the kinetic energy gained by each electron.<br>
+            (c) What is the total kinetic energy of the electrons striking the target per second (input power)?</p>
+            <p><strong>Solution:</strong><br>
+            Given \(V = 40 \text{ kV} = 40 \times 10^3 \text{ V}\), \(I = 10 \text{ mA} = 10 \times 10^{-3} \text{ A}\).<br>
+            (a) Number of electrons/sec (\(n_e/t\)) = \(I/e = (10 \times 10^{-3}) / (1.6 \times 10^{-19}) = 6.25 \times 10^{16}\) electrons/s.<br>
+            (b) KE per electron = \(eV = (1.6 \times 10^{-19}) \times (40 \times 10^3) = 6.4 \times 10^{-15}\) J.<br>
+            (c) Total KE/sec (Power) = \(IV = (10 \times 10^{-3}) \times (40 \times 10^3) = 400\) W.
+            (Also, Total KE/sec = (electrons/sec) \(\times\) (KE/electron) = \((6.25 \times 10^{16}) \times (6.4 \times 10^{-15}) = 400\) W).
+            </p>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>8. Comparison of X-rays and Cathode Rays</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Cathode Rays</th>
+                            <th>X-Rays</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nature</strong></td>
+                            <td>Streams of fast-moving electrons (particles)</td>
+                            <td>High-energy electromagnetic waves (photons)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Charge</strong></td>
+                            <td>Negatively charged</td>
+                            <td>No charge</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mass</strong></td>
+                            <td>Have mass (mass of electrons)</td>
+                            <td>Massless (energy packets)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Origin</strong></td>
+                            <td>Emitted from heated cathode (thermionic emission)</td>
+                            <td>Produced when fast electrons hit a metal target</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>Variable, depends on accelerating voltage, less than speed of light</td>
+                            <td>Travel at the speed of light in vacuum (\(3 \times 10^8\) m/s)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wavelength</strong></td>
+                            <td>Associated de Broglie wavelength; relatively longer</td>
+                            <td>Very short wavelengths (e.g., \(10^{-8}\) m to \(10^{-12}\) m)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Energy</strong></td>
+                            <td>Kinetic energy (\(eV\))</td>
+                            <td>Photon energy (\(hf\))</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deflection by E/M fields</strong></td>
+                            <td>Deflected by both electric and magnetic fields</td>
+                            <td>Not deflected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ionizing Power</strong></td>
+                            <td>Can cause ionization</td>
+                            <td>Highly ionizing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penetrating Power</strong></td>
+                            <td>Low</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production Mechanism</strong></td>
+                            <td>Thermionic emission</td>
+                            <td>Deceleration of high-speed electrons striking a target</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="diagram-placeholder">Conceptual Placeholder: Table above serves as comparison. No separate graphic needed unless specifically for visual distinction (e.g. wave vs particle beam).</div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>9. Revision Questions</h2>
+            
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>1.</strong> What are X-rays?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays are a form of high-energy electromagnetic radiation with very short wavelengths (0.01 to 10 nanometers), placing them between UV radiation and gamma rays in the EM spectrum.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>2.</strong> Who discovered X-rays and in what year?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Wilhelm Conrad Roentgen discovered X-rays in 1895.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>3.</strong> What is the basic principle behind the production of X-rays?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays are produced when fast-moving electrons are suddenly stopped or decelerated.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>4.</strong> Name the specialized vacuum tube used to produce X-rays.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>An X-ray tube.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>5.</strong> What is the function of the cathode in an X-ray tube, and what material is it typically made of?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The cathode is the source of electrons via thermionic emission. It typically consists of a tungsten filament and a focusing cup.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>6.</strong> What is thermionic emission?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The release of electrons from the surface of a material (like a heated filament) due to the high temperature providing electrons with enough energy to escape.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>7.</strong> Describe the anode (target) in an X-ray tube. What properties should its material possess?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The anode is a metal target that the accelerated electrons strike. It's often made of tungsten or molybdenum embedded in a copper block. The material should have a high atomic number (for efficient X-ray production) and a high melting point (to withstand heat).</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>8.</strong> Why is a high voltage (EHT) supply necessary in an X-ray tube?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>To create a large potential difference that accelerates the electrons from the cathode to the anode at very high speeds and kinetic energies.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>9.</strong> Why is the X-ray tube evacuated?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>To prevent the accelerated electrons from colliding with air molecules, which would cause them to lose energy and reduce the efficiency of X-ray production.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>10.</strong> Why is a cooling system essential for the anode in an X-ray tube?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Because over 99% of the kinetic energy of the electrons striking the anode is converted into heat, which could melt the anode without efficient cooling.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>11.</strong> What are the two main processes by which X-ray photons are produced when electrons hit the target? Briefly describe each.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p><strong>Bremsstrahlung (Braking Radiation):</strong> Occurs when incident electrons are deflected and slowed down by the nucleus of target atoms, with the lost kinetic energy emitted as an X-ray photon. Produces a continuous spectrum of X-rays.<br><strong>Characteristic X-rays:</strong> Occurs when an incident electron dislodges an inner-shell electron of a target atom; an electron from a higher energy level fills the vacancy, emitting an X-ray photon of specific energy characteristic of the target material.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>12.</strong> List the main energy transformations that occur in an X-ray tube.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Electrical energy (low voltage) to heat in filament; Electrical potential energy (high voltage) to kinetic energy of electrons; Kinetic energy of electrons to heat and X-ray photons at the anode.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>13.</strong> Write the formula relating the accelerating voltage (V) to the minimum wavelength (\(\lambda_{min}\)) of X-rays produced. Define each term.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(eV = \frac{hc}{\lambda_{min}}\), where \(e\) = electron charge, \(V\) = accelerating voltage, \(h\) = Planck's constant, \(c\) = speed of light, \(\lambda_{min}\) = minimum wavelength.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>14.</strong> How is the "hardness" or penetrating power of X-rays controlled?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>By adjusting the accelerating voltage (EHT). Higher voltage produces harder (more penetrating) X-rays.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>15.</strong> How is the intensity (quantity) of X-rays controlled?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>By adjusting the filament current (heater current), which controls the tube current (number of electrons per second hitting the target).</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>16.</strong> List five distinct properties of X-rays.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p> (Any five) Are electromagnetic waves; travel in straight lines; are not deflected by electric or magnetic fields; have high penetrating power; cause ionization; affect photographic film; cause fluorescence; can be diffracted.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>17.</strong> Are X-rays deflected by electric or magnetic fields? Why?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>No, because they are uncharged electromagnetic waves.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>18.</strong> What is meant by "differential absorption" of X-rays, and why is it important?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Different materials absorb X-rays to different extents. Denser materials and those with higher atomic numbers absorb more X-rays. This is crucial for medical imaging, as it allows bones (denser) to be distinguished from soft tissues.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>19.</strong> Differentiate between soft X-rays and hard X-rays.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Soft X-rays have longer wavelengths, lower energy, and are less penetrating; produced at lower voltages. Hard X-rays have shorter wavelengths, higher energy, and are more penetrating; produced at higher voltages.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>20.</strong> Why are X-rays considered hazardous to living tissues?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Because they are ionizing radiation and can damage cells, mutate DNA, and potentially lead to conditions like cancer or tissue burns.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>21.</strong> List three specific dangers of X-ray exposure.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Cell damage/mutation leading to cancer; tissue burns; genetic effects if reproductive cells are damaged.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>22.</strong> What does the ALARA principle stand for in X-ray safety?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>As Low As Reasonably Achievable.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>23.</strong> List three key safety precautions taken when working with or undergoing X-ray procedures.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Minimizing exposure time; maximizing distance from the source; using shielding (e.g., lead aprons).</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>24.</strong> State two uses of X-rays in medical diagnosis.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Detecting bone fractures; diagnosing lung conditions like pneumonia or TB; dental imaging.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>25.</strong> How are X-rays used in medical treatment?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>In radiotherapy, high-energy X-rays are used to kill cancer cells and shrink tumors.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>26.</strong> Give one industrial application of X-rays.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Non-destructive testing (NDT) to detect flaws in metal castings or welds; inspecting packaged goods.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>27.</strong> How are X-rays used in security?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Scanning luggage and cargo at airports and security checkpoints to detect prohibited items.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>28.</strong> What is X-ray crystallography used for?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>To determine the atomic and molecular structure of crystalline materials, including complex biological molecules.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>29.</strong> If the accelerating voltage in an X-ray tube is doubled, what happens to the minimum wavelength of the X-rays produced?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The minimum wavelength is halved (\(\lambda_{min} = hc/eV\)).</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>30.</strong> What is the energy of an X-ray photon whose frequency is \(f\)?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(E = hf\), where \(h\) is Planck's constant.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>31.</strong> State two main differences between X-rays and cathode rays regarding their nature.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays are electromagnetic waves (photons), while cathode rays are streams of particles (electrons). X-rays are uncharged, while cathode rays are negatively charged.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>32.</strong> Which has greater penetrating power generally: X-rays or cathode rays?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>33.</strong> How do X-rays and cathode rays differ in their behavior in a magnetic field?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Cathode rays are deflected by a magnetic field, while X-rays are not.</p></div>
+            </div>
+
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>34.</strong> What is the origin of cathode rays in an X-ray tube versus the origin of X-rays themselves?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Cathode rays originate from the heated cathode through thermionic emission. X-rays originate from the anode (target) when it is struck by these high-speed cathode rays.</p></div>
+            </div>
+            
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>35.</strong> Which travels at the speed of light in a vacuum: X-rays or cathode rays?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays. Cathode rays travel at speeds less than the speed of light, depending on the accelerating voltage.</p></div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <button id="prev-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.content-page');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            sidebarLinks.forEach((link) => { 
+                link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
+            });
+            currentPageIndex = index;
+            updateNavButtons();
+            window.scrollTo(0, 0); 
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === pages.length - 1;
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
+                showPage(pageIndex);
+                if (window.innerWidth < 768) { 
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                showPage(currentPageIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < pages.length - 1) {
+                showPage(currentPageIndex + 1);
+            }
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        mainContent.addEventListener('click', () => {
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        const questionToggles = document.querySelectorAll('.question-toggle');
+        questionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const answerContent = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                answerContent.classList.toggle('hidden');
+                if (answerContent.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        showPage(0); // Initialize first page
+    </script>
+
+</body>
+</html>
