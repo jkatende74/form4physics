@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radioactivity Learning Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-page {
+            display: none;
+        }
+        .content-page.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active-link {
+            background-color: #4A5568; /* gray-700 */
+            color: #FFFFFF;
+            transform: translateX(5px);
+        }
+        .diagram-placeholder {
+            width: 100%;
+            max-width: 500px; 
+            height: 280px; 
+            background-color: #E2E8F0; /* gray-200 */
+            border: 2px dashed #A0AEC0; /* gray-400 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4A5568; /* gray-700 */
+            font-style: italic;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #1A202C; /* gray-900 */
+            border-bottom: 2px solid #718096; /* gray-500 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2D3748; /* gray-800 */
+        }
+         h4 {
+            font-size: 1.1rem; /* slightly larger than default p */
+            font-weight: 600; /* semibold */
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #374151; /* gray-700 */
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: #4A5568; /* gray-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+         ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        strong {
+            color: #1E40AF; /* blue-800 Tailwind v2, or similar dark blue */
+        }
+        .question-container {
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; /* gray-200 */
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        .question-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background-color: #F9FAFB; /* gray-50 */
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid #E2E8F0; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .question-toggle:hover {
+            background-color: #F3F4F6; /* gray-100 */
+        }
+        .question-toggle span {
+            font-weight: 600; 
+            color: #1F2937; /* gray-800 */
+        }
+        .question-toggle svg {
+            width: 1.25rem; 
+            height: 1.25rem; 
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .answer-content {
+            background-color: #FFFFFF; 
+            padding: 1rem; 
+            border-top: 1px solid #E2E8F0;
+        }
+        .answer-content.hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* gray-300 */
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+            color: #374151; /* gray-700 */
+        }
+        th {
+            background-color: #F3F4F6; /* gray-100 */
+            font-weight: 600; /* semibold */
+            color: #111827; /* gray-900 */
+        }
+        code, .math-inline { /* Style for inline math */
+            background-color: #EFF6FF; /* blue-50 */
+            color: #1D4ED8; /* blue-700 */
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        .math-display { /* Style for display math */
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+        .citation-note {
+            font-size: 0.9rem;
+            color: #6B7280; /* gray-500 */
+            font-style: italic;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background-color: #F9FAFB; /* gray-50 */
+            border-left: 4px solid #D1D5DB; /* gray-300 */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
+        <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">Radioactivity Guide</h1>
+        <nav class="flex-grow overflow-y-auto">
+            <ul>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="0">1. Introduction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="1">2. KCSE Syllabus</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="2">3. Atomic Structure & Stability</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="3">4. Types of Radiations</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="4">5. Radioactive Decay</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="5">6. Radiation Detectors</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="6">7. Decay Law & Half-Life</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="7">8. Applications</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="8">9. Hazards & Safety</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="9">10. Fission & Fusion</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="10">11. Key Concepts Elaboration</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="11">12. Conclusion</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="12">13. Revision Questions</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <button id="hamburger-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>1. Introduction</h2>
+            <h3>1.1 Context of Radioactivity in Physics</h3>
+            <p>The discovery of radioactivity in 1896 by Henri Becquerel, followed by the pioneering investigations of Marie and Pierre Curie, marked a watershed moment in the history of science. These scientists observed that certain materials, like uranium compounds, spontaneously emitted penetrating radiations. Their work revealed that these emissions originated from the atomic nucleus, a concept that fundamentally altered the then-prevailing understanding of the atom as an indivisible entity. Radioactivity, therefore, is a natural phenomenon characterized by the spontaneous transformation of unstable atomic nuclei, accompanied by the release of energy and particles. This field of study paved the way for the development of nuclear physics and has had profound implications across various scientific and technological domains.</p>
+            <h3>1.2 Purpose and Scope</h3>
+            <p>This guide provides an expert-level, in-depth analysis of Radioactivity, aligning with typical content found in resources like the KLB Physics Book 4 (Chapter 10) and the requirements of the KCSE Physics Syllabus (Topic 40.0.0). It aims to serve as a comprehensive resource for understanding this topic.</p>
+             <div class="citation-note">
+                <p>Note: References like "KLB Figure/Table X.Y" or "KLB p. ZZZ" mentioned in this guide refer to typical content and figures found in standard physics textbooks such as the KLB Physics Book 4, Chapter 10, which covers Radioactivity. Specific page numbers and figure details are illustrative of common textbook structures.</p>
+            </div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>2. KCSE Physics Syllabus Requirements (Topic 40.0.0: RADIOACTIVITY)</h2>
+            <h3>Specific Learning Objectives:</h3>
+            <p>By the end of this topic, the learner should be able to:</p>
+            <ul>
+                <li>(a) define radioactive decay and half-life;</li>
+                <li>(b) describe the three types of radiations emitted in natural radioactivity;</li>
+                <li>(c) explain the detection of radioactive emissions;</li>
+                <li>(d) define nuclear fission and fusion;</li>
+                <li>(e) write balanced nuclear equations;</li>
+                <li>(f) explain the dangers of radioactive emissions;</li>
+                <li>(g) state the applications of radioactivity;</li>
+                <li>(h) solve numerical problems involving half-life.</li>
+            </ul>
+            <h3>Content Points:</h3>
+            <ul>
+                <li>40.2.1 Radioactive decay</li>
+                <li>40.2.2 Half-life</li>
+                <li>40.2.3 Types of radiations, properties of radiations</li>
+                <li>40.2.4 Detectors of radiation</li>
+                <li>40.2.5 Nuclear fission, nuclear fusion</li>
+                <li>40.2.6 Nuclear equations</li>
+                <li>40.2.7 Hazards of radioactivity, precautions</li>
+                <li>40.2.8 Applications</li>
+                <li>40.2.9 Problems on half-life (integration not required)</li>
+            </ul>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>3. Atomic Structure and Nuclear Stability</h2>
+            <p>Fundamental concepts include protons, neutrons, atomic number (Z), mass number (A), and nuclide notation \({}^{A}_{Z}X\). Isotopes (e.g., Carbon-12, Carbon-14) are atoms of the same element with different numbers of neutrons.</p>
+            <p>Nuclear stability depends on the balance of forces within the nucleus. Stable nuclides often have a proton-to-neutron ratio near 1:1 for lighter elements, but this ratio increases for heavier stable nuclei. The "Stability Curve" (N vs. Z graph) illustrates this.</p>
+            <div class="diagram-placeholder">Diagram Placeholder: Stability Curve (N vs Z graph), showing the band of stability and regions of unstable nuclides. (Similar to KLB Fig 10.2)</div>
+            <p>Unstable nuclides decay to achieve a more stable configuration. This instability arises from an imbalance between the attractive strong nuclear force and the repulsive electrostatic force between protons.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>4. Types of Radiations (α, β, γ) and their Properties</h2>
+            <p>The three primary types of radioactive emissions are alpha (\(\alpha\)), beta (\(\beta\)), and gamma (\(\gamma\)) radiations. Their behavior in a magnetic field (KLB Fig 10.3) helps distinguish them.</p>
+            <div class="diagram-placeholder">Diagram Placeholder: Deflection of \(\alpha\), \(\beta\), and \(\gamma\) radiations in a magnetic field. (Similar to KLB Fig 10.3)</div>
+            <ul>
+                <li><strong>Alpha (\(\alpha\)) particles:</strong> Helium nuclei (\({}_{2}^{4}He\)), +2e charge.</li>
+                <li><strong>Beta (\(\beta\)) particles:</strong> Electrons (\({}_{-1}^{0}e\)), -e charge.</li>
+                <li><strong>Gamma (\(\gamma\)) radiation:</strong> High-energy electromagnetic waves (photons), no charge.</li>
+            </ul>
+            <h3>Properties:</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Alpha (\(\alpha\))</th>
+                            <th>Beta (\(\beta\))</th>
+                            <th>Gamma (\(\gamma\))</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nature</strong></td>
+                            <td>Helium nucleus</td>
+                            <td>Electron</td>
+                            <td>EM wave (photon)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Charge</strong></td>
+                            <td>+2e</td>
+                            <td>-e</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Relative Mass</strong></td>
+                            <td>Approx. 4 amu</td>
+                            <td>Approx. 1/1840 amu</td>
+                            <td>0 (rest mass)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penetrating Power</strong></td>
+                            <td>Low (stopped by paper, few cm of air)</td>
+                            <td>Moderate (stopped by few mm Al)</td>
+                            <td>High (stopped by thick lead/concrete)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ionising Effect</strong></td>
+                            <td>High (dense)</td>
+                            <td>Moderate</td>
+                            <td>Low (sparse, indirect)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>~10% speed of light</td>
+                            <td>Up to ~90% speed of light</td>
+                            <td>Speed of light</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deflection in E/M fields</strong></td>
+                            <td>Deflected</td>
+                            <td>Deflected (more than \(\alpha\))</td>
+                            <td>Not deflected</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="diagram-placeholder">Diagram Placeholder: Illustration of penetrating power of \(\alpha\), \(\beta\), \(\gamma\) through different materials. (Similar to KLB Fig 10.4/10.5)</div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>5. Radioactivity and Radioactive Decay</h2>
+            <p><strong>Radioactivity</strong> is the spontaneous random emission of particles from the nucleus of an unstable nuclide. It is unaffected by external factors.</p>
+            <p><strong>Radioactive decay</strong> is the process by which an unstable nucleus transforms by emitting radiation.</p>
+            <h3>Types of Decay:</h3>
+            <ul>
+                <li><strong>Alpha Decay:</strong> Emission of an \(\alpha\) particle (\({}_{2}^{4}He\)).
+                    <p class="math-display">\({}_{Z}^{A}X \rightarrow {}_{Z-2}^{A-4}Y + {}_{2}^{4}He\)</p>
+                    Example: \({}_{92}^{238}U \rightarrow {}_{90}^{234}Th + {}_{2}^{4}He\)
+                </li>
+                <li><strong>Beta Decay:</strong> Emission of a \(\beta\) particle (\({}_{-1}^{0}e\)). A neutron in the nucleus converts to a proton and an electron (the \(\beta\) particle).
+                    <p class="math-display">\({}_{Z}^{A}X \rightarrow {}_{Z+1}^{A}Y + {}_{-1}^{0}e \quad (+ \bar{\nu_e} \text{ antineutrino})\)</p>
+                    Example: \({}_{11}^{24}Na \rightarrow {}_{12}^{24}Mg + {}_{-1}^{0}e\)
+                </li>
+                <li><strong>Gamma Emission:</strong> Emission of a \(\gamma\) ray (photon) when an excited nucleus transitions to a lower energy state. No change in A or Z.
+                    <p class="math-display">\({}_{Z}^{A}X^* \rightarrow {}_{Z}^{A}X + \gamma\)</p>
+                    Example: \({}_{27}^{60}Co^* \rightarrow {}_{27}^{60}Co + \gamma\)
+                </li>
+            </ul>
+            <p><em>(KLB Examples 1-4 demonstrate balancing nuclear equations.)</em></p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>6. Radiation Detectors</h2>
+            <ul>
+                <li><strong>Photographic Emulsions:</strong> Darken upon exposure to radiation. Used in radiation badges.</li>
+                <li><strong>Cloud Chamber:</strong> Shows visible tracks of condensed vapor on ions formed by radiation.
+                    <ul>
+                        <li>Expansion Cloud Chamber (KLB Fig 10.6)</li>
+                        <li>Diffusion Cloud Chamber (KLB Fig 10.7)</li>
+                    </ul>
+                    <div class="diagram-placeholder">Diagram: Expansion Cloud Chamber (KLB Fig 10.6)</div>
+                    <div class="diagram-placeholder">Diagram: Diffusion Cloud Chamber (KLB Fig 10.7)</div>
+                    Tracks: \(\alpha\) (short, thick, straight - KLB Fig 10.8), \(\beta\) (thin, long, irregular - KLB Fig 10.9), \(\gamma\) (scanty, disjointed - KLB Fig 10.10).
+                    <div class="diagram-placeholder">Diagram: Alpha, Beta, Gamma tracks in a cloud chamber. (Similar to KLB Figs 10.8-10.10)</div>
+                </li>
+                <li><strong>Geiger-Müller (G-M) Tube:</strong>
+                    <div class="diagram-placeholder">Diagram: Structure of a G-M Tube. (Similar to KLB Fig 10.11)</div>
+                    Structure: Gas-filled tube (e.g., argon + bromine) with central anode wire and cylindrical cathode. Thin mica window.
+                    Operation: Radiation ionizes gas \(\rightarrow\) electron avalanche (gas amplification) \(\rightarrow\) detectable current pulse.
+                    Features:
+                    <ul>
+                        <li><strong>Dead Time:</strong> Period of insensitivity after a pulse.</li>
+                        <li><strong>Quenching Agent (e.g., bromine):</strong> Prevents continuous discharge/false pulses.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Background Radiation:</strong> Radiation detected even without a specific source (from cosmic rays, rocks, etc.). Measurements must be corrected for this.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>7. Decay Law and Half-Life</h2>
+            <p>Radioactive decay is spontaneous and random.</p>
+            <p><strong>Decay Law:</strong> The rate of disintegration (\(\frac{dN}{dt}\)) is proportional to the number of undecayed nuclides (N) present:
+            \[\frac{dN}{dt} = -\lambda N\]
+            Where \(\lambda\) is the <strong>decay constant</strong> (probability of decay per unit time). \(\frac{dN}{dt}\) is also the <strong>activity (A)</strong> of the sample, so \(A = \lambda N\). The SI unit of activity is the Becquerel (Bq: 1 decay/second).</p>
+            
+            <p><strong>Half-Life (\(t_{1/2}\)):</strong> The time taken for half the number of nuclides initially present in a sample to decay.</p>
+            <p>Formula for number of undecayed nuclides (N) after time (T):
+            \[N = N_0 \left(\frac{1}{2}\right)^{\frac{T}{t_{1/2}}}\]
+            Where \(N_0\) is the initial number of nuclides.</p>
+            <p>Relationship between half-life and decay constant:
+            \[t_{1/2} = \frac{\ln 2}{\lambda} \approx \frac{0.693}{\lambda}\]</p>
+            <div class="diagram-placeholder">Diagram: Radioactive decay curve (N vs. time), showing exponential decrease and how to determine half-life. (Similar to KLB Fig 10.12)</div>
+            <p><em>(KLB Examples 5-9 and Figures 10.13, 10.14 illustrate half-life calculations and graphical determination.)</em></p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>8. Applications of Radioactivity</h2>
+            <ul>
+                <li><strong>Carbon Dating:</strong> Determining age of organic materials using Carbon-14 (half-life ~5730 years).</li>
+                <li><strong>Medicine:</strong>
+                    <ul>
+                        <li><strong>Cancer Treatment (Radiotherapy):</strong> Gamma rays (e.g., from Cobalt-60) destroy cancerous cells.</li>
+                        <li><strong>Sterilization:</strong> Gamma rays sterilize medical equipment.</li>
+                        <li><strong>Medical Tracers & Imaging:</strong> E.g., Iodine-131 for thyroid function, PET scans.</li>
+                    </ul>
+                </li>
+                <li><strong>Industrial Applications:</strong>
+                    <ul>
+                        <li><strong>Detecting Pipe Leakages:</strong> Radioactive tracers added to fluids.</li>
+                        <li><strong>Thickness Gauging:</strong> Beta source and detector measure material thickness (e.g., paper, metal foil - KLB Fig 10.15).
+                            <div class="diagram-placeholder">Diagram: Thickness gauging setup. (Similar to KLB Fig 10.15)</div>
+                        </li>
+                        <li><strong>Detection of Flaws:</strong> Gamma radiography for inspecting welds.</li>
+                        <li><strong>Smoke Detectors:</strong> E.g., Americium-241 (alpha emitter).</li>
+                    </ul>
+                </li>
+                <li><strong>Trace Elements in Research:</strong> Studying uptake of fertilizers by plants, water movement in soil.</li>
+            </ul>
+            <p>Choice of radioisotope depends on half-life, type/energy of radiation, and chemical properties.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>9. Hazards of Radiation and Safety Precautions</h2>
+            <p>Radiation can damage living cells and tissues. Effects depend on radiation type, dose, and irradiated body part.</p>
+            <h3>Hazards:</h3>
+            <ul>
+                <li>Cell damage, mutations, cancer (e.g., leukaemia).</li>
+                <li>Skin burns, blisters.</li>
+                <li>Hereditary defects.</li>
+                <li>High doses can be fatal.</li>
+            </ul>
+            <p>Gamma rays are a major external hazard due to high penetration. Alpha emitters are dangerous if ingested/inhaled (internal hazard).</p>
+            <h3>Safety Precautions (ALARA: As Low As Reasonably Achievable):</h3>
+            <ol>
+                <li><strong>Time:</strong> Minimize exposure duration.</li>
+                <li><strong>Distance:</strong> Maximize distance from the source (intensity \(\propto 1/d^2\)).</li>
+                <li><strong>Shielding:</strong> Use absorbing materials (e.g., lead for \(\gamma\), Perspex for \(\beta\)).</li>
+            </ol>
+            <ul>
+                <li>Never handle sources with bare hands; use forceps/tongs.</li>
+                <li>Store in thick, dense (e.g., lead) containers.</li>
+                <li>Wear monitoring badges (dosimeters).</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>10. Nuclear Fission and Fusion</h2>
+            <h3>Nuclear Fission</h3>
+            <p>Splitting of a heavy nucleus (e.g., Uranium-235 by neutron bombardment) into lighter nuclei, releasing energy and more neutrons.</p>
+            <p class="math-display">\({}_{92}^{235}U + {}_{0}^{1}n \rightarrow {}_{92}^{236}U^* \rightarrow {}_{56}^{144}Ba + {}_{36}^{90}Kr + 2 \text{ or } 3 {}_{0}^{1}n + \text{Energy}\)</p>
+            <p><strong>Chain Reaction:</strong> Neutrons from fission cause further fissions. Controlled in reactors (e.g., using boron rods to absorb neutrons), uncontrolled in atomic bombs.</p>
+            <div class="diagram-placeholder">Diagram: Nuclear fission chain reaction. (Similar to KLB Fig 10.16)</div>
+            <h3>Nuclear Fusion</h3>
+            <p>Combining (fusing) of light nuclei (e.g., hydrogen isotopes) to form a heavier nucleus, releasing substantial energy.</p>
+            <p class="math-display">\({}_{1}^{2}H + {}_{1}^{3}H \rightarrow {}_{2}^{4}He + {}_{0}^{1}n + \text{Energy (Deuterium-Tritium fusion)}\)</p>
+            <p>Requires extremely high temperatures and pressures (occurs in stars). Controlled fusion for power is a research goal.</p>
+            <p>Energy is released in both because products are more stable (higher binding energy per nucleon).</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>11. Elaboration on Key Radioactivity Concepts</h2>
+            <h3>Probabilistic Nature of Decay</h3>
+            <p>Radioactive decay is spontaneous and random for individual nuclei. The decay constant (\(\lambda\)) is the probability per unit time of decay for a nucleus. For large numbers of nuclei, the decay rate is predictable.</p>
+            <h3>Interaction of Radiation with Matter</h3>
+            <ul>
+                <li><strong>Alpha:</strong> Strong electrostatic interactions, dense ionization, short straight tracks.</li>
+                <li><strong>Beta:</strong> Less intense interactions than alpha, longer tortuous tracks.</li>
+                <li><strong>Gamma:</strong> Interact via photoelectric effect, Compton scattering, pair production; sparse, indirect ionization, highly penetrating.</li>
+            </ul>
+            <h3>Activity, Decay Constant, Half-Life Relationship</h3>
+            <p>Activity \(A = \lambda N\). Half-life \(t_{1/2} = \frac{\ln 2}{\lambda} \approx \frac{0.693}{\lambda}\).</p>
+            <h3>Detector Principles & Limitations</h3>
+            <p><strong>G-M Tube:</strong> High efficiency for \(\beta\), low for \(\gamma\). No energy info. Dead time limits high count rates.</p>
+            <p><strong>Cloud Chamber:</strong> Visualizes tracks, gives qualitative info on particle type, charge, energy.</p>
+            <h3>Nuclear Energy: Fission vs. Fusion In-depth</h3>
+            <p>Energy release is due to increased binding energy per nucleon in products. Fusion releases more energy per unit mass. Fusion power faces challenges of plasma confinement at extreme temperatures.</p>
+            <h3>Modern Applications & Ethical Considerations</h3>
+            <p>PET scans, smoke detectors. Ethical issues: nuclear waste, accidents, weapons proliferation. ALARA principle is key.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>12. Conclusion and Recommendations</h2>
+            <h3>Summary of Principal Findings</h3>
+            <p>The study of radioactivity is crucial. Standard textbooks like KLB Physics Book 4 generally align well with the KCSE syllabus, covering definitions, properties of radiations, detectors, decay laws, applications, and hazards. Deeper understanding can be fostered by elaborating on the underlying physics of nuclear stability, decay mechanisms, and energy release in fission/fusion.</p>
+            <h3>Recommendations for Educators & Students</h3>
+            <p>Educators should leverage textbook strengths, supplement with depth on nuclear forces and binding energy, and emphasize safety. Students should master definitions, practice problem-solving (especially half-life and nuclear equations), understand conceptual underpinnings, and relate theory to real-world applications and safety.</p>
+            <p>A sound understanding of radioactivity empowers informed citizenship regarding nuclear science and its societal impact.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>13. Revision Questions</h2>
+            <p><em>(Constants: \(h = 6.63 \times 10^{-34} \text{ Js}\); \(e = 1.6 \times 10^{-19} \text{ C}\); \(c = 3.0 \times 10^8 \text{ m/s}\); \(m_e = 9.11 \times 10^{-31} \text{ kg}\); \(1 \text{ eV} = 1.6 \times 10^{-19} \text{ J}\))</em></p>
+            
+            <h4>I. Basic Concepts and Discovery</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>1.</strong> Define radioactivity based on the spontaneous transformation of atomic nuclei.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Radioactivity is a natural phenomenon characterized by the spontaneous transformation of unstable atomic nuclei, accompanied by the release of energy and particles.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>2.</strong> Who discovered radioactivity in 1896?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Henri Becquerel.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>3.</strong> Name the scientists who further investigated radioactivity after its initial discovery.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Marie and Pierre Curie.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>4.</strong> What specific materials did early investigators observe emitting penetrating radiations?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Uranium compounds.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>5.</strong> What fundamental understanding of the atom was changed by the work on radioactivity?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The understanding of the atom as an indivisible entity was changed, as radioactivity showed emissions originated from the atomic nucleus.</p></div>
+            </div>
+
+            <h4>II. Atomic Structure and Nuclear Stability</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>6.</strong> Define atomic number (Z).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Atomic number (Z) is the number of protons in the nucleus of an atom.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>7.</strong> Define mass number (A).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Mass number (A) is the total number of protons and neutrons in the nucleus of an atom.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>8.</strong> Explain the notation \({}^{A}_{Z}X\) for a nuclide.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(X\) is the chemical symbol of the element, \(A\) is the mass number (top left), and \(Z\) is the atomic number (bottom left).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>9.</strong> What are isotopes?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Isotopes are atoms of the same element (same atomic number Z) that have different numbers of neutrons, and therefore different mass numbers (A).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>10.</strong> Give an example of two isotopes of the same element.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Carbon-12 (\({}^{12}_{6}C\)) and Carbon-14 (\({}^{14}_{6}C\)).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>11.</strong> How does the proton-to-neutron ratio generally relate to nuclear stability in light nuclei?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>In light stable nuclei, the proton-to-neutron ratio is approximately 1:1.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>12.</strong> How does the proton-to-neutron ratio typically deviate for heavier unstable nuclei?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>For heavier nuclei, stability often requires more neutrons than protons; unstable heavy nuclei may have an excess or deficit of neutrons relative to the stable ratio for their mass.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>13.</strong> How do unstable nuclides above the stability line (neutron-rich) tend to decay?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>They tend to decay by beta-minus (\(\beta^-\)) emission, which converts a neutron into a proton, decreasing the neutron number and increasing the proton number, moving them closer to the stability line.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>14.</strong> How do unstable nuclides below the stability line (proton-rich) tend to decay?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>They tend to decay by processes that decrease the proton number relative to the neutron number, such as positron (\(\beta^+\)) emission or electron capture.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>15.</strong> What two primary forces balance within the nucleus to determine its stability?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The strong nuclear force (attractive) and the electrostatic force (repulsive between protons).</p></div>
+            </div>
+
+            <h4>III. Types of Radiations and their Properties</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>16.</strong> Name the three primary types of radioactive emissions.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Alpha (\(\alpha\)), Beta (\(\beta\)), and Gamma (\(\gamma\)) radiations.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>17.</strong> How are \(\alpha\), \(\beta\), and \(\gamma\) radiations distinguished by their behavior in a strong magnetic field?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Alpha particles are deflected as positively charged particles, beta particles as negatively charged particles (deflected more than alpha), and gamma rays are undeflected.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>18.</strong> What is the nature and composition of an alpha (\(\alpha\)) particle? Give its notation.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>An alpha particle is a helium nucleus, consisting of 2 protons and 2 neutrons. Notation: \({}_{2}^{4}He\) or \(\alpha\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>19.</strong> What is the nature and composition of a beta (\(\beta\)) particle? Give its notation.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A beta particle is a high-speed electron. Notation: \({}_{-1}^{0}e\) or \(\beta^-\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>20.</strong> What is the nature of gamma (\(\gamma\)) radiation?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Gamma radiation is high-energy electromagnetic radiation (photons).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>21.</strong> Describe the penetrating power of alpha particles and state what material can stop them.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Alpha particles have low penetrating power; they can be stopped by a sheet of paper or a few centimeters of air.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>22.</strong> Describe the penetrating power of beta particles and state what material can stop them.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Beta particles are more penetrating than alpha particles; they can be stopped by a few millimeters of aluminum.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>23.</strong> Describe the penetrating power of gamma rays and state what materials are effective for their attenuation.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Gamma rays are highly penetrating; significant thicknesses of lead or concrete are needed for substantial attenuation.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>24.</strong> Compare the ionising effect of alpha, beta, and gamma radiations.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Alpha particles have the highest ionising effect (dense ionization). Beta particles have a moderate ionising effect. Gamma rays have the lowest ionising effect (sparse, indirect ionization).</p></div>
+            </div>
+             <div class="question-container">
+                <button class="question-toggle"><span><strong>25.</strong> Why do alpha particles produce short, straight, thick tracks in a cloud chamber?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Due to their high ionisation density (causing thick tracks), high mass (preventing easy deflection, hence straight tracks), and rapid energy loss (short tracks).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>26.</strong> Why do beta particles produce thinner, longer, irregular tracks in a cloud chamber?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Due to their lower ionisation density (thinner tracks), greater penetration (longer tracks), and smaller mass (easily scattered, hence irregular tracks).</p></div>
+            </div>
+             <div class="question-container">
+                <button class="question-toggle"><span><strong>27.</strong> Why do gamma rays produce scanty, disjointed tracks in a cloud chamber?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Gamma rays are uncharged and ionize indirectly by ejecting electrons from air molecules; these secondary electrons then create the observed weak, sparse tracks.</p></div>
+            </div>
+
+            <h4>IV. Radioactive Decay</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>28.</strong> Is radioactive decay a spontaneous process? Explain.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Yes, it occurs without any external trigger or influence.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>29.</strong> Is radioactive decay a random process? Explain what this means for an individual nucleus.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Yes, it is random for an individual nucleus, meaning it's impossible to predict exactly when a specific nucleus will decay.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>30.</strong> Is radioactive decay affected by external factors like temperature or pressure?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>No, it is unaffected by such external factors.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>31.</strong> Write the general nuclear equation for alpha decay.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\({}_{Z}^{A}X \rightarrow {}_{Z-2}^{A-4}Y + {}_{2}^{4}He\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>32.</strong> Write the nuclear equation for the alpha decay of Polonium-210 (\({}^{210}_{84}Po\)) into Lead-206 (\({}^{206}_{82}Pb\)).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\({}^{210}_{84}Po \rightarrow {}^{206}_{82}Pb + {}_{2}^{4}He\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>33.</strong> Write the general nuclear equation for beta decay.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\({}_{Z}^{A}X \rightarrow {}_{Z+1}^{A}Y + {}_{-1}^{0}e\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>34.</strong> Write the nuclear equation for the beta decay of Sodium-24 (\({}^{24}_{11}Na\)) into Magnesium-24 (\({}^{24}_{12}Mg\)).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\({}^{24}_{11}Na \rightarrow {}^{24}_{12}Mg + {}_{-1}^{0}e\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>35.</strong> In beta decay, what transformation occurs within the nucleus?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A neutron transforms into a proton, an electron (the beta particle), and an antineutrino (\({}_{0}^{1}n \rightarrow {}_{1}^{1}p + {}_{-1}^{0}e + \bar{\nu_e}\)).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>36.</strong> Does gamma emission change the mass number or atomic number of a nucleus? Explain.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>No, gamma emission only involves the release of energy from an excited nucleus as it transitions to a lower energy state. The number of protons and neutrons remains unchanged.</p></div>
+            </div>
+
+            <h4>V. Decay Law and Half-Life</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>37.</strong> State the qualitative form of the radioactive decay law.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The rate of disintegration at a given time is directly proportional to the number of undecayed nuclides present at that time.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>38.</strong> Write the mathematical expression for the radioactive decay law using the decay constant (\(\lambda\)).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(\frac{dN}{dt} = -\lambda N\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>39.</strong> What does the term \(\frac{dN}{dt}\) represent in the decay law equation?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>It represents the rate of disintegration or the activity of the sample.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>40.</strong> What is the SI unit of activity?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Becquerel (Bq), where 1 Bq = 1 decay per second.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>41.</strong> Define half-life (\(t_{1/2}\)) of a radioactive sample.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The time taken for half the number of nuclides initially present in a radioactive sample to decay.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>42.</strong> Write the formula relating \(N\), \(N_0\), elapsed time (\(T\)), and half-life (\(t_{1/2}\)).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(N = N_0 \left(\frac{1}{2}\right)^{\frac{T}{t_{1/2}}}\)</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>43.</strong> A radioactive sample has a half-life of 10 years. What fraction remains after 30 years?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Number of half-lives = 30 years / 10 years = 3. Fraction remaining = \((1/2)^3 = 1/8\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>44.</strong> If \(N_0\) nuclei are present initially, how many half-lives have passed when \(N_0/8\) nuclei remain?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(N/N_0 = 1/8 = (1/2)^3\). So, 3 half-lives have passed.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>45.</strong> After 48 minutes, 1/16 of the original radioactive material remains. What is its half-life?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(1/16 = (1/2)^4\). So, 4 half-lives = 48 minutes. Half-life = 48/4 = 12 minutes.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>46.</strong> Half-life is 5 days. Start with 100g. How much remains after 15 days?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Number of half-lives = 15 days / 5 days = 3. Amount remaining = \(100g \times (1/2)^3 = 100g \times 1/8 = 12.5\) grams.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>47.</strong> What does a larger decay constant (\(\lambda\)) indicate about stability and half-life?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A larger \(\lambda\) indicates the isotope is more unstable, decays more rapidly, and has a shorter half-life.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>48.</strong> State the relationship between half-life (\(t_{1/2}\)) and decay constant (\(\lambda\)).</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>\(t_{1/2} \approx 0.693/\lambda\)</p></div>
+            </div>
+             <div class="question-container">
+                <button class="question-toggle"><span><strong>49.</strong> How is half-life determined from a decay curve?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Find the time it takes for the activity (or number of undecayed nuclei) to reduce to half of its initial value. This time interval is the half-life.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>50.</strong> What is background radiation? Give two sources.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Radiation detected even without a specific radioactive source. Sources: cosmic rays, radioactive materials in rocks (e.g., granite).</p></div>
+            </div>
+             <div class="question-container">
+                <button class="question-toggle"><span><strong>51.</strong> Why correct for background radiation in experiments?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>To obtain the count rate due only to the radioactive source, allowing for an accurate determination of its decay rate and half-life.</p></div>
+            </div>
+
+            <h4>VI. Radiation Detectors</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>52.</strong> How do photographic emulsions detect radiation?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Radiation affects the emulsion, causing it to darken upon exposure and development. The degree of darkening indicates the dose.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>53.</strong> Explain the basic principle of a cloud chamber.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>It relies on the condensation of a supersaturated vapour onto ions created by the passage of radiation, forming visible tracks.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>54.</strong> Name two types of cloud chambers.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Expansion cloud chamber and diffusion cloud chamber.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>55.</strong> Describe the key structural components of a G-M tube.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A gas-filled tube (e.g., argon with bromine), a central wire anode, a cylindrical cathode (tube wall), and a thin mica window.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>56.</strong> Explain gas amplification in a G-M tube.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electrons produced by initial ionization are accelerated and cause further ionizations by collision, leading to an avalanche of electrons for each detected particle.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>57.</strong> What is the dead time of a G-M tube?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A short period after detecting a particle during which the tube is insensitive to further radiation.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>58.</strong> What is the function of a quenching agent in a G-M tube?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>To absorb the kinetic energy of positive ions and prevent them from causing secondary electron emission from the cathode, which would lead to false pulses.</p></div>
+            </div>
+
+            <h4>VII. Nuclear Fission and Fusion</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>59.</strong> Define nuclear fission.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The splitting of a heavy atomic nucleus, typically by neutron bombardment, into two or more lighter nuclei, releasing energy and additional neutrons.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>60.</strong> Define nuclear fusion.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The combining or fusing of two light atomic nuclei to form a heavier nucleus, accompanied by the release of substantial energy.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>61.</strong> Explain a chain reaction in nuclear fission.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Neutrons released in one fission event cause further fissions in other fissile nuclei, leading to a rapidly escalating number of fissions and energy release.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>62.</strong> Give an example of a heavy nucleus that undergoes fission.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Uranium-235 (\({}^{235}_{92}U\)).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>63.</strong> Give an example of light nuclei that can undergo fusion.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Isotopes of Hydrogen, such as Deuterium (\({}^{2}_{1}H\)) and Tritium (\({}^{3}_{1}H\)).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>64.</strong> Why do both fission and fusion release energy?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Because the products of the reaction are in a more stable, lower-energy state (more tightly bound, higher binding energy per nucleon) than the initial reactants. This involves the conversion of a small amount of mass into energy (\(E=mc^2\)).</p></div>
+            </div>
+
+            <h4>VIII. Applications, Hazards, and Safety</h4>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>65.</strong> Explain carbon dating using Carbon-14.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Living organisms incorporate Carbon-14. Upon death, intake stops, and C-14 decays with a known half-life. Measuring remaining C-14 relative to stable C-12 estimates age.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>66.</strong> State one medical application of radioactivity for cancer treatment.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Radiotherapy, using gamma rays (e.g., from Cobalt-60) to destroy cancerous cells.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>67.</strong> How is radioactivity used for thickness gauging in industry?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A beta source is placed on one side of the material and a detector on the other. The amount of radiation passing through is inversely related to thickness, allowing for control.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>68.</strong> Explain how radioactive tracers detect pipe leakages.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A radioactive tracer is added to the liquid. If there's a leak, the tracer seeps into the soil. A detector passed over the ground locates the leak by detecting increased radiation.</p></div>
+            </div>
+             <div class="question-container">
+                <button class="question-toggle"><span><strong>69.</strong> State one application of radioactive tracers in agriculture.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>To study the uptake and utilization of fertilizers by plants.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>70.</strong> State two potential long-term health effects of radiation exposure.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Increased risk of cancer (e.g., leukaemia) and hereditary defects.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>71.</strong> Why are gamma rays a major external radiation hazard?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Due to their high penetrating power, allowing them to damage cells deep within the body from an external source.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>72.</strong> State two safety precautions for handling radioactive materials.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Never handle with bare hands (use forceps/tongs). Store in thick, dense (e.g., lead) containers.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>73.</strong> Explain the ALARA principle and its three primary strategies.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>ALARA stands for "As Low As Reasonably Achievable." Strategies: 1. Time (minimize exposure duration). 2. Distance (maximize distance from source). 3. Shielding (use absorbing materials).</p></div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <button id="prev-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.content-page');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            sidebarLinks.forEach((link) => { 
+                link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
+            });
+            currentPageIndex = index;
+            updateNavButtons();
+            window.scrollTo(0, 0); 
+            // Re-typeset MathJax for the current active page
+            if (typeof MathJax !== 'undefined' && pages[index]) {
+                MathJax.typesetPromise([pages[index]]).catch(function (err) {
+                    console.error('MathJax typesetting error: ' + err.message);
+                });
+            }
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === pages.length - 1;
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
+                showPage(pageIndex);
+                if (window.innerWidth < 768) { 
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                showPage(currentPageIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < pages.length - 1) {
+                showPage(currentPageIndex + 1);
+            }
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        mainContent.addEventListener('click', () => {
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        const questionToggles = document.querySelectorAll('.question-toggle');
+        questionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const answerContent = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                answerContent.classList.toggle('hidden');
+                if (answerContent.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Initial page load
+        showPage(0);
+    </script>
+
+</body>
+</html>

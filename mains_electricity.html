@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mains Electricity: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams' // Automatic equation numbering for AMS environments
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.5rem; 
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section h4 { 
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4B5563; /* Tailwind gray-600 */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list):not(.problem-solving-steps) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        .problem-solving-steps li { 
+            margin-bottom: 0.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+            min-height: 150px; 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6; /* Tailwind gray-100 */
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .revision-questions-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6;
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6;
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6;
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .answer-container.expanded {
+            display: block;
+            max-height: 2000px; 
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">Mains Electricity: KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro-mains" class="nav-link">1. Overview</a></li>
+                <li><a href="#sources-mains" class="nav-link">2. Sources of Mains Electricity</a></li>
+                <li><a href="#transmission-mains" class="nav-link">3. Transmission of Power</a></li>
+                <li><a href="#dangers-mains" class="nav-link">4. Dangers of Electricity</a></li>
+                <li><a href="#safety-mains" class="nav-link">5. Safety Precautions</a></li>
+                <li><a href="#wiring-mains" class="nav-link">6. Domestic Wiring Systems</a></li>
+                <li><a href="#billing-mains" class="nav-link">7. Billing of Electrical Energy</a></li>
+                <li><a href="#revision-questions-mains" class="nav-link">8. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro-mains" class="content-section">
+                <h2>1. Overview of Mains Electricity</h2>
+                <p>Mains electricity refers to the electrical power delivered to consumers via the national grid[cite: 1]. This electricity originates from various power generating stations that convert different forms of energy into electrical energy[cite: 2]. The study of mains electricity includes its sources, transmission, associated dangers, safety precautions, domestic wiring systems, and the calculation of electrical energy consumption and cost[cite: 3].</p>
+            </section>
+
+            <section id="sources-mains" class="content-section hidden-section">
+                <h2>2. Sources of Mains Electricity</h2>
+                <p>Mains electricity is generated from several primary energy sources harnessed in power stations[cite: 4]. The KCSE Physics syllabus specifically mentions geothermal, hydro, and nuclear among others[cite: 5].</p>
+                <h3>Hydro-electric Power</h3>
+                <ul>
+                    <li><strong>Principle:</strong> Utilizes the potential energy of water stored at a high level[cite: 6]. Water flows downwards through penstocks to drive turbines, which are connected to generators[cite: 7]. This process converts the kinetic energy of water into rotational mechanical energy in the turbines, which is then converted into electrical energy by generators via electromagnetic induction[cite: 8].</li>
+                    <li><strong>Advantages:</strong> Renewable, relatively clean, and having low running costs[cite: 9].</li>
+                    <li><strong>Disadvantages:</strong> High initial costs, dependence on rainfall, and potential ecological impact and land use issues[cite: 9].</li>
+                    <li><strong>Kenyan Context:</strong> It is a significant source in Kenya[cite: 10].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Hydro-electric power station.</div>
+
+                <h3>Geothermal Power</h3>
+                <ul>
+                    <li><strong>Principle:</strong> This source utilizes the Earth’s internal heat[cite: 10]. Hot water or steam from underground reservoirs is used to drive turbines connected to generators[cite: 11].</li>
+                    <li><strong>Advantages:</strong> Geothermal power is renewable, consistent, and has a smaller land footprint[cite: 12].</li>
+                    <li><strong>Disadvantages:</strong> Requires high exploration/drilling costs and may involve potential gas release, while being geographically limited[cite: 12].</li>
+                    <li><strong>Kenyan Context:</strong> Kenya is noted as a leading African producer of geothermal power[cite: 13].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Geothermal power station.</div>
+
+                <h3>Thermal Power (Fossil Fuels & Biomass)</h3>
+                <ul>
+                    <li><strong>Principle:</strong> This involves burning fuels like coal, oil, natural gas, or biomass to heat water and produce steam, which then drives turbines[cite: 14].</li>
+                    <li><strong>Advantages:</strong> Plants can be located near load centers and gas turbines can be built quickly[cite: 15].</li>
+                    <li><strong>Disadvantages:</strong> Fossil fuels are non-renewable and produce greenhouse gases and pollutants[cite: 15]. Biomass use needs to be sustainable to avoid deforestation[cite: 16].</li>
+                    <li><strong>Kenyan Context:</strong> Thermal power is used in Kenya for supplementation[cite: 16].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Thermal power station.</div>
+                
+                <h3>Nuclear Power</h3>
+                <ul>
+                    <li><strong>Principle:</strong> This utilizes heat generated from nuclear fission (e.g., of Uranium-235) in a reactor to produce steam that drives turbines[cite: 17].</li>
+                    <li><strong>Advantages:</strong> It offers large electricity output from a small amount of fuel and produces no greenhouse gas emissions during operation[cite: 18].</li>
+                    <li><strong>Disadvantages:</strong> It has high construction costs, produces radioactive waste, carries the risk of accidents, and faces public perception challenges[cite: 19].</li>
+                    <li><strong>Kenyan Context:</strong> Nuclear power is a future consideration for Kenya, with no operational plants currently[cite: 20].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Nuclear power station.</div>
+
+                <h3>Solar Power</h3>
+                <ul>
+                    <li><strong>Principle:</strong> Sunlight is converted directly to electricity using photovoltaic cells or indirectly by using concentrated solar power to heat a fluid for turbines[cite: 21].</li>
+                    <li><strong>Advantages:</strong> It is renewable, abundant, and clean, and suitable for off-grid use[cite: 22].</li>
+                    <li><strong>Disadvantages:</strong> Include being intermittent, requiring energy storage, high initial costs for large scale, and land use requirements[cite: 23].</li>
+                    <li><strong>Kenyan Context:</strong> Solar power is growing in popularity in Kenya[cite: 24].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating Photovoltaic cells and Concentrated Solar Power.</div>
+
+                <h3>Wind Power</h3>
+                <ul>
+                    <li><strong>Principle:</strong> This source utilizes the kinetic energy of wind to rotate turbine blades connected to a generator[cite: 24].</li>
+                    <li><strong>Advantages:</strong> It is renewable, clean, and has low operating costs[cite: 25].</li>
+                    <li><strong>Disadvantages:</strong> Is intermittent and can have visual impact, potential noise, and wildlife impact[cite: 25].</li>
+                    <li><strong>Kenyan Context:</strong> Kenya is stated to have significant wind power potential[cite: 26].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Wind turbine.</div>
+            </section>
+
+            <section id="transmission-mains" class="content-section hidden-section">
+                <h2>3. Transmission of Electrical Power</h2>
+                <p>After generation, electricity is transmitted over long distances[cite: 26]. Power stations generally generate electricity at voltages between 11 kV and 25 kV[cite: 27]. This voltage is then stepped up for transmission[cite: 28].</p>
+                <h3>High Voltage Transmission</h3>
+                <p>To reduce power loss during transmission over long distances, electricity is transmitted at very high voltages, such as 132 kV, 220 kV, and 400 kV[cite: 28]. The power ($P$) transmitted is given by $P = VI$, where $V$ is voltage and $I$ is current[cite: 29]. Power loss ($P_{loss}$) in cables is given by $P_{loss} = I^2R$, where $R$ is the resistance of the cables[cite: 30]. By stepping up the voltage $V$, the current $I = P/V$ is reduced[cite: 31]. This reduction in current drastically reduces the $I^2R$ losses, making high voltage transmission more efficient[cite: 32]. Cables used for transmission are typically thick and made of materials like copper or aluminum, with aluminum being preferred for its lower density, making it lighter and cheaper[cite: 33].</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating power loss reduction with high voltage transmission.</div>
+                <h3>Transformers</h3>
+                <p>These devices are used to change AC voltage levels through mutual induction[cite: 34].</p>
+                <ul>
+                    <li><strong>Step-Up Transformers:</strong> Located at power stations, they increase the voltage for transmission[cite: 35]. They have more turns in the secondary coil ($N_s$) than in the primary coil ($N_p$)[cite: 36].</li>
+                    <li><strong>Step-Down Transformers:</strong> Located at substations and local points, they reduce the voltage for consumers[cite: 37]. For example, in Kenya, the voltage is reduced to 240 V single-phase or 415 V three-phase[cite: 38]. They have fewer turns in the secondary coil ($N_s$) than in the primary coil ($N_p$)[cite: 39].</li>
+                </ul>
+                <p>For an ideal transformer, the ratio of voltages is equal to the ratio of the number of turns in the coils: $\frac{V_s}{V_p} = \frac{N_s}{N_p}$, and also equal to the inverse ratio of currents: $\frac{I_p}{I_s}$[cite: 40].</p>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Block diagram of power generation, transmission, and distribution system.</div>
+            </section>
+
+            <section id="dangers-mains" class="content-section hidden-section">
+                <h2>4. Dangers of Electricity</h2>
+                <p>Mains electricity can be dangerous if mishandled[cite: 40]. The dangers include:</p>
+                <h3>Electric Shock</h3>
+                <ul>
+                    <li><strong>Cause:</strong> This occurs when current passes through the human body[cite: 41]. The severity depends on the current magnitude, path through the body, duration of contact, and body resistance[cite: 42].</li>
+                    <li><strong>Effects:</strong> Range from tingling and muscle contractions to respiratory paralysis, ventricular fibrillation, burns, and death[cite: 43]. Currents greater than 25 mA can be dangerous, and over 100 mA are often fatal[cite: 44].</li>
+                </ul>
+                <h3>Fire</h3>
+                <ul>
+                    <li><strong>Cause:</strong> This can be caused by overheating of cables due to overloading or undersized wires, short circuits, faulty appliances, and poor connections[cite: 45].</li>
+                </ul>
+                <h3>Burns</h3>
+                <ul>
+                    <li><strong>Cause:</strong> These can be electrical burns (caused by current passing through tissue) or thermal burns (from contact with overheated electrical parts or fire)[cite: 46].</li>
+                </ul>
+                <p>Other dangers mentioned specifically for high voltage transmission lines include poles collapsing, cables hanging low, and the harmful effects of strong electric fields[cite: 47].</p>
+            </section>
+
+            <section id="safety-mains" class="content-section hidden-section">
+                <h2>5. Safety Precautions</h2>
+                <p>Various safety devices and practices are used to mitigate the dangers of electricity[cite: 48]. These include:</p>
+                <h3>Fuses</h3>
+                <ul>
+                    <li><strong>Function:</strong> These protect circuits from overcurrent[cite: 49]. A fuse contains a wire with a low melting point, typically in a fireproof casing[cite: 49].</li>
+                    <li><strong>Operation:</strong> It is connected in series with the live wire[cite: 50]. If the current exceeds the fuse's rating, the wire melts ("blows"), breaking the circuit and stopping the current flow[cite: 50].</li>
+                    <li><strong>Rating:</strong> Fuse ratings are slightly higher than the normal operating current (e.g., 3A, 5A, 13A)[cite: 51].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of different types of fuses (cartridge, rewireable).</div>
+
+                <h3>Earthing (Grounding)</h3>
+                <ul>
+                    <li><strong>Function:</strong> This provides a safe path for fault current if the metallic casing of an appliance becomes live, preventing electric shock[cite: 52].</li>
+                    <li><strong>Mechanism:</strong> An earth wire (green/yellow stripes) connects the casing to an earth electrode[cite: 53]. If a fault occurs, the fault current flows to the earth, which blows the fuse or trips the circuit breaker, disconnecting the supply[cite: 54].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating the principle of earthing an appliance.</div>
+
+                <h3>Circuit Breakers</h3>
+                <ul>
+                    <li><strong>Function:</strong> These also protect circuits from overcurrents[cite: 55]. Unlike fuses, they can be reset[cite: 55].</li>
+                    <li><strong>Types:</strong> Include thermal (using a bimetallic strip) and magnetic (MCBs, using an electromagnet)[cite: 56].</li>
+                    <li><strong>Advantages:</strong> Circuit breakers are often more sensitive and faster than fuses[cite: 57].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram showing the internal mechanism of a circuit breaker.</div>
+
+                <h3>Insulation</h3>
+                <ul>
+                    <li><strong>Function:</strong> Insulating materials (like plastics, rubber, ceramic) cover live parts to prevent accidental contact and short circuits[cite: 58].</li>
+                </ul>
+                <h3>Double Insulation</h3>
+                <ul>
+                    <li><strong>Function:</strong> This is a safety feature for appliances that do not have an earth connection (Class II appliances)[cite: 59]. It provides two layers of insulation between the live parts and the outer casing[cite: 60].</li>
+                    <li><strong>Symbol:</strong> Appliances with double insulation are marked with a symbol of a square within a square[cite: 61].</li>
+                </ul>
+                <div class="placeholder-img w-1/4 h-24 my-4">Placeholder: Double insulation symbol.</div>
+                <h3>Other General Safety Precautions</h3>
+                <ul>
+                    <li>Avoid touching electrical appliances with wet hands[cite: 62].</li>
+                    <li>Do not overload sockets[cite: 62].</li>
+                    <li>Switch off the power supply before attempting repairs[cite: 62].</li>
+                    <li>Replace damaged cables[cite: 62].</li>
+                    <li>Use qualified electricians[cite: 62].</li>
+                    <li>Keep appliances away from water[cite: 63].</li>
+                </ul>
+            </section>
+
+            <section id="wiring-mains" class="content-section hidden-section">
+                <h2>6. Domestic Wiring Systems</h2>
+                <p>Domestic wiring systems distribute electrical power safely within a house[cite: 63]. The system starts at the meter, which measures energy consumption, and connects to a consumer's fuse box (or consumer unit)[cite: 64].</p>
+                <h3>The Consumer Unit (Fuse Box / Distribution Board)</h3>
+                <p>This is the central distribution point for the house wiring[cite: 65]. It contains the main switch, circuit breakers (or fuses) for each individual circuit (e.g., lighting, sockets, cooker), and a Residual Current Device (RCD) or Earth Leakage Circuit Breaker (ELCB) which detects earth leakage currents and disconnects the supply[cite: 66].</p>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a typical consumer unit.</div>
+                <h3>Wiring Circuits</h3>
+                <h4>Lighting Circuit</h4>
+                <ul>
+                    <li><strong>Arrangement:</strong> Lights are typically wired in parallel[cite: 67]. This ensures that each lamp receives the full voltage supply, and if one bulb fails, the others continue to operate[cite: 68]. Switches are connected in the live wire[cite: 69].</li>
+                    <li><strong>Fusing:</strong> Lighting circuits usually use a low-rated fuse or circuit breaker (e.g., 5A or 6A)[cite: 69].</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a lighting circuit.</div>
+                <h4>Ring Main Circuit (for Sockets)</h4>
+                <ul>
+                    <li><strong>Arrangement:</strong> Socket outlets are often wired in a ring arrangement that starts and ends at the consumer unit[cite: 70]. Live, neutral, and earth wires form these rings[cite: 71].</li>
+                    <li><strong>Advantages:</strong> A key advantage is that current can flow to a socket via two paths, which halves the current in the cable sections, allowing thinner wires to be used[cite: 71]. It also provides some continuity if there is a break in the ring[cite: 72].</li>
+                    <li><strong>Fusing:</strong> Ring main circuits use a higher-rated fuse or breaker (e.g., 30A/32A), and each appliance plug connecting to a socket also contains its own fuse[cite: 73].</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a ring main circuit.</div>
+                <h3>Live, Neutral, and Earth Wires</h3>
+                <p>In domestic wiring, distinct wires carry out specific functions[cite: 74].</p>
+                <ul>
+                    <li><strong>Live Wire (L):</strong> Typically brown (formerly red) and carries the alternating current from the supply, usually at 240V[cite: 75]. It is the dangerous wire[cite: 76].</li>
+                    <li><strong>Neutral Wire (N):</strong> Typically blue (formerly black) and completes the circuit back to the supply[cite: 76]. It is normally close to earth potential (0V)[cite: 77].</li>
+                    <li><strong>Earth Wire (E):</strong> Typically green/yellow stripes (formerly green) and is a safety wire connecting the metal casing of appliances to the ground[cite: 77]. It normally carries no current[cite: 78].</li>
+                </ul>
+                <h3>The 3-Pin Plug</h3>
+                <p>This connects appliances to the socket outlets[cite: 78].</p>
+                <ul>
+                    <li><strong>Pins:</strong> It has three pins: the Live pin (connected to the brown/red wire, contains the appliance fuse), the Neutral pin (connected to the blue/black wire), and the Earth pin (connected to the green/yellow wire)[cite: 79].</li>
+                    <li><strong>Earth Pin:</strong> The earth pin is longer than the others to ensure it makes contact first when plugging in and breaks contact last when unplugging, and it also operates the socket shutter for safety[cite: 80].</li>
+                    <li><strong>Fuse:</strong> A cartridge fuse (e.g., 3A, 5A, or 13A) is located within the live pin path[cite: 81].</li>
+                    <li><strong>Cable Grip:</strong> Secures the cable where it enters the plug[cite: 82].</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a correctly wired 3-pin plug.</div>
+            </section>
+
+            <section id="billing-mains" class="content-section hidden-section">
+                <h2>7. Billing of Electrical Energy</h2>
+                <p>The amount of electrical energy consumed by a household or consumer is measured and billed[cite: 83].</p>
+                <h3>The Kilowatt-hour (kWh)</h3>
+                <p>Energy ($E$) is calculated as Power ($P$) multiplied by time ($t$) ($E = P \times t$)[cite: 84]. The SI unit of energy is the Joule (J), where $1 \text{ J} = 1 \text{ W} \times 1 \text{ s}$[cite: 85]. The Kilowatt-hour (kWh) is a larger, practical unit used for billing[cite: 86].</p>
+                <p><strong>Definition:</strong> One kilowatt-hour is defined as the energy consumed by an appliance with a power of 1 kilowatt operating for 1 hour[cite: 87].</p>
+                <p><strong>Conversion:</strong> $1 \text{ kWh} = 1000 \text{ W} \times 3600 \text{ s} = 3,600,000 \text{ J}$, or $3.6 \times 10^6 \text{ J}$ (3.6 MJ)[cite: 88]. The kWh is often referred to as a "unit" of electricity[cite: 89].</p>
+                <h3>Electricity Meter</h3>
+                <p>An electricity meter measures the total electrical energy consumed in kilowatt-hours[cite: 90].</p>
+                <div class="placeholder-img w-1/2 h-48 my-4">Placeholder: Image of an electricity meter.</div>
+                <h3>Calculating Cost</h3>
+                <p>The cost of electrical energy consumed is calculated by multiplying the number of units (kWh) by the cost per unit[cite: 91]. Additional charges may also apply[cite: 92].</p>
+                <h4>Worked Examples:</h4>
+                <p><strong>Example 1:</strong> A 1.5 kW electric heater is used for 4 hours. If electricity costs Ksh 20 per unit, calculate the cost.</p>
+                <p><em>Solution:</em> Energy = $1.5 \text{ kW} \times 4 \text{ hours} = 6 \text{ kWh}$. Cost = $6 \text{ kWh} \times \text{Ksh } 20/\text{kWh} = \text{Ksh } 120$.</p>
+                <p><strong>Example 2:</strong> A 500 W appliance runs for 10 hours. If electricity costs Ksh 20 per unit, find the cost.</p>
+                <p><em>Solution:</em> Power = $500 \text{ W} = 0.5 \text{ kW}$. Energy = $0.5 \text{ kW} \times 10 \text{ hours} = 5 \text{ kWh}$. Cost = $5 \text{ kWh} \times \text{Ksh } 20/\text{kWh} = \text{Ksh } 100$.</p>
+            </section>
+
+            <section id="revision-questions-mains" class="content-section hidden-section">
+                <h2>8. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. Define mains electricity.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Mains electricity is the electrical power supplied to consumers through the national grid[cite: 130]. It originates from various sources where energy is converted into electrical energy[cite: 131].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. List four primary sources of mains electricity according to the sources.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Water in high dams (Hydro-electric Power), Geothermal energy, Coal or diesel (Thermal Power), Nuclear energy. (Solar and Wind are also mentioned)[cite: 133].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. Explain the principle behind hydroelectric power generation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Hydro-electric power utilizes the potential energy of water stored at a high level[cite: 134]. Water flows downwards through penstocks, driving turbines connected to generators[cite: 135]. This process converts the kinetic energy of water into rotational mechanical energy in the turbines, and then into electrical energy in the generators via electromagnetic induction[cite: 136].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">4. State one advantage and one disadvantage of using hydroelectric power.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> One advantage of hydroelectric power mentioned is its relatively clean operation. A disadvantage is that it is rainfall dependent[cite: 138].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. Explain the principle behind geothermal power generation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Geothermal power generation utilizes the Earth’s internal heat[cite: 139]. Hot water or steam from underground reservoirs is used to drive turbines[cite: 140].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">6. According to the sources, where does Kenya rank in African geothermal power production?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> According to the sources, Kenya is the leading African producer of geothermal power[cite: 142].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. Describe the process by which thermal power stations generate electricity.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Thermal power stations generate electricity by burning fuels such as coal, oil, gas, or biomass to heat water[cite: 144]. This produces steam, which then drives turbines[cite: 145].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. State two disadvantages of using fossil fuels for thermal power generation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Two disadvantages of using fossil fuels for thermal power generation are that fossil fuels are non-renewable, and they produce greenhouse gases (CO2) and pollutants (SO2, NOx)[cite: 146].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">9. Explain the principle behind nuclear power generation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Nuclear power generation utilizes heat from nuclear fission, such as from Uranium-235, in a reactor to produce steam[cite: 147]. This steam then drives turbines[cite: 148].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. State one advantage and one disadvantage of using nuclear power for electricity generation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> One advantage of using nuclear power is that it provides a large electricity output from a small amount of fuel[cite: 149]. A disadvantage is the production of radioactive waste[cite: 150].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. Describe two methods of converting solar energy into electricity mentioned in the sources.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Two methods of converting solar energy into electricity mentioned are converting sunlight directly to electricity using photovoltaic cells, or indirectly using concentrated solar power to heat a fluid which then drives turbines[cite: 151].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. State one advantage and one disadvantage of solar power.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An advantage of solar power is that it is renewable and clean in operation[cite: 153]. A disadvantage is that it is intermittent[cite: 154].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. Explain how wind power is generated.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Wind power is generated by utilizing the kinetic energy of wind to rotate turbine blades, which then drive a generator[cite: 155].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. State one advantage and one disadvantage of wind power.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An advantage of wind power is that it is renewable and clean in operation[cite: 157]. A disadvantage is that it is intermittent[cite: 158].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">15. Explain why electrical power is transmitted over long distances at very high voltages.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Electrical power is transmitted over long distances at very high voltages to reduce power loss[cite: 159]. The power transmitted P is equal to the voltage V multiplied by the current I ($P = VI$)[cite: 160]. Power loss in cables ($P_{loss}$) is given by $I^2R$, where R is the resistance of the cable[cite: 161]. If the voltage V is stepped up, the current $I = P/V$ is reduced[cite: 162]. This reduction in current drastically reduces the $I^2R$ losses in the transmission cables[cite: 163].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. Explain the relationship between power loss, current, and resistance in transmission cables.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The relationship between power loss ($P_{loss}$), current ($I$), and resistance ($R$) in transmission cables is given by the formula $P_{loss} = I^2R$[cite: 165]. This means that power loss is directly proportional to the square of the current and the resistance of the cable[cite: 166].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">17. What is the function of a step-up transformer in power transmission?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Step-up transformers are used at power stations to increase the voltage for transmission[cite: 168].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. Where are step-down transformers typically used in the power distribution system?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Step-down transformers are typically used at substations and local points to reduce the voltage for consumers[cite: 170].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. State the ideal transformer equation relating voltage and number of turns.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The ideal transformer equation relating voltage ($V$) and number of turns ($N$) for the primary (p) and secondary (s) coils is $\frac{V_s}{V_p} = \frac{N_s}{N_p}$[cite: 172].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. List three dangers associated with electricity if mishandled.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Three dangers associated with electricity if mishandled are electric shock, fire, and burns[cite: 174].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. What causes electric shock, and on what factors does its severity depend?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Electric shock is caused by current passing through the human body[cite: 176]. Its severity depends on the current magnitude, the path the current takes through the body, the duration of the shock, and the body's resistance[cite: 177].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. According to the sources, what level of current is often fatal to humans?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> According to the sources, currents greater than 100 mA are often fatal to humans[cite: 179].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">23. List three causes of electrical fires mentioned in the sources.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Three causes of electrical fires mentioned are overheating of cables due to overloading or undersized wires, short circuits, and faulty appliances or poor connections[cite: 181].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">24. Distinguish between electrical burns and thermal burns.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Electrical burns are caused by current passing through tissue[cite: 182]. Thermal burns are caused by contact with overheated electrical parts or the fire resulting from an electrical fault[cite: 183].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">25. What is the function of a fuse in an electrical circuit?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The function of a fuse is to protect circuits from overcurrent[cite: 185].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">26. Describe the construction and operation of a fuse.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A fuse is constructed with a wire made of a low melting point alloy, typically enclosed in a fireproof casing[cite: 187]. It is connected in series with the live wire in a circuit[cite: 188]. If the current exceeds the fuse's rating, the wire heats up and melts ("blows"), breaking the circuit and stopping the current flow[cite: 189].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">27. Where in a circuit is a fuse typically connected for protection?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A fuse is typically connected in series with the live wire in a circuit[cite: 191].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">28. What is the function of earthing in a domestic wiring system?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The function of earthing (grounding) in a domestic wiring system is to provide a safe path for fault current if a metallic casing of an appliance becomes live, preventing electric shock[cite: 193].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">29. How does earthing help to protect against electric shock?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Earthing helps protect against electric shock by connecting the metallic casing of an appliance to an earth electrode via an earth wire[cite: 195]. If a fault causes the live wire to touch the casing, the fault current flows safely to the earth through the earth wire, causing a large current to flow which will blow the fuse or trip the circuit breaker, thus disconnecting the power supply[cite: 196].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">30. What are circuit breakers, and how do they differ from fuses?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Circuit breakers are devices that protect circuits from overcurrents and can be reset after they have tripped[cite: 198]. They differ from fuses in that fuses contain a wire that melts and must be replaced after an overcurrent, whereas circuit breakers can be reset for reuse once the fault is corrected[cite: 199].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">31. Explain the function of insulation in electrical wiring.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The function of insulation in electrical wiring is to cover live parts with insulating materials to prevent contact and short circuits[cite: 201].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">32. What is double insulation, and for which types of appliances is it primarily used?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Double insulation is a safety feature for appliances that do not have an earth connection (Class II appliances)[cite: 203]. It involves using two layers of insulation between the live parts and the outer casing[cite: 204].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">33. List the main components found in a consumer unit (fuse box/distribution board).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The main components found in a consumer unit are the Main Switch, Circuit Breakers (or Fuses) for each circuit, and a Residual Current Device (RCD) or Earth Leakage Circuit Breaker (ELCB)[cite: 206].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">34. Describe the arrangement of lamps in a typical lighting circuit and explain why they are wired this way.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> In a typical lighting circuit, lamps are wired in parallel[cite: 208]. They are wired this way so that if one lamp blows, the others can still work, and all lamps receive the full mains voltage[cite: 209].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">35. State one advantage of the ring main circuit arrangement used for sockets.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> One advantage of the ring main circuit arrangement for sockets is that the current can flow via two paths from the consumer unit, which halves the current in each section of the cable, allowing for the use of thinner wires[cite: 211]. It also offers some continuity if there is a break in one part of the ring[cite: 212].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">36. State the standard colour coding for the Live, Neutral, and Earth wires in a domestic wiring system.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The standard colour coding for the Live wire is Brown (previously Red)[cite: 214]. The standard colour coding for the Neutral wire is Blue (previously Black)[cite: 215]. The standard colour coding for the Earth wire is Green/Yellow stripes (previously Green)[cite: 216].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">37. Explain why the Earth pin on a 3-pin plug is longer than the Live and Neutral pins.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The Earth pin on a 3-pin plug is longer so that it makes contact with the socket's earth connection first when the plug is inserted and breaks contact last when the plug is removed[cite: 218]. This ensures that the appliance's casing is earthed before the live connection is made and remains earthed until after the live connection is broken, providing safety[cite: 219]. The longer Earth pin also operates the socket shutter mechanism[cite: 220].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">38. Define a kilowatt-hour (kWh) and state its relationship to Joules.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A kilowatt-hour (kWh) is a practical unit of electrical energy consumption[cite: 222]. It is defined as the energy consumed by a 1 kW appliance operating for 1 hour[cite: 223]. Its relationship to Joules is $1 \text{ kWh} = 3,600,000 \text{ J}$, or $3.6 \times 10^6 \text{ J}$, which is equal to 3.6 MJ[cite: 224].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">39. Calculate the energy consumed in kWh by a 1.5 kW electric heater used for 4 hours.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Using the formula Energy (kWh) = Power (kW) $\times$ Time (h): Energy = $1.5 \text{ kW} \times 4 \text{ hours} = 6 \text{ kWh}$[cite: 226].</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">40. If the cost of electricity is Ksh 20 per unit (kWh), what is the cost of running a 500 W appliance for 10 hours?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> First, convert the power to kilowatts: $500 \text{ W} = 0.5 \text{ kW}$[cite: 228]. Calculate the energy consumed in kWh: Energy = Power (kW) $\times$ Time (h)[cite: 229]. Energy = $0.5 \text{ kW} \times 10 \text{ hours} = 5 \text{ kWh}$[cite: 230]. The cost is calculated as Cost = Number of units (kWh) $\times$ Cost per unit[cite: 231]. Cost = $5 \text{ kWh} \times \text{Ksh } 20/\text{kWh} = \text{Ksh } 100$[cite: 232].</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">41. What material is commonly used for the filament in an incandescent bulb and why?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Tungsten is commonly used for the filament in an incandescent bulb because it has a very high melting point and can withstand being heated to high temperatures (to incandescence) without melting or vaporizing too quickly.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">42. What is the purpose of a two-way switch in a lighting circuit?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A two-way switch allows a single lamp or group of lamps to be controlled from two different locations, such as at the top and bottom of a staircase or at either end of a corridor.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Mains Electricity. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0;
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+            if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer');
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    // Optional: Close other open answers if desired
+                    // document.querySelectorAll('.answer-container.expanded').forEach(openAnswer => {
+                    //     if (openAnswer !== answerContainer) {
+                    //         openAnswer.classList.remove('expanded');
+                    //         openAnswer.classList.add('hidden-answer');
+                    //         openAnswer.previousElementSibling.querySelector('.toggle-icon').textContent = '+';
+                    //         openAnswer.previousElementSibling.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
+                    //     }
+                    // });
+                    answerContainer.classList.remove('hidden-answer');
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                    if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise([answerContainer]); // Typeset only the newly expanded answer
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+    </script>
+</body>
+</html>

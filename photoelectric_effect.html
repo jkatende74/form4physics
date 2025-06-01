@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoelectric Effect Learning Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-page {
+            display: none;
+        }
+        .content-page.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active-link {
+            background-color: #4A5568; /* gray-700 */
+            color: #FFFFFF;
+            transform: translateX(5px);
+        }
+        .diagram-placeholder {
+            width: 100%;
+            max-width: 450px; /* Slightly smaller for potentially complex diagrams */
+            height: 250px; 
+            background-color: #E2E8F0; /* gray-200 */
+            border: 2px dashed #A0AEC0; /* gray-400 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4A5568; /* gray-700 */
+            font-style: italic;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #1A202C; /* gray-900 */
+            border-bottom: 2px solid #718096; /* gray-500 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2D3748; /* gray-800 */
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: #4A5568; /* gray-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+         ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        strong {
+            color: #2C5282; /* blue-800 */
+        }
+        .question-container {
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; /* gray-200 */
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        .question-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background-color: #F7FAFC; /* gray-50 */
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid #E2E8F0; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .question-toggle:hover {
+            background-color: #EDF2F7; /* gray-100 */
+        }
+        .question-toggle span {
+            font-weight: 600; 
+            color: #2D3748; 
+        }
+        .question-toggle svg {
+            width: 1.25rem; 
+            height: 1.25rem; 
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .answer-content {
+            background-color: #FFFFFF; 
+            padding: 1rem; 
+        }
+        .answer-content.hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #CBD5E0; /* gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+            color: #4A5568; /* gray-700 */
+        }
+        th {
+            background-color: #F7FAFC; /* gray-50 */
+            font-weight: 600; /* semibold */
+            color: #2D3748; /* gray-800 */
+        }
+        code {
+            background-color: #EDF2F7; /* gray-100 */
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+        .citation-note {
+            font-size: 0.9rem;
+            color: #718096; /* gray-500 */
+            font-style: italic;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background-color: #F9FAFB; /* gray-50 */
+            border-left: 4px solid #D1D5DB; /* gray-300 */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
+        <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">Photoelectric Effect</h1>
+        <nav class="flex-grow overflow-y-auto">
+            <ul>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="0">1. Introduction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="1">2. KCSE Syllabus Alignment</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="2">3. Fundamental Concepts</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="3">4. Einstein's Equation</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="4">5. Experimental Demonstration</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="5">6. Factors Affecting Emission</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="6">7. Applications</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="7">8. Problem Solving</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="8">9. Conclusion</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="9">10. Revision Questions</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <button id="hamburger-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>1. Introduction</h2>
+            <p>The Photoelectric Effect is a fundamental phenomenon in physics, crucial for understanding quantum mechanics. It involves the emission of electrons (called <strong>photoelectrons</strong>) from a material when electromagnetic radiation of sufficient frequency shines on its surface. This effect cannot be fully explained by classical wave theory, necessitating a quantum interpretation.</p>
+            <p>This learning guide explores the Photoelectric Effect, aligning with the KCSE Physics syllabus and drawing upon common textbook explanations (such as those found in KLB Physics Book 4, Chapter 9). Understanding this topic is vital as it bridges classical physics with the quantum world and has numerous practical applications.</p>
+            <div class="citation-note">
+                <p>Note: References like "KLB Table 9.1" or "Figure 9.X" mentioned in this guide refer to typical content found in standard physics textbooks such as the KLB Physics Book 4, Chapter 9, which covers the Photoelectric Effect.</p>
+            </div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>2. KCSE Physics Syllabus Alignment (Topic 39.0.0)</h2>
+            <p>This guide addresses the following specific objectives and content areas for the Photoelectric Effect as per the KCSE Physics Syllabus:</p>
+            <h3>Specific Objectives:</h3>
+            <ul>
+                <li>Perform and describe simple experiments to illustrate the photoelectric effect.</li>
+                <li>Explain the factors affecting photoelectric emission.</li>
+                <li>Apply the equation \(E=hf\) to calculate the energy of photons.</li>
+                <li>Define threshold frequency, work function, and the electron-volt.</li>
+                <li>Explain photoelectric emission using Einstein's equation: \(hf = hf_0 + \frac{1}{2}mv^2_{max}\).</li>
+                <li>Explain the applications of the photoelectric effect.</li>
+                <li>Solve numerical problems involving photoelectric emissions.</li>
+            </ul>
+            <h3>Content Areas:</h3>
+            <ul>
+                <li>Photoelectric effect, photons, threshold frequency, work function, Planck's constant, and electron-volt.</li>
+                <li>Factors affecting photoelectric emission.</li>
+                <li>Energy of Photons.</li>
+                <li>Einstein's equation.</li>
+                <li>Applications: Photoemissive cells, Photoconductive cells, Photovoltaic cells.</li>
+            </ul>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>3. Fundamental Concepts and Theory</h2>
+            <h3>Quantum Theory and Photons</h3>
+            <p>Max Planck's Quantum Theory introduced the idea that light energy is propagated in discrete packets or <strong>quanta</strong>. In the context of light, these quanta are called <strong>photons</strong>.</p>
+            <p>The energy (\(E\)) of a photon is directly proportional to the frequency (\(f\)) of the radiation:
+            \[E = hf\]
+            Where \(h\) is <strong>Planck's constant</strong> (\( \approx 6.63 \times 10^{-34} \text{ Js} \)).</p>
+            <p>Since \(c = f\lambda\) (where \(c\) is the speed of light and \(\lambda\) is the wavelength), photon energy can also be expressed as:
+            \[E = \frac{hc}{\lambda}\]</p>
+
+            <h3>Work Function (\(W_0\))</h3>
+            <p>The <strong>work function</strong> is the minimum amount of energy required to dislodge an electron from the surface of a specific metal. It is a characteristic property of the metal.</p>
+            <p>Work function can be expressed in Joules (J) or <strong>electron-volts (eV)</strong>.</p>
+            <p><strong>Electron-Volt (eV):</strong> A unit of energy. \(1 \text{ eV} = 1.6 \times 10^{-19} \text{ J}\).</p>
+
+            <h3>Threshold Frequency (\(f_0\)) and Threshold Wavelength (\(\lambda_0\))</h3>
+            <p><strong>Threshold frequency (\(f_0\)):</strong> The minimum frequency of incident radiation below which no photoelectric emission will occur, regardless of the light's intensity.</p>
+            <p><strong>Threshold wavelength (\(\lambda_0\)):</strong> The maximum wavelength of incident radiation beyond which no photoelectric emission will occur. It corresponds to \(f_0\) via \(c = f_0\lambda_0\).</p>
+            <p>The work function is related to the threshold frequency by: \(W_0 = hf_0\).</p>
+            <p><em>(Reference: KLB Table 9.1 typically lists work functions and threshold frequencies for various metals.)</em></p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>4. Einstein's Photoelectric Equation</h2>
+            <p>Albert Einstein explained the photoelectric effect using the concept of photons and energy conservation. When a photon of energy \(hf\) strikes a metal surface, its energy is utilized in two ways:</p>
+            <ol>
+                <li>To overcome the work function (\(W_0\)) of the metal, freeing the electron.</li>
+                <li>The remaining energy is imparted to the emitted electron as kinetic energy.</li>
+            </ol>
+            <p>Einstein's Photoelectric Equation is:
+            \[hf = W_0 + K.E._{max}\]
+            This can also be written as:
+            \[hf = hf_0 + \frac{1}{2}m_e v^2_{max}\]
+            Where:</p>
+            <ul>
+                <li>\(hf\): Energy of the incident photon.</li>
+                <li>\(W_0 = hf_0\): Work function of the metal (energy needed to just eject an electron).</li>
+                <li>\(K.E._{max} = \frac{1}{2}m_e v^2_{max}\): Maximum kinetic energy of the emitted photoelectron (\(m_e\) is the mass of the electron, \(v_{max}\) is its maximum velocity).</li>
+            </ul>
+            <p>The term "maximum" kinetic energy (\(K.E._{max}\)) is crucial. Electrons can be emitted from various depths within the metal. Those emitted from deeper inside may lose some energy due to collisions before escaping, resulting in lower kinetic energies. Only electrons emitted from the very surface with no internal energy loss will have this maximum kinetic energy.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>5. Experimental Demonstration of the Photoelectric Effect</h2>
+            <p>Simple experiments illustrate the photoelectric effect, often using a gold-leaf electroscope and a UV light source.</p>
+            <h3>Using Neutral Plates (Similar to KLB Figure 9.1)</h3>
+            <div class="diagram-placeholder">Diagram: UV source, Metal Plate A, Metal Plate B, Galvanometer. Shows electron flow when UV hits Plate A.</div>
+            <p>UV radiation directed onto a clean metal plate (A) causes the emission of photoelectrons. If another plate (B) is placed nearby and connected through a galvanometer, these electrons can be attracted to plate B, resulting in a detectable current. Introducing a glass plate (which absorbs UV) between the source and plate A stops the current, demonstrating that UV radiation was responsible.</p>
+            <h3>Using a Charged Electroscope (Similar to KLB Figure 9.2)</h3>
+            <div class="diagram-placeholder">Diagram: Zinc plate on an electroscope cap. UV light source. Show separate diagrams for negatively and positively charged electroscope.</div>
+            <ul>
+                <li><strong>Negatively Charged Electroscope:</strong> A clean zinc plate is placed on the cap of a negatively charged electroscope. When UV light is shone on the zinc plate, the electroscope's leaf collapses. This is because the emitted photoelectrons are repelled by the negative charge on the electroscope, leading to its discharge.</li>
+                <li><strong>Positively Charged Electroscope:</strong> If the electroscope is positively charged, shining UV light on the zinc plate causes no change in the leaf divergence. Any emitted photoelectrons are immediately attracted back to the positively charged plate.</li>
+                <li>Using a glass barrier between the UV source and the zinc plate stops the effect in the negatively charged case, confirming UV light is the cause.</li>
+            </ul>
+            <p>These experiments qualitatively establish the existence of the photoelectric effect and its dependence on the type of radiation.</p>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>6. Factors Influencing Photoelectric Emission</h2>
+            <h3>Intensity of Incident Radiation</h3>
+            <div class="diagram-placeholder">Diagram: Photocell setup with a light source at varying distances (or varying brightness), ammeter to measure photocurrent. (Similar to KLB Fig 9.3)</div>
+            <p>The <strong>rate of emission of photoelectrons</strong> (and thus the photoelectric current) is directly proportional to the intensity of the incident radiation, provided the frequency of the radiation is above the threshold frequency (\(f \ge f_0\)).</p>
+            <p>Higher intensity means more photons strike the surface per second, leading to more electrons being ejected per second. Intensity does NOT affect the maximum kinetic energy of the individual emitted electrons.</p>
+
+            <h3>Frequency (Energy) of Incident Radiation</h3>
+            <div class="diagram-placeholder">Diagram: Photocell with different color filters (to vary frequency) and a setup to apply and measure stopping potential (\(V_s\)). (Similar to KLB Fig 9.4)</div>
+            <p>Photoelectric emission only occurs if the frequency (\(f\)) of the incident radiation is equal to or greater than the threshold frequency (\(f_0\)) of the metal.</p>
+            <p>If \(f < f_0\), no photoemission occurs, no matter how high the intensity.</p>
+            <p>If \(f > f_0\), increasing the frequency of the incident radiation increases the <strong>maximum kinetic energy</strong> (\(K.E._{max}\)) of the emitted photoelectrons. It does NOT increase the number of electrons emitted per second (photocurrent), assuming constant intensity.</p>
+            <p><strong>Stopping Potential (\(V_s\)):</strong> The minimum retarding (negative) potential applied to the anode that just stops the most energetic photoelectrons from reaching it, thus reducing the photocurrent to zero. It's a measure of \(K.E._{max}\): \(eV_s = K.E._{max}\).</p>
+            <p>A graph of stopping potential (\(V_s\)) versus frequency (\(f\)) is a straight line:
+            \[V_s = \left(\frac{h}{e}\right)f - \frac{W_0}{e}\]
+            <div class="diagram-placeholder">Diagram: Graph of Stopping Potential (\(V_s\)) on y-axis vs. Frequency (\(f\)) on x-axis, showing a straight line with positive slope, x-intercept as \(f_0\), and y-intercept as \(-W_0/e\). (Similar to KLB Fig 9.5)</div>
+            From this graph:
+            <ul>
+                <li>Slope = \(h/e\) (allows determination of Planck's constant).</li>
+                <li>x-intercept (where \(V_s=0\)) = \(f_0\) (threshold frequency).</li>
+                <li>y-intercept = \(-W_0/e\) (allows determination of work function).</li>
+            </ul>
+
+            <h3>Type of Metal (Nature of the Surface)</h3>
+            <p>Each metal has a unique <strong>work function (\(W_0\))</strong> and corresponding <strong>threshold frequency (\(f_0\))</strong>. Metals with lower work functions will emit electrons with lower frequency light compared to metals with higher work functions.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>7. Applications of the Photoelectric Effect</h2>
+            <h3>Photoemissive Cells</h3>
+            <div class="diagram-placeholder">Diagram: Structure of a photoemissive cell (vacuum tube with a photosensitive cathode and an anode). (Similar to KLB Fig 9.6)</div>
+            <p>These cells use materials that emit electrons when light shines on them (photoemission). Light incident on the cathode causes electron emission; these electrons are attracted to the anode, resulting in a current.</p>
+            <p><strong>Applications:</strong></p>
+            <ul>
+                <li>Automatic door openers</li>
+                <li>Burglar alarms (light beam interruption)</li>
+                <li>Counting systems (e.g., items on a conveyor belt - KLB Fig 9.7)</li>
+                <li>Sound reproduction from film soundtracks (light intensity variations through film track modulate current - KLB Fig 9.8)</li>
+            </ul>
+
+            <h3>Photovoltaic Cells (Solar Cells)</h3>
+            <div class="diagram-placeholder">Diagram: Basic structure of a photovoltaic cell (e.g., p-n junction or copper/copper-oxide type) and its circuit symbol. (Similar to KLB Fig 9.9)</div>
+            <p>These cells directly convert light energy into electrical energy, generating a voltage (potential difference) when illuminated. This is often due to light creating electron-hole pairs at a semiconductor junction.</p>
+            <p><strong>Applications:</strong></p>
+            <ul>
+                <li>Solar panels for power generation</li>
+                <li>Light meters in cameras</li>
+                <li>Calculators and watches</li>
+            </ul>
+
+            <h3>Photoconductive Cells (Light-Dependent Resistors - LDRs)</h3>
+            <div class="diagram-placeholder">Diagram: Structure of an LDR (semiconductor material like CdS in a zig-zag pattern) and its circuit symbol. (Similar to KLB Fig 9.10)</div>
+            <p>The electrical resistance of these cells decreases when the intensity of light falling on them increases. Light photons free charge carriers within the semiconductor material, increasing its conductivity.</p>
+            <p><strong>Applications:</strong></p>
+            <ul>
+                <li>Street light controls (switching on at dusk, off at dawn)</li>
+                <li>Camera exposure meters</li>
+                <li>Fire alarms (detecting changes in light due to smoke or flame)</li>
+                <li>Light-activated switches</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>8. Problem Solving</h2>
+            <p>Constants to use (unless specified otherwise):</p>
+            <ul>
+                <li>Planck's constant, \(h = 6.63 \times 10^{-34} \text{ Js}\)</li>
+                <li>Charge on electron, \(e = 1.6 \times 10^{-19} \text{ C}\)</li>
+                <li>Speed of light in vacuum, \(c = 3.0 \times 10^8 \text{ m/s}\)</li>
+                <li>Mass of electron, \(m_e = 9.11 \times 10^{-31} \text{ kg}\)</li>
+                <li>\(1 \text{ eV} = 1.6 \times 10^{-19} \text{ J}\)</li>
+            </ul>
+            
+            <h3>Example Problems (Conceptual approach based on KLB examples)</h3>
+            <p><strong>1. Photon Energy Calculation:</strong> Given wavelength or frequency, calculate photon energy using \(E=hf\) or \(E=hc/\lambda\). (Similar to KLB Example 1, p.153)</p>
+            <p><strong>2. Multi-step Calculation using Einstein's Equation:</strong>
+                <ul>
+                    <li>Given \(f_0\), find \(W_0 = hf_0\).</li>
+                    <li>Given \(v_{max}\), find \(K.E._{max} = \frac{1}{2}m_e v^2_{max}\).</li>
+                    <li>Given incident \(f\), \(W_0\), find \(K.E._{max}\) or \(v_{max}\) using \(hf = W_0 + K.E._{max}\).</li>
+                </ul>
+            (Similar to KLB Examples 2 & 3, p.155)
+            </p>
+            <p><strong>3. Graph Interpretation (\(V_s\) vs \(f\)):</strong> From a graph of stopping potential vs. frequency:
+                <ul>
+                    <li>Determine threshold frequency (\(f_0\)) from the x-intercept.</li>
+                    <li>Calculate Planck's constant (\(h\)) from the slope (\(slope = h/e\)).</li>
+                    <li>Calculate work function (\(W_0\)) from \(f_0\) (\(W_0 = hf_0\)) or the y-intercept (\(y_{int} = -W_0/e\)).</li>
+                </ul>
+            (Similar to KLB Example 4, p.159)
+            </p>
+
+            <h3>Sample Calculation Problems (from provided notes):</h3>
+            <ol>
+                <li><strong>Photon Energy:</strong> Calculate the energy (Joules) of red light (wavelength 700 nm).
+                    <p>\(E = hc/\lambda = (6.63 \times 10^{-34} \times 3.0 \times 10^8) / (700 \times 10^{-9}) \approx 2.84 \times 10^{-19} \text{ J}\)</p>
+                </li>
+                <li><strong>Threshold Frequency:</strong> Work function of Potassium is 2.22 eV. Calculate \(f_0\).
+                    <p>\(W_0 = 2.22 \text{ eV} = 2.22 \times 1.6 \times 10^{-19} \text{ J} = 3.552 \times 10^{-19} \text{ J}\)<br>
+                    \(f_0 = W_0/h = (3.552 \times 10^{-19}) / (6.63 \times 10^{-34}) \approx 5.36 \times 10^{14} \text{ Hz}\)</p>
+                </li>
+                <li><strong>Max K.E.:</strong> Light of frequency \(9.0 \times 10^{14}\) Hz on metal with \(W_0 = 3.0\) eV. Find \(K.E._{max}\).
+                    <p>\(hf = (6.63 \times 10^{-34})(9.0 \times 10^{14}) = 5.967 \times 10^{-19} \text{ J}\)<br>
+                    \(W_0 = 3.0 \times 1.6 \times 10^{-19} = 4.8 \times 10^{-19} \text{ J}\)<br>
+                    \(K.E._{max} = hf - W_0 = (5.967 - 4.8) \times 10^{-19} = 1.167 \times 10^{-19} \text{ J}\)</p>
+                </li>
+                 <li><strong>Stopping Potential:</strong> Light of \(f = 6.5 \times 10^{14}\) Hz on metal with \(f_0 = 4.0 \times 10^{14}\) Hz. Calculate \(V_s\).
+                    <p>\(eV_s = hf - hf_0 = h(f - f_0)\)<br>
+                    \(V_s = h(f - f_0)/e = (6.63 \times 10^{-34})(6.5 \times 10^{14} - 4.0 \times 10^{14}) / (1.6 \times 10^{-19})\)<br>
+                    \(V_s = (6.63 \times 10^{-34})(2.5 \times 10^{14}) / (1.6 \times 10^{-19}) \approx 1.04 \text{ V}\)</p>
+                </li>
+            </ol>
+            <p><em>(Refer to KLB Physics Book 4, Revision Exercise 9, for more practice problems.)</em></p>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>9. Conclusion</h2>
+            <p>The Photoelectric Effect is a pivotal phenomenon that demonstrates the quantum nature of light and provides strong evidence for the existence of photons. Understanding its principles, including the concepts of work function, threshold frequency, and Einstein's photoelectric equation, is essential for grasping modern physics.</p>
+            <p>The factors influencing photoelectric emission—intensity and frequency of incident light, and the nature of the material—highlight the particle-like interactions between light and matter. The diverse applications of the photoelectric effect, from automatic doors and solar cells to light meters, underscore its technological significance.</p>
+            <p>A thorough study of this topic, including experimental observations and problem-solving, prepares students for further studies in physics and related fields, aligning with the goals of the KCSE syllabus.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>10. Revision Questions</h2>
+            
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>1.</strong> Define the photoelectric effect.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The emission of electrons (photoelectrons) from a material (usually a metal surface) when electromagnetic radiation of sufficient frequency shines on it.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>2.</strong> What is a photon, and what theory introduced this concept in relation to light energy?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A photon is a discrete packet or quantum of electromagnetic energy. Max Planck's Quantum Theory introduced this concept.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>3.</strong> Define the work function (\(W_0\)) of a metal.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The minimum amount of energy required to dislodge an electron from the surface of a metal.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>4.</strong> Define the threshold frequency (\(f_0\)) for a metal surface.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The minimum frequency of incident radiation below which no photoelectric emission will occur, regardless of the intensity of the light.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>5.</strong> Define the threshold wavelength (\(\lambda_0\)) for a metal surface.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The maximum wavelength of incident radiation beyond which no photoelectric emission will occur.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>6.</strong> Explain the unit electron-volt (eV) and provide its conversion factor to Joules.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The electron-volt (eV) is a unit of energy. It is the energy gained (or lost) by an electron when it moves across an electric potential difference of one volt. \(1 \text{ eV} = 1.6 \times 10^{-19} \text{ J}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>7.</strong> State the relationship between the energy of a photon (\(E\)), Planck's constant (\(h\)), and the frequency (\(f\)) of the radiation.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(E = hf\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>8.</strong> Write down Einstein's photoelectric equation.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(hf = W_0 + K.E._{max}\) or \(hf = hf_0 + \frac{1}{2}m_e v^2_{max}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>9.</strong> Explain what each term in Einstein's photoelectric equation represents.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(hf\) = energy of the incident photon. \(W_0\) (or \(hf_0\)) = work function of the metal. \(K.E._{max}\) (or \(\frac{1}{2}m_e v^2_{max}\)) = maximum kinetic energy of the emitted photoelectron.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>10.</strong> Explain why the kinetic energy term in Einstein's photoelectric equation is referred to as the maximum kinetic energy of the emitted photoelectrons.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Electrons emitted from deeper within the metal may lose some of their initial kinetic energy through collisions before escaping. Only those electrons originating very near the surface and escaping without such internal energy losses will possess this maximum kinetic energy.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>11.</strong> Calculate the energy, in Joules, of a photon of red light with a wavelength of 700 nm.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Given \(\lambda = 700 \text{ nm} = 700 \times 10^{-9} \text{ m}\). \(E = hc/\lambda = (6.63 \times 10^{-34} \text{ Js} \times 3.0 \times 10^8 \text{ m/s}) / (700 \times 10^{-9} \text{ m}) \approx 2.84 \times 10^{-19} \text{ J}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>12.</strong> A photon has an energy of 3.0 eV. Calculate its frequency.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(E = 3.0 \text{ eV} = 3.0 \times 1.6 \times 10^{-19} \text{ J} = 4.8 \times 10^{-19} \text{ J}\). \(f = E/h = (4.8 \times 10^{-19} \text{ J}) / (6.63 \times 10^{-34} \text{ Js}) \approx 7.24 \times 10^{14} \text{ Hz}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>13.</strong> The work function of Potassium is 2.22 eV. Calculate the threshold frequency for Potassium.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(W_0 = 2.22 \text{ eV} = 2.22 \times 1.6 \times 10^{-19} \text{ J} = 3.552 \times 10^{-19} \text{ J}\). \(f_0 = W_0/h = (3.552 \times 10^{-19} \text{ J}) / (6.63 \times 10^{-34} \text{ Js}) \approx 5.36 \times 10^{14} \text{ Hz}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>14.</strong> A metal has a threshold frequency of \(4.5 \times 10^{14}\) Hz. Calculate its work function in Joules.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(W_0 = hf_0 = (6.63 \times 10^{-34} \text{ Js}) \times (4.5 \times 10^{14} \text{ Hz}) = 2.9835 \times 10^{-19} \text{ J}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>15.</strong> Calculate the threshold wavelength for a metal whose work function is 4.0 eV.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(W_0 = 4.0 \text{ eV} = 4.0 \times 1.6 \times 10^{-19} \text{ J} = 6.4 \times 10^{-19} \text{ J}\). \(f_0 = W_0/h \approx 9.65 \times 10^{14} \text{ Hz}\). \(\lambda_0 = c/f_0 = (3.0 \times 10^8 \text{ m/s}) / (9.65 \times 10^{14} \text{ Hz}) \approx 3.11 \times 10^{-7} \text{ m}\) or 311 nm.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>16.</strong> Light of frequency \(9.0 \times 10^{14}\) Hz is incident on a metal surface with a work function of 3.0 eV. Calculate \(K.E._{max}\) in Joules.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(hf = (6.63 \times 10^{-34})(9.0 \times 10^{14}) = 5.967 \times 10^{-19} \text{ J}\). \(W_0 = 3.0 \text{ eV} = 4.8 \times 10^{-19} \text{ J}\). \(K.E._{max} = hf - W_0 = (5.967 - 4.8) \times 10^{-19} = 1.167 \times 10^{-19} \text{ J}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>17.</strong> Light of \(\lambda = 300\) nm on metal with \(\lambda_0 = 500\) nm. Calculate \(K.E._{max}\) in Joules.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(hf = hc/\lambda = (6.63 \times 10^{-34} \times 3 \times 10^8) / (300 \times 10^{-9}) = 6.63 \times 10^{-19} \text{ J}\). \(hf_0 = hc/\lambda_0 = (6.63 \times 10^{-34} \times 3 \times 10^8) / (500 \times 10^{-9}) = 3.978 \times 10^{-19} \text{ J}\). \(K.E._{max} = hf - hf_0 = (6.63 - 3.978) \times 10^{-19} = 2.652 \times 10^{-19} \text{ J}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>18.</strong> If \(K.E._{max} = 2.88 \times 10^{-19}\) J and \(W_0 = 4.42 \times 10^{-19}\) J, calculate incident frequency \(f\).</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(hf = W_0 + K.E._{max} = (4.42 + 2.88) \times 10^{-19} = 7.3 \times 10^{-19} \text{ J}\). \(f = (hf)/h = (7.3 \times 10^{-19}) / (6.63 \times 10^{-34}) \approx 1.10 \times 10^{15} \text{ Hz}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>19.</strong> Photoelectrons have \(K.E._{max} = 4.0 \times 10^{-19}\) J. Calculate their maximum speed \(v_{max}\).</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(v_{max} = \sqrt{2 \times K.E._{max} / m_e} = \sqrt{(2 \times 4.0 \times 10^{-19}) / (9.11 \times 10^{-31})} \approx 9.37 \times 10^5 \text{ m/s}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>20.</strong> What stopping potential \(V_s\) stops photoelectrons with \(K.E._{max} = 4.8 \times 10^{-19}\) J?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(V_s = K.E._{max} / e = (4.8 \times 10^{-19} \text{ J}) / (1.6 \times 10^{-19} \text{ C}) = 3.0 \text{ V}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>21.</strong> Light \(f = 6.5 \times 10^{14}\) Hz on metal with \(f_0 = 4.0 \times 10^{14}\) Hz. Calculate \(V_s\).</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>\(eV_s = h(f - f_0)\). \(V_s = h(f - f_0)/e = (6.63 \times 10^{-34})(6.5 \times 10^{14} - 4.0 \times 10^{14}) / (1.6 \times 10^{-19}) \approx 1.04 \text{ V}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>22.</strong> Slope of \(V_s\) vs \(f\) graph is \(4.1 \times 10^{-15}\) Vs/Hz. Find experimental \(h\).</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Slope = \(h/e\). \(h = \text{slope} \times e = (4.1 \times 10^{-15} \text{ Vs/Hz}) \times (1.6 \times 10^{-19} \text{ C}) = 6.56 \times 10^{-34} \text{ Js}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>23.</strong> f-intercept of \(V_s\) vs \(f\) graph is \(3.5 \times 10^{14}\) Hz. What is this? Calculate \(W_0\) in eV.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>f-intercept is threshold frequency \(f_0 = 3.5 \times 10^{14}\) Hz. \(W_0 = hf_0 = (6.63 \times 10^{-34})(3.5 \times 10^{14}) = 2.3205 \times 10^{-19} \text{ J}\). \(W_0 (\text{eV}) = (2.3205 \times 10^{-19} \text{ J}) / (1.6 \times 10^{-19} \text{ J/eV}) \approx 1.45 \text{ eV}\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>24.</strong> Describe Experiment 9.1 (Neutral Plates) & observation with glass plate.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>UV radiation on metal plate A causes electron emission, detected as current by galvanometer when electrons reach plate B. Introducing a glass plate (UV barrier) stops the current, showing UV was responsible.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>25.</strong> Why does a negatively charged electroscope discharge with UV on zinc plate?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>UV light ejects photoelectrons from the zinc. Since the electroscope is negative, these electrons are repelled away, leading to a net loss of negative charge and discharge.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>26.</strong> Why does a positively charged electroscope NOT discharge with UV on zinc plate?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Emitted photoelectrons are immediately attracted back to the positively charged zinc plate, so there's no net change in charge.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>27.</strong> How does increasing light intensity (above \(f_0\)) affect photoelectron emission rate?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Increases the rate of emission of photoelectrons (photocurrent increases).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>28.</strong> How does increasing light frequency (above \(f_0\)) affect \(K.E._{max}\) of photoelectrons?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Increases the maximum kinetic energy of the emitted photoelectrons.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>29.</strong> Describe a photoemissive cell's principle and two applications.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Principle: Light on photosensitive cathode emits electrons, attracted to anode, causing current. Applications: Burglar alarms, automatic door openers.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>30.</strong> Describe a photovoltaic cell's principle and one application.</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Principle: Light striking a junction of materials directly generates a potential difference (voltage). Application: Solar cells, light meters.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>31.</strong> What was the main failure of classical wave theory in explaining the photoelectric effect?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Classical wave theory predicted that: 1) The kinetic energy of emitted electrons should increase with light intensity (it doesn't). 2) Photoemission should occur for any frequency of light if the intensity is high enough (it doesn't; there's a threshold frequency). 3) There should be a time lag for electron emission with low intensity light (there isn't an observable lag).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>32.</strong> How does the photoelectric effect provide evidence for the particle nature of light?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The existence of a threshold frequency, the instantaneous emission of electrons, and the fact that electron kinetic energy depends on frequency (not intensity) are all explained by light behaving as particles (photons), where each photon interacts with a single electron.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>33.</strong> If light of a certain frequency causes photoelectric emission from metal A, what might happen if the metal is changed to metal B with a higher work function, keeping the light source the same?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>If the photon energy (\(hf\)) of the incident light is less than the work function of metal B (\(W_{0B}\)), no emission will occur from metal B, even if it occurred from metal A (which had a lower work function). If emission does occur from metal B, the photoelectrons will have less maximum kinetic energy compared to those from metal A.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>34.</strong> Explain why there is no observable time lag in photoelectric emission, even with very low intensity light (above threshold frequency).</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The interaction is between a single photon and a single electron. If a photon has enough energy (\(hf \ge W_0\)), it can eject an electron almost instantaneously upon impact. Low intensity means fewer photons per second, but each photon still carries its full energy packet.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>35.</strong> What is the role of a color filter when investigating the effect of frequency on photoelectric emission?</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A color filter is used to select a narrow range of wavelengths (and thus frequencies) from a white light source, allowing for the study of photoelectric emission with approximately monochromatic light of a known frequency.</p></div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <button id="prev-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.content-page');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            sidebarLinks.forEach((link) => { 
+                link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
+            });
+            currentPageIndex = index;
+            updateNavButtons();
+            window.scrollTo(0, 0); 
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === pages.length - 1;
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
+                showPage(pageIndex);
+                if (window.innerWidth < 768) { 
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                showPage(currentPageIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < pages.length - 1) {
+                showPage(currentPageIndex + 1);
+            }
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        mainContent.addEventListener('click', () => {
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        const questionToggles = document.querySelectorAll('.question-toggle');
+        questionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const answerContent = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                answerContent.classList.toggle('hidden');
+                if (answerContent.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        showPage(0); // Initialize first page
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating and Sinking: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams' // Automatic equation numbering for AMS environments
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.5rem; 
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section h4 { /* For sub-sub-headings if needed */
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4B5563; /* Tailwind gray-600 */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list):not(.problem-solving-steps) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        .problem-solving-steps li { /* Specific styling for problem-solving steps list */
+            margin-bottom: 0.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+            min-height: 100px; 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6; /* Tailwind gray-100 */
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .revision-questions-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6;
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6;
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6;
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .answer-container.expanded {
+            display: block;
+            max-height: 2000px; /* Increased for potentially longer answers */
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">Floating and Sinking: KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro-fs" class="nav-link">1. Introduction</a></li>
+                <li><a href="#upthrust" class="nav-link">2. Upthrust</a></li>
+                <li><a href="#archimedes-principle" class="nav-link">3. Archimedes' Principle</a></li>
+                <li><a href="#law-of-flotation" class="nav-link">4. Law of Flotation</a></li>
+                <li><a href="#relative-density" class="nav-link">5. Relative Density</a></li>
+                <li><a href="#applications-fs" class="nav-link">6. Applications</a></li>
+                <li><a href="#problem-solving-fs" class="nav-link">7. Problem Solving</a></li>
+                <li><a href="#kcse-focus-fs" class="nav-link">8. KCSE Syllabus Guide</a></li>
+                <li><a href="#revision-questions-fs" class="nav-link">9. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro-fs" class="content-section">
+                <h2>1. Introduction</h2>
+                <p>The behavior of objects when placed in fluids (liquids or gases) is governed by fundamental physical principles, determining if they float, sink, or remain suspended. The study of floating and sinking is underpinned by concepts such as upthrust, Archimedes' Principle, and the Law of Flotation. The Kenya Certificate of Secondary Education (KCSE) syllabus places significant emphasis on these principles and their experimental verification.</p>
+            </section>
+
+            <section id="upthrust" class="content-section hidden-section">
+                <h2>2. Upthrust</h2>
+                <h3>Definition and Existence</h3>
+                <p>When an object is immersed in a fluid, it experiences an <strong>upward force</strong> known as upthrust. Upthrust makes objects feel lighter when submerged in water compared to being in air. This force is a characteristic of all fluids, including liquids and gases.</p>
+                <h3>Cause of Upthrust (Pressure Difference)</h3>
+                <p>The origin of upthrust lies in the pressure differences within a fluid. Fluid pressure increases with depth. For a submerged object, the fluid pressure exerted on its lower surface is greater than the pressure on its upper surface. This pressure difference, acting over the respective surface areas, results in a net upward force, which is the upthrust.</p>
+                <p>Consider a cylindrical solid of height $h$ and cross-sectional area $A$ fully submerged in a fluid of density $\rho_{fluid}$ (placeholder for Figure 3.3 from KLB Physics Book 4). Let the top surface be at depth $h_1$ and bottom surface at depth $h_2$.
+                The pressure at the top surface, $P_T = P_{atm} + h_1\rho_{fluid}g$.
+                The downward force on the top surface, $F_T = P_T A$.
+                The pressure at the bottom surface, $P_B = P_{atm} + h_2\rho_{fluid}g$.
+                The upward force on the bottom surface, $F_B = P_B A$.
+                The net upward force (upthrust, $U$) is $U = F_B - F_T = (h_2 - h_1)\rho_{fluid}gA$.
+                Since $h_2 - h_1 = h$ and $hA = V_{displaced}$ (volume of fluid displaced), the equation becomes:
+                $$U = V_{displaced}\rho_{fluid}g$$</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating pressure difference on a submerged cylinder causing upthrust.</div>
+                <h3>Apparent Weight</h3>
+                <p>The apparent weight of a submerged object is its true weight in air minus the upthrust. The difference between an object's true weight and its apparent weight in a fluid is equal to the upthrust ("apparent loss in weight").</p>
+                <h3>Upthrust in Gases</h3>
+                <p>Upthrust also applies to gases. Though often less significant than in liquids due to lower gas densities, it can be substantial for large volumes. Example: A helium balloon rises because the upthrust from the displaced, denser air is greater than the balloon's total weight.</p>
+                <h3>Conditions for Floating, Sinking, and Apparent Suspension</h3>
+                <p>An object's behavior in a fluid is determined by comparing its weight ($W_o$) and the upthrust ($U$) it experiences, or its average density ($\rho_o$) and the fluid density ($\rho_f$).</p>
+                <ul>
+                    <li><strong>Sinking:</strong> $U < W_o$ or $\rho_o > \rho_f$.</li>
+                    <li><strong>Floating/Suspension:</strong> $U = W_o$.
+                        <ul>
+                            <li>Suspended (fully submerged): $\rho_o = \rho_f$.</li>
+                            <li>Floats (partially submerged): $\rho_o < \rho_f$.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Initial Upward Acceleration:</strong> If $U > W_o$ when fully submerged, the object rises until it floats with $U = W_o$.</li>
+                </ul>
+            </section>
+
+            <section id="archimedes-principle" class="content-section hidden-section">
+                <h2>3. Archimedes' Principle</h2>
+                <h3>Statement</h3>
+                <p>Archimedes' Principle states that: <strong>"When a body is partially or totally immersed in a fluid, it experiences an upthrust equal to the weight of the fluid displaced."</strong></p>
+                <h3>Experimental Verification (Experiment 3.1)</h3>
+                <p>The KCSE syllabus requires experimental verification.</p>
+                <ul>
+                    <li><strong>Apparatus:</strong> Spring balance, object (e.g., stone), string, Eureka can, beaker, water.</li>
+                    <li><strong>Procedure:</strong>
+                        <ol>
+                            <li>Record the object's weight in air ($W_1$).</li>
+                            <li>Fill Eureka can to overflow. Weigh an empty, dry beaker ($W_3$).</li>
+                            <li>Place beaker under spout. Immerse object fully in Eureka can, collecting displaced water.</li>
+                            <li>Record apparent weight in water ($W_5$).</li>
+                            <li>Weigh beaker with displaced water ($W_6$).</li>
+                        </ol>
+                    </li>
+                    <li><strong>Calculations and Observation:</strong>
+                        <ul>
+                            <li>Upthrust, $U = W_1 - W_5$.</li>
+                            <li>Weight of water displaced, $W_{displaced} = W_6 - W_3$.</li>
+                            <li>Observation: $W_1 - W_5 = W_6 - W_3$. This verifies Archimedes' Principle.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Note:</strong> The object should be insoluble, non-porous, and non-reactive.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of experimental setup for verifying Archimedes' Principle.</div>
+            </section>
+
+            <section id="law-of-flotation" class="content-section hidden-section">
+                <h2>4. Law of Flotation</h2>
+                <h3>Statement</h3>
+                <p>The Law of Flotation states that: <strong>"A floating object displaces its own weight of the fluid in which it floats."</strong></p>
+                <h3>Relationship to Archimedes' Principle</h3>
+                <p>This law is a special case of Archimedes' Principle for floating objects. When an object floats, it's in equilibrium, so Upthrust = Weight of object. By Archimedes' Principle, Upthrust = Weight of fluid displaced. Therefore, for a floating object, Weight of object = Weight of fluid displaced.</p>
+                <p>This implies $V_{object}\rho_{object\_avg}g = V_{submerged}\rho_{fluid}g$, so $V_{object}\rho_{object\_avg} = V_{submerged}\rho_{fluid}$.</p>
+                <h3>Experimental Verification (Experiment 3.2)</h3>
+                <p>The KCSE syllabus requires experimental treatment.</p>
+                <ul>
+                    <li><strong>Apparatus:</strong> Measuring cylinder, water, test-tube, sand, weighing balance.</li>
+                    <li><strong>Procedure:</strong>
+                        <ol>
+                            <li>Record initial water level. Weigh test tube with sand ($W_{object}$).</li>
+                            <li>Float test tube in water. Record new water level to find volume of displaced water ($V_{displaced}$).</li>
+                            <li>Calculate weight of displaced water ($W_{displaced\_water} = V_{displaced} \rho_{water} g$).</li>
+                            <li>Repeat with different amounts of sand.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Observation:</strong> In each case, $W_{object}$ is found to be equal to $W_{displaced\_water}$.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of experimental setup for verifying Law of Flotation.</div>
+                <h4>Table 1: Conditions for Floating, Sinking, and Suspension</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Condition based on Forces</th>
+                            <th>Condition based on Densities ($\rho_o$=avg. density of object, $\rho_f$=density of fluid)</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Weight of object $>$ Upthrust</td><td>$\rho_o > \rho_f$</td><td>Object Sinks</td></tr>
+                        <tr><td>Weight of object = Upthrust</td><td>$\rho_o = \rho_f$</td><td>Object Suspended (fully submerged)</td></tr>
+                        <tr><td>Weight of object = Upthrust</td><td>$\rho_o < \rho_f$</td><td>Object Floats (partially submerged)</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="relative-density" class="content-section hidden-section">
+                <h2>5. Relative Density</h2>
+                <h3>Defining Relative Density</h3>
+                <p><strong>Relative density (R.D.)</strong> of a substance is the ratio of the mass of the substance to the mass of an equal volume of water, or the ratio of the density of the substance to the density of water.
+                R.D. = $\frac{\text{Density of substance}}{\text{Density of water}}$ or R.D. = $\frac{\text{Mass of substance}}{\text{Mass of an equal volume of water}}$.
+                Also, R.D. = $\frac{\text{Weight of substance}}{\text{Weight of an equal volume of water}}$.
+                It is a dimensionless quantity. If R.D. > 1, object sinks in water; if R.D. < 1, it floats.</p>
+                <h3>Methods for Determining Relative Density</h3>
+                <h4>Using Archimedes' Principle for Solids</h4>
+                <p>R.D.$_{solid} = \frac{\text{Weight of solid in air}}{\text{Upthrust on the solid when fully submerged in water}} = \frac{W_{air}}{W_{air} - W_{water}}$.</p>
+                <h4>Using Archimedes' Principle for Liquids</h4>
+                <p>R.D.$_{liquid} = \frac{\text{Upthrust on a solid in the liquid}}{\text{Upthrust on the same solid in water}} = \frac{W_{1} - W_{3}}{W_{1} - W_{2}}$, where $W_1$ is weight of solid in air, $W_2$ in water, $W_3$ in liquid.</p>
+                <h4>Determination using Moments (Experiment 3.3)</h4>
+                <p>This method uses the Principle of Moments.</p>
+                <ul>
+                    <li><strong>For Solids:</strong> R.D.$_{solid} = \frac{d_1}{d_1 - d_2}$, where $d_1$ is distance to balance weight $W$ when solid is in air, and $d_2$ is distance when solid is in water (solid at fixed distance $d$ from pivot). A graph of $d_1$ against $(d_1 - d_2)$ gives R.D. as slope.</li>
+                    <li><strong>For Liquids:</strong> R.D.$_{liquid} = \frac{d_1 - d_3}{d_1 - d_2}$, where $d_3$ is distance to balance weight $W$ when solid is in the liquid.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram for determining relative density using moments.</div>
+            </section>
+
+            <section id="applications-fs" class="content-section hidden-section">
+                <h2>6. Applications in Real-World Contexts</h2>
+                <h3>Hydrometers: Measuring Liquid Densities</h3>
+                <p>A hydrometer measures liquid density based on the Law of Flotation.</p>
+                <ul>
+                    <li><strong>Principle:</strong> Constant weight, sinks deeper in less dense liquids, floats higher in denser liquids.</li>
+                    <li><strong>Construction:</strong> Bulb (for displacement), ballast (lead shot/mercury for stability), narrow graduated stem (for sensitivity).</li>
+                    <li><strong>Types:</strong> Lactometer (milk), Brewer's hydrometer, Battery acid hydrometer.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Typical Hydrometer (e.g., Figure 3.11 from KLB).</div>
+                <h3>The Science of Balloons: Achieving Lift</h3>
+                <p>Balloons rise if upthrust from air > total weight of balloon.</p>
+                <ul>
+                    <li><strong>Lighter-than-Air Gases:</strong> Helium or hydrogen are used.</li>
+                    <li><strong>Meteorological Balloons:</strong> Rise until upthrust equals weight as air density decreases with altitude.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Balloon showing forces (upthrust and weight).</div>
+                <h3>Engineering Marvels: How Ships Float</h3>
+                <p>Ships float due to their hollow hull displacing a large volume of water. Average density of ship $<$ density of water.</p>
+                <ul>
+                    <li><strong>Law of Flotation:</strong> Ship displaces its own weight of water.</li>
+                    <li><strong>Loading:</strong> Heavier load means ship sinks deeper.</li>
+                    <li><strong>Plimsoll Line:</strong> Indicates maximum safe loading depth.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Ship floating with Plimsoll line visible.</div>
+                <h3>Submersibles: The Mechanics of Submarines</h3>
+                <p>Submarines control buoyancy by altering their overall weight using ballast tanks.</p>
+                <ul>
+                    <li><strong>To Sink:</strong> Flood ballast tanks.</li>
+                    <li><strong>To Float:</strong> Expel water from ballast tanks.</li>
+                    <li><strong>Neutral Buoyancy:</strong> Weight = Upthrust.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram of a Submarine showing ballast tanks.</div>
+            </section>
+
+            <section id="problem-solving-fs" class="content-section hidden-section">
+                <h2>7. Mastering KCSE Problems on Floating and Sinking</h2>
+                <h3>Key Formulas and Problem-Solving Strategies</h3>
+                <p><strong>Recap of Essential Formulas:</strong></p>
+                <ol class="problem-solving-steps">
+                    <li>Density ($\rho$): $\rho = \frac{m}{V}$</li>
+                    <li>Weight ($W$): $W = mg$</li>
+                    <li>Upthrust ($U$): $U = V_{displaced} \rho_{fluid} g$</li>
+                    <li>Archimedes' Principle: Upthrust = $W_{fluid\_displaced} = W_{object\_in\_air} - W_{object\_in\_fluid}$</li>
+                    <li>Law of Flotation: $W_{object} = W_{fluid\_displaced}$ (for floating object)</li>
+                    <li>Relative Density (R.D.):
+                        <ul>
+                            <li>R.D. = $\frac{\rho_{substance}}{\rho_{water}}$</li>
+                            <li>R.D.$_{solid} = \frac{W_{air}}{W_{air} - W_{apparent\_in\_water}}$</li>
+                            <li>R.D.$_{liquid} = \frac{W_{air\_solid} - W_{apparent\_in\_liquid}}{W_{air\_solid} - W_{apparent\_in\_water}}$</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>General Problem-Solving Steps:</strong></p>
+                <ol class="problem-solving-steps">
+                    <li>Read and Understand the problem.</li>
+                    <li>Identify Knowns and Unknowns.</li>
+                    <li>Draw a Diagram if helpful.</li>
+                    <li>Choose Relevant Principle(s) (Archimedes', Law of Flotation).</li>
+                    <li>Select and Apply Appropriate Formulas.</li>
+                    <li>Ensure Unit Consistency (SI units preferred: kg, m, s. Note: 1 g/cm³ = 1000 kg/m³).</li>
+                    <li>Substitute values and Solve.</li>
+                    <li>Check Answer for reasonableness and correct units.</li>
+                    <li>Distinguish between Mass and Weight.</li>
+                </ol>
+                <h3>Worked Examples Aligned with KCSE Expectations</h3>
+                <p><em>(Refer to Examples 1-13 in KLB Physics Book 4, Chapter 3 for detailed worked examples.)</em></p>
+                <p><strong>Example (based on Example 3 from KLB):</strong> A stone weighs 2.0 N in air and 1.2 N when totally immersed in water. Calculate: (a) the volume of the stone, (b) the density of the stone. (Take $g=10 \text{ N/kg}$, $\rho_{water} = 1000 \text{ kg/m}^3$).</p>
+                <ul>
+                    <li><em>Solution Outline:</em>
+                        <ol>
+                            <li>Upthrust $U = W_{air} - W_{water} = 2.0 \text{ N} - 1.2 \text{ N} = 0.8 \text{ N}$.</li>
+                            <li>Weight of water displaced = $U = 0.8 \text{ N}$.</li>
+                            <li>Mass of water displaced $m_w = U/g = 0.8 \text{ N} / 10 \text{ N/kg} = 0.08 \text{ kg}$.</li>
+                            <li>Volume of water displaced $V_w = m_w / \rho_{water} = 0.08 \text{ kg} / 1000 \text{ kg/m}^3 = 8 \times 10^{-5} \text{ m}^3$.</li>
+                            <li>(a) Volume of stone $V_s = V_w = 8 \times 10^{-5} \text{ m}^3$.</li>
+                            <li>Mass of stone $m_s = W_{air}/g = 2.0 \text{ N} / 10 \text{ N/kg} = 0.2 \text{ kg}$.</li>
+                            <li>(b) Density of stone $\rho_s = m_s / V_s = 0.2 \text{ kg} / (8 \times 10^{-5} \text{ m}^3) = 2500 \text{ kg/m}^3$.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="kcse-focus-fs" class="content-section hidden-section">
+                <h2>8. KCSE Syllabus Guide: Floating and Sinking</h2>
+                <h3>Summary of Learning Objectives (KCSE Syllabus 33.1.0)</h3>
+                <p>By the end of this topic, the learner should be able to:</p>
+                <ol type="a">
+                    <li>State Archimedes' principle.</li>
+                    <li>Verify Archimedes' principle experimentally.</li>
+                    <li>State the law of flotation.</li>
+                    <li>Define relative density.</li>
+                    <li>Describe the applications of Archimedes' principle and relative density.</li>
+                    <li>Solve numerical problems involving Archimedes' principles.</li>
+                </ol>
+                <h3>Key Concepts and Definitions for Revision</h3>
+                <h4>Table 2: Summary of Key Principles and Formulas</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Principle/Concept</th>
+                            <th>Statement / Definition</th>
+                            <th>Formula(s)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Upthrust</td><td>The upward force exerted by a fluid on an object wholly or partially immersed in it.</td><td>$U = V_{displaced} \cdot \rho_{fluid} \cdot g$</td></tr>
+                        <tr><td>Archimedes' Principle</td><td>An object wholly or partially immersed in a fluid experiences an upthrust equal to the weight of the fluid displaced.</td><td>Upthrust = $W_{fluid\_displaced}$ <br> Upthrust = $W_{object\_in\_air} - W_{object\_in\_fluid}$</td></tr>
+                        <tr><td>Law of Flotation</td><td>A floating object displaces its own weight of the fluid in which it floats.</td><td>For floating object: $W_{object} = U$ <br> Therefore, $W_{object} = W_{fluid\_displaced}$</td></tr>
+                        <tr><td>Density</td><td>Mass per unit volume of a substance.</td><td>$\rho = \frac{m}{V}$</td></tr>
+                        <tr><td>Relative Density (RD)</td><td>Ratio of the density of a substance to the density of water.</td><td>RD = $\frac{\rho_{substance}}{\rho_{water}}$ <br> RD (solid) = $\frac{W_{air}}{W_{air} - W_{water}}$ <br> RD (liquid) = $\frac{W_{air\_solid} - W_{apparent\_in\_liquid}}{W_{air\_solid} - W_{apparent\_in\_water}}$</td></tr>
+                    </tbody>
+                </table>
+                <h4>Table 3: Experimental Verification Overview (KCSE Syllabus 33.2.1)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Principle</th>
+                            <th>Key Apparatus</th>
+                            <th>Key Procedure Steps</th>
+                            <th>Expected Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Archimedes' Principle</td><td>Spring balance, object, Eureka can, beaker, water.</td><td>1. Weigh object in air ($W_{air}$). <br> 2. Immerse in water, collect displaced water. <br> 3. Note apparent weight ($W_{water}$). <br> 4. Weigh displaced water.</td><td>$W_{air} - W_{water}$ = Weight of displaced water.</td></tr>
+                        <tr><td>Law of Flotation</td><td>Measuring cylinder, test-tube, sand, water, balance.</td><td>1. Weigh test-tube + sand ($W_{object}$). <br> 2. Float it. <br> 3. Measure volume of displaced water. <br> 4. Calculate weight of displaced water.</td><td>$W_{object}$ = Weight of displaced water.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="revision-questions-fs" class="content-section hidden-section">
+                <h2>9. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. Define upthrust.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Upthrust is the upward force experienced by an object when it is immersed in a fluid, either wholly or partially. It is the upward force exerted by a fluid on an object wholly or partially immersed in it.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. State Archimedes' Principle.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Archimedes' Principle states that when a body is partially or totally immersed in a fluid, it experiences an upthrust equal to the weight of the fluid displaced.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. State the Law of Flotation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The Law of Flotation states that a floating object displaces its own weight of the fluid in which it floats.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">4. Define relative density.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Relative density is a comparative measure of the density of a substance, typically with respect to water. It is defined as the ratio of the density of the substance to the density of water, or the ratio of the mass of the substance to the mass of an equal volume of water, or the ratio of the weight of the substance to the weight of an equal volume of water.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. Explain the cause of upthrust experienced by an object immersed in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The cause of upthrust lies in the pressure differences within a fluid. Fluid pressure increases with depth. For an object submerged in a fluid, the pressure exerted by the fluid on its lower surface is greater than the pressure exerted on its upper surface. This pressure difference, acting over the respective surface areas, results in a net upward force, which is the upthrust.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">6. Explain why objects feel lighter when submerged in a fluid compared to when they are in air.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Objects feel lighter when submerged in a fluid because they experience an upward force called upthrust. The apparent weight of a submerged object is its true weight in air minus the upthrust. Therefore, the upthrust reduces the effective weight of the object in the fluid, making it feel lighter. This "apparent loss in weight" is equal to the upthrust.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. Describe the concept of upthrust in gases and provide an example.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The principle of upthrust also applies to gases. Upthrust exists in gases because the underlying cause (pressure variation with altitude) is common to all fluids. An example is a balloon filled with a gas lighter than air, such as helium. The balloon displaces a large volume of denser air, and the weight of this displaced air (the upthrust) can be greater than the combined weight of the balloon and the gas inside, causing it to rise.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. Derive the formula for upthrust, $U = V_{displaced}\rho_{fluid}g$, from the pressure difference between the lower and upper surfaces of a submerged object.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Consider a cylindrical solid of height $h$ and cross-sectional area $A$, fully submerged in a fluid of density $\rho_{fluid}$. Let the top surface be at depth $h_1$ and the bottom surface at depth $h_2$. The pressure at the top surface is $P_T = P_{atm} + h_1\rho_{fluid}g$. The downward force on the top surface is $F_T = P_T A = (P_{atm} + h_1\rho_{fluid}g)A$. The pressure at the bottom surface is $P_B = P_{atm} + h_2\rho_{fluid}g$. The upward force on the bottom surface is $F_B = P_B A = (P_{atm} + h_2\rho_{fluid}g)A$. The net upward force, or upthrust ($U$), is the difference between $F_B$ and $F_T$: $U = F_B - F_T = ((P_{atm} + h_2\rho_{fluid}g)A) - ((P_{atm} + h_1\rho_{fluid}g)A) = (h_2\rho_{fluid}g - h_1\rho_{fluid}g)A = (h_2 - h_1)\rho_{fluid}gA$. Since $h_2 - h_1 = h$ (the height of the cylinder) and $hA = V$ (the volume of the cylinder, which is the volume of fluid displaced, $V_{displaced}$), the equation becomes $U = V_{displaced}\rho_{fluid}g$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">9. Define the term "apparent weight" and explain how it is related to the true weight and upthrust experienced by an object in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Apparent weight is the net downward force experienced by an object when submerged in a fluid. It is related to the true weight (weight in air) and upthrust by the equation: Apparent weight = True weight in air - Upthrust.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. State the condition, in terms of the object's weight ($W_o$) and the upthrust ($U$), for an object to sink in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object sinks if the upthrust ($U$) is less than the weight of the object ($W_o$). This can be stated as $U < W_o$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. State the condition, in terms of $W_o$ and $U$, for an object to float in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object floats if the upthrust ($U$) is equal to the weight of the object ($W_o$). This can be stated as $U = W_o$. If the object was initially fully submerged and $U > W_o$, it will accelerate upwards until it floats with $U = W_o$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. State the condition, in terms of $W_o$ and $U$, for an object to remain suspended while fully submerged in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object remains suspended while fully submerged in a fluid if the upthrust ($U$) is equal to the weight of the object ($W_o$). This can be stated as $U = W_o$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. State the condition, in terms of the average density of the object ($\rho_o$) and the density of the fluid ($\rho_f$), for an object to sink in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object sinks in a fluid if its average density ($\rho_o$) is greater than the density of the fluid ($\rho_f$). This can be stated as $\rho_o > \rho_f$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. State the condition, in terms of $\rho_o$ and $\rho_f$, for an object to float in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object floats in a fluid if its average density ($\rho_o$) is less than the density of the fluid ($\rho_f$). This can be stated as $\rho_o < \rho_f$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">15. State the condition, in terms of $\rho_o$ and $\rho_f$, for an object to remain suspended while fully submerged in a fluid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An object remains suspended while fully submerged in a fluid if its average density ($\rho_o$) is equal to the density of the fluid ($\rho_f$). This can be stated as $\rho_o = \rho_f$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. Describe the experimental procedure to verify Archimedes' Principle, including the apparatus used and the expected observation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Apparatus: Spring balance, object (e.g., stone), string, Eureka can, beaker, water. Procedure: (1) Suspend object from spring balance, record weight in air ($W_1$). (2) Fill Eureka can to overflow. (3) Weigh empty, dry beaker ($W_3$). (4) Place beaker under spout. Immerse object fully in Eureka can. (5) Record apparent weight in water ($W_5$). (6) Weigh beaker with displaced water ($W_6$). Expected Observation: The upthrust ($U = W_1 - W_5$) is equal to the weight of the water displaced ($W_{displaced} = W_6 - W_3$).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">17. What are the key requirements for the object used in the experimental verification of Archimedes' Principle using the Eureka can method?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The object must be insoluble in the fluid, non-porous (so it doesn't absorb the fluid), and non-reactive with the fluid.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. Explain the relationship between Archimedes' Principle and the Law of Flotation for a floating object.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The Law of Flotation is a special case of Archimedes' Principle. For a floating object, it is in equilibrium, so Upthrust = Weight of object. By Archimedes' Principle, Upthrust = Weight of fluid displaced. Therefore, for a floating object, Weight of object = Weight of fluid displaced.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. Describe the experimental procedure to verify the Law of Flotation, including the apparatus used and the expected outcome.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Apparatus: Measuring cylinder, water, test-tube, sand, weighing balance. Procedure: (1) Record initial water level. (2) Weigh test tube with sand ($W_{object}$). (3) Float test tube in water. (4) Record new water level to find volume of displaced water ($V_{displaced}$). (5) Calculate weight of displaced water ($W_{displaced\_water} = V_{displaced}\rho_{water}g$). Repeat with different amounts of sand. Expected Outcome: For each case, $W_{object}$ is equal to $W_{displaced\_water}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. How is the relative density of a substance defined in terms of masses? State the relevant formula.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Relative density (R.D.) of a substance is defined as the ratio of the mass of the substance to the mass of an equal volume of water. Formula: R.D. = $\frac{\text{Mass of substance}}{\text{Mass of an equal volume of water}}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. How is the relative density of a substance defined in terms of densities? State the relevant formula.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Relative density (R.D.) of a substance is defined as the ratio of the density of the substance to the density of water. Formula: R.D. = $\frac{\text{Density of substance}}{\text{Density of water}}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. What does it signify if a substance has a relative density greater than 1?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> It signifies that the substance is denser than water and will sink in water.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">23. What does it signify if a substance has a relative density less than 1?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> It signifies that the substance is less dense than water and will float in water.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">24. Describe how the relative density of a solid can be determined experimentally using Archimedes' Principle. State the relevant formula.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Weigh the solid in air ($W_{air}$). Then weigh the solid when fully submerged in water ($W_{water}$). The upthrust in water is $W_{air} - W_{water}$, which is equal to the weight of an equal volume of water. Formula: R.D.$_{solid} = \frac{W_{air}}{W_{air} - W_{water}}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">25. Describe how the relative density of a liquid can be determined experimentally using Archimedes' Principle. State the relevant formula.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Weigh a solid (sinker) in air ($W_1$). Weigh the solid when fully immersed in water ($W_2$). Weigh the solid when fully immersed in the liquid ($W_3$). The upthrust in water is $W_1 - W_2$. The upthrust in the liquid is $W_1 - W_3$. Formula: R.D.$_{liquid} = \frac{W_1 - W_3}{W_1 - W_2}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">26. Explain the principle behind determining relative density using the method of moments for a solid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The method uses a balanced metre rule. The solid is suspended at a fixed distance from the pivot. A known weight balances it at distance $d_1$ (solid in air) and $d_2$ (solid in water). The moments $W_{air} \times d = W \times d_1$ and $W_{water} \times d = W \times d_2$ allow calculation of $W_{air}$ and $W_{water}$ (or their ratio), leading to R.D.$_{solid} = \frac{d_1}{d_1 - d_2}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">27. Describe the basic construction and principle of operation of a hydrometer.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Construction: Bulb (for displacement), ballast (lead shot/mercury for stability), narrow graduated stem. Principle: Based on the Law of Flotation. A hydrometer has a constant weight and floats. It sinks deeper in less dense liquids and floats higher in denser liquids because it must displace its own weight of the liquid.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">28. Explain how a hydrometer is used to measure the density of a liquid.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The hydrometer is gently floated in the liquid. It sinks to a level where the weight of the liquid displaced equals its own weight. The density (or relative density) is read from the calibrated scale on its stem at the point where the liquid surface meets the stem.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">29. Name and briefly describe three types of hydrometers.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> 1. Lactometer: Measures the density of milk (indicates purity/water content). 2. Brewer's hydrometer: Measures density of wort/beer during brewing. 3. Battery acid hydrometer: Measures density of sulfuric acid in lead-acid batteries (indicates charge state).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">30. Explain, based on the principle of upthrust, how a balloon is able to rise in the air.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A balloon displaces a volume of air. The upthrust on the balloon is equal to the weight of this displaced air. If this upthrust is greater than the total weight of the balloon (including its contents), there is a net upward force, causing the balloon to rise.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">31. Why are gases like helium or hydrogen preferred for use in balloons designed to lift objects?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Helium and hydrogen are much less dense than air. Using them minimizes the weight of the gas inside the balloon for a given volume, allowing the upthrust (weight of displaced air) to more easily exceed the total weight of the balloon, thus providing greater lift.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">32. Explain how a large steel ship, despite steel being denser than water, is able to float.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A ship has a hollow hull, enclosing a large volume of air. This makes the ship's average density (total mass divided by total volume including enclosed air) less than the density of water. It floats by displacing a volume of water whose weight is equal to the ship's total weight.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">33. What is the purpose of the Plimsoll line marked on the hull of a ship?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The Plimsoll line indicates the maximum safe loading depth for a ship in different types of water (e.g., freshwater, saltwater, different seasons), ensuring it maintains sufficient buoyancy and stability.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">34. Explain how a submarine is able to control its depth in water.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Submarines use ballast tanks. To sink, they flood these tanks with water, increasing their overall weight and average density. To rise, they expel water from the tanks using compressed air, decreasing their weight and average density. They can achieve neutral buoyancy by adjusting the water in the tanks until their weight equals the upthrust.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">35. A stone weighs 2.0 N in air and has an apparent weight of 1.2 N when fully immersed in water. Calculate the upthrust on the stone.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Upthrust = Weight in air - Apparent weight in water = $2.0 \text{ N} - 1.2 \text{ N} = 0.8 \text{ N}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">36. If $g = 10 \text{ N/kg}$, calculate the mass of water displaced by the stone in question 35.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Upthrust = Weight of water displaced = 0.8 N. Mass = Weight / $g = 0.8 \text{ N} / 10 \text{ N/kg} = 0.08 \text{ kg}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">37. Given $\rho_{water} = 1000 \text{ kg/m}^3$, calculate the volume of water displaced by the stone in question 36.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Volume = Mass / Density = $0.08 \text{ kg} / 1000 \text{ kg/m}^3 = 8 \times 10^{-5} \text{ m}^3$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">38. What is the volume of the stone in question 37? Calculate its density.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Volume of stone = Volume of water displaced = $8 \times 10^{-5} \text{ m}^3$. Mass of stone = Weight in air / $g = 2.0 \text{ N} / 10 \text{ N/kg} = 0.2 \text{ kg}$. Density of stone = Mass / Volume = $0.2 \text{ kg} / (8 \times 10^{-5} \text{ m}^3) = 2500 \text{ kg/m}^3$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">39. A block of material has $V = 0.15 \text{ m}^3$ and $\rho = 800 \text{ kg/m}^3$. Calculate its weight (take $g = 10 \text{ N/kg}$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Mass $m = \rho V = 800 \text{ kg/m}^3 \times 0.15 \text{ m}^3 = 120 \text{ kg}$. Weight $W = mg = 120 \text{ kg} \times 10 \text{ N/kg} = 1200 \text{ N}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">40. The block from Q39 is placed in a liquid with $\rho_{liquid} = 1200 \text{ kg/m}^3$. Calculate the upthrust if fully submerged.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Upthrust $U = V_{displaced} \rho_{liquid} g = 0.15 \text{ m}^3 \times 1200 \text{ kg/m}^3 \times 10 \text{ N/kg} = 1800 \text{ N}$.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">41. A block of length 15 cm and cross-sectional area 9 cm² is made of material with a density of 1.25 g/cm³. Calculate the mass of the block.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Volume $V = \text{length} \times \text{area} = 15 \text{ cm} \times 9 \text{ cm}^2 = 135 \text{ cm}^3$. Mass $m = \rho V = 1.25 \text{ g/cm}^3 \times 135 \text{ cm}^3 = 168.75 \text{ g}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">42. The block from Q41 is suspended from a spring balance and fully immersed in oil of density 0.8 g/cm³. Calculate the reading on the spring balance (Take $g = 10 \text{ N/kg}$, $1 \text{ g/cm}^3 = 1000 \text{ kg/m}^3$).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Weight in air: $m = 0.16875 \text{ kg}$, $W_{air} = 0.16875 \text{ kg} \times 10 \text{ N/kg} = 1.6875 \text{ N}$.
+                            Volume of block: $V = 135 \text{ cm}^3 = 135 \times 10^{-6} \text{ m}^3$.
+                            Density of oil: $\rho_{oil} = 0.8 \text{ g/cm}^3 = 800 \text{ kg/m}^3$.
+                            Upthrust $U = V \rho_{oil} g = (135 \times 10^{-6} \text{ m}^3) \times (800 \text{ kg/m}^3) \times (10 \text{ N/kg}) = 1.08 \text{ N}$.
+                            Spring balance reading (Apparent weight) = $W_{air} - U = 1.6875 \text{ N} - 1.08 \text{ N} = 0.6075 \text{ N}$.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Floating and Sinking. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0;
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+            if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer');
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    answerContainer.classList.remove('hidden-answer');
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                    if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise([answerContainer]);
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+    </script>
+</body>
+</html>
