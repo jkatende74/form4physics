@@ -6,7 +6,7 @@
     <title>The Electromagnetic Spectrum: A Comprehensive Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <script>
       MathJax = {
         tex: {
@@ -42,13 +42,13 @@
             padding-bottom: 0.5rem;
         }
         .content-section h3 {
-            font-size: 1.5rem; 
+            font-size: 1.5rem;
             font-weight: 600;
             color: #374151; /* Tailwind gray-700 */
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
         }
-        .content-section h4 { 
+        .content-section h4 {
             font-size: 1.25rem;
             font-weight: 600;
             color: #4B5563; /* Tailwind gray-600 */
@@ -68,7 +68,7 @@
             list-style-type: decimal;
             margin-left: 1.5rem;
         }
-        .problem-solving-steps li { 
+        .problem-solving-steps li {
             margin-bottom: 0.5rem;
         }
         .content-section strong {
@@ -94,7 +94,7 @@
             justify-content: center;
             color: #6B7280; /* Tailwind gray-500 */
             font-style: italic;
-            min-height: 150px; 
+            min-height: 150px;
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
@@ -195,13 +195,24 @@
         }
         .answer-container.expanded {
             display: block;
-            max-height: 2000px; 
+            max-height: 2000px;
             padding: 0.75rem;
             transition: max-height 0.5s ease-in, padding 0.5s ease-in;
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+<header style="padding: 10px; background-color: #f0f0f0; margin-bottom: 20px; border-bottom: 1px solid #ccc;">
+    <h3>electromagnetic spectrum</h3>
+    <audio controls src="electromagnetic_spectrum.mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <nav style="margin-top: 10px;">
+        <a href="floating_and_sinking.html" style="margin-right: 10px;">Previous Topic</a>
+        <a href="dashboard.html" style="margin-right: 10px;">Back to Dashboard</a>
+        <a href="electromagnetic Induction3.html">Next Topic</a>
+    </nav>
+</header>
 
     <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
         <div class="container mx-auto flex items-center justify-between">
@@ -240,7 +251,7 @@
                 <li><a href="#revision-questions-ems" class="nav-link">12. Revision Questions</a></li>
             </ul>
         </nav>
-        
+
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
 
         <main class="lg:w-3/4 w-full">
@@ -283,7 +294,7 @@
                 </ol>
                 <p>The boundaries between these regions are not sharply defined.</p>
                 <div class="placeholder-img w-full h-64 my-4">Placeholder: Detailed chart of the EM Spectrum showing approximate wavelength and frequency ranges for each component, common sources, and applications (Similar to S_R1 table and [1], Fig 4.2).</div>
-                
+
                 <h4>Table: Overview of Electromagnetic Spectrum Components]</h4>
                 <table>
                     <thead>
@@ -802,7 +813,7 @@
         const closeSidebarButton = document.getElementById('closeSidebarButton');
         const sidebarNav = document.getElementById('sidebarNav');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
-        
+
         const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
         const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
         const prevButton = document.getElementById('prevButton');
@@ -859,7 +870,7 @@
 
         navLinks.forEach((anchor, index) => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 updateNavigationState(index);
                 if (window.innerWidth < 1024) {
                     closeSidebar();
@@ -878,7 +889,7 @@
                 updateNavigationState(currentIndex - 1);
             }
         });
-        
+
         const questionContainers = document.querySelectorAll('.question-container');
         questionContainers.forEach(container => {
             container.addEventListener('click', () => {
