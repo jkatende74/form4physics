@@ -30,7 +30,7 @@
         .diagram-placeholder {
             width: 100%;
             max-width: 450px; /* Slightly smaller for potentially complex diagrams */
-            height: 250px; 
+            height: 250px;
             background-color: #E2E8F0; /* gray-200 */
             border: 2px dashed #A0AEC0; /* gray-400 */
             display: flex;
@@ -78,7 +78,7 @@
             margin-bottom: 1rem;
             border: 1px solid #E2E8F0; /* gray-200 */
             border-radius: 8px;
-            overflow: hidden; 
+            overflow: hidden;
         }
         .question-toggle {
             display: flex;
@@ -87,8 +87,8 @@
             width: 100%;
             text-align: left;
             background-color: #F7FAFC; /* gray-50 */
-            padding: 0.75rem 1rem; 
-            border-bottom: 1px solid #E2E8F0; 
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E2E8F0;
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
@@ -96,18 +96,18 @@
             background-color: #EDF2F7; /* gray-100 */
         }
         .question-toggle span {
-            font-weight: 600; 
-            color: #2D3748; 
+            font-weight: 600;
+            color: #2D3748;
         }
         .question-toggle svg {
-            width: 1.25rem; 
-            height: 1.25rem; 
+            width: 1.25rem;
+            height: 1.25rem;
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
         .answer-content {
-            background-color: #FFFFFF; 
-            padding: 1rem; 
+            background-color: #FFFFFF;
+            padding: 1rem;
         }
         .answer-content.hidden {
             display: none;
@@ -150,6 +150,17 @@
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+<header style="padding: 10px; background-color: #f0f0f0; margin-bottom: 20px; border-bottom: 1px solid #ccc;">
+    <h3>photoelectric effect</h3>
+    <audio controls src="photoelectric_effect.mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <nav style="margin-top: 10px;">
+        <a href="xrays.html" style="margin-right: 10px;">Previous Topic</a>
+        <a href="dashboard.html" style="margin-right: 10px;">Back to Dashboard</a>
+        <a href="radioactivity.html">Next Topic</a>
+    </nav>
+</header>
 
     <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
         <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">Photoelectric Effect</h1>
@@ -176,7 +187,7 @@
     </button>
 
     <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
-        
+
         <div class="content-page bg-white p-6 rounded-lg shadow-md">
             <h2>1. Introduction</h2>
             <p>The Photoelectric Effect is a fundamental phenomenon in physics, crucial for understanding quantum mechanics. It involves the emission of electrons (called <strong>photoelectrons</strong>) from a material when electromagnetic radiation of sufficient frequency shines on its surface. This effect cannot be fully explained by classical wave theory, necessitating a quantum interpretation.</p>
@@ -208,7 +219,7 @@
                 <li>Applications: Photoemissive cells, Photoconductive cells, Photovoltaic cells.</li>
             </ul>
         </div>
-        
+
         <div class="content-page bg-white p-6 rounded-lg shadow-md">
             <h2>3. Fundamental Concepts and Theory</h2>
             <h3>Quantum Theory and Photons</h3>
@@ -266,7 +277,7 @@
             </ul>
             <p>These experiments qualitatively establish the existence of the photoelectric effect and its dependence on the type of radiation.</p>
         </div>
-        
+
         <div class="content-page bg-white p-6 rounded-lg shadow-md">
             <h2>6. Factors Influencing Photoelectric Emission</h2>
             <h3>Intensity of Incident Radiation</h3>
@@ -339,7 +350,7 @@
                 <li>Mass of electron, \(m_e = 9.11 \times 10^{-31} \text{ kg}\)</li>
                 <li>\(1 \text{ eV} = 1.6 \times 10^{-19} \text{ J}\)</li>
             </ul>
-            
+
             <h3>Example Problems (Conceptual approach based on KLB examples)</h3>
             <p><strong>1. Photon Energy Calculation:</strong> Given wavelength or frequency, calculate photon energy using \(E=hf\) or \(E=hc/\lambda\). (Similar to KLB Example 1, p.153)</p>
             <p><strong>2. Multi-step Calculation using Einstein's Equation:</strong>
@@ -381,7 +392,7 @@
             </ol>
             <p><em>(Refer to KLB Physics Book 4, Revision Exercise 9, for more practice problems.)</em></p>
         </div>
-        
+
         <div class="content-page bg-white p-6 rounded-lg shadow-md">
             <h2>9. Conclusion</h2>
             <p>The Photoelectric Effect is a pivotal phenomenon that demonstrates the quantum nature of light and provides strong evidence for the existence of photons. Understanding its principles, including the concepts of work function, threshold frequency, and Einstein's photoelectric equation, is essential for grasping modern physics.</p>
@@ -391,7 +402,7 @@
 
         <div class="content-page bg-white p-6 rounded-lg shadow-md">
             <h2>10. Revision Questions</h2>
-            
+
             <div class="question-container">
                 <button class="question-toggle">
                     <span><strong>1.</strong> Define the photoelectric effect.</span>
@@ -661,12 +672,12 @@
             pages.forEach((page, i) => {
                 page.classList.toggle('active', i === index);
             });
-            sidebarLinks.forEach((link) => { 
+            sidebarLinks.forEach((link) => {
                 link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
             });
             currentPageIndex = index;
             updateNavButtons();
-            window.scrollTo(0, 0); 
+            window.scrollTo(0, 0);
         }
 
         function updateNavButtons() {
@@ -679,7 +690,7 @@
                 e.preventDefault();
                 const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
                 showPage(pageIndex);
-                if (window.innerWidth < 768) { 
+                if (window.innerWidth < 768) {
                     sidebar.classList.add('-translate-x-full');
                 }
             });
@@ -700,7 +711,7 @@
         hamburgerBtn.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
         });
-        
+
         mainContent.addEventListener('click', () => {
             if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
                 sidebar.classList.add('-translate-x-full');

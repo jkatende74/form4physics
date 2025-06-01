@@ -6,7 +6,7 @@
     <title>Electromagnetic Induction: A Comprehensive Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <script>
       MathJax = {
         tex: {
@@ -196,6 +196,17 @@
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+<header style="padding: 10px; background-color: #f0f0f0; margin-bottom: 20px; border-bottom: 1px solid #ccc;">
+    <h3>electromagnetic induction</h3>
+    <audio controls src="Electromagnetic_induction_1.mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <nav style="margin-top: 10px;">
+        <a href="electromagnetic_spectrum.html" style="margin-right: 10px;">Previous Topic</a>
+        <a href="dashboard.html" style="margin-right: 10px;">Back to Dashboard</a>
+        <a href="mains_electricity.html">Next Topic</a>
+    </nav>
+</header>
 
     <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
         <div class="container mx-auto flex items-center justify-between">
@@ -231,7 +242,7 @@
                 <li><a href="#revision-questions-emi" class="nav-link">9. Revision Questions</a></li>
             </ul>
         </nav>
-        
+
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
 
         <main class="lg:w-3/4 w-full">
@@ -909,7 +920,7 @@
         const closeSidebarButton = document.getElementById('closeSidebarButton');
         const sidebarNav = document.getElementById('sidebarNav');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
-        
+
         const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
         const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
         const prevButton = document.getElementById('prevButton');
@@ -963,7 +974,7 @@
 
         navLinks.forEach((anchor, index) => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 updateNavigationState(index);
                 if (window.innerWidth < 1024) {
                     closeSidebar();
@@ -982,7 +993,7 @@
                 updateNavigationState(currentIndex - 1);
             }
         });
-        
+
         const questionContainers = document.querySelectorAll('.question-container');
         questionContainers.forEach(container => {
             container.addEventListener('click', () => {
