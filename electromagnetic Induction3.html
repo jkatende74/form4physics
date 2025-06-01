@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electromagnetic Induction: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams' // Automatic equation numbering for AMS environments
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.5rem; /* Slightly larger for sub-sections */
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section h4 {
+            font-size: 1.25rem; /* For sub-sub-sections */
+            font-weight: 600;
+            color: #4B5563; /* Tailwind gray-600 */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+            min-height: 100px; /* Ensure placeholder has some height */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6; /* Tailwind gray-100 */
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .revision-questions-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6;
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6;
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6;
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .answer-container.expanded {
+            display: block;
+            max-height: 1000px; /* Adjust as needed */
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">Electromagnetic Induction: KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro-emi" class="nav-link">1. Understanding EMI</a></li>
+                <li><a href="#factors-emf" class="nav-link">2. Factors Affecting Induced EMF</a></li>
+                <li><a href="#laws-emi" class="nav-link">3. Fundamental Laws of EMI</a></li>
+                <li><a href="#direction-current" class="nav-link">4. Direction of Induced Current</a></li>
+                <li><a href="#mutual-induction" class="nav-link">5. Mutual Induction</a></li>
+                <li><a href="#applications-emi" class="nav-link">6. Applications of EMI</a></li>
+                <li><a href="#problems-transformers" class="nav-link">7. Transformer Problems</a></li>
+                <li><a href="#conclusion-emi" class="nav-link">8. Conclusion</a></li>
+                <li><a href="#revision-questions-emi" class="nav-link">9. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro-emi" class="content-section">
+                <h2>1. Understanding Electromagnetic Induction</h2>
+                <h3>1.1 Defining Electromagnetic Induction</h3>
+                <p>Electromagnetic induction is a fundamental phenomenon in physics where an electromotive force (e.m.f.), and consequently an electric current if a closed path exists, is generated within an electrical conductor when it is subjected to a changing magnetic field. This can occur either when the conductor moves through a stationary magnetic field in such a way as to cut the magnetic field lines, or when the magnetic field around a stationary conductor changes in strength or orientation. This principle is, in essence, the converse of the magnetic effect of electric current, where a current-carrying conductor produces a magnetic field.</p>
+                <p>The discovery of electromagnetic induction is attributed to Michael Faraday in the 19th century. This breakthrough has had profound implications for technological advancement, most notably paving the way for the large-scale and economical generation of electrical energy in power stations, which underpins modern society. The critical element in electromagnetic induction is the <em>change</em> in the magnetic environment experienced by the conductor. A constant, unchanging magnetic field, or a conductor that is stationary within such a field without cutting flux lines, will not result in an induced e.m.f. This concept of a changing magnetic flux is central to understanding the entire topic. The changing magnetic flux acts as the cause, leading to the effect of an induced e.m.f. and, if the circuit is complete, an induced current.</p>
+
+                <h3>1.2 Simple Experiments Illustrating Electromagnetic Induction</h3>
+                <p>The Kenya Certificate of Secondary Education (KCSE) syllabus emphasizes the importance of practical understanding, requiring learners to perform and describe simple experiments that illustrate the principles of electromagnetic induction. These foundational experiments demonstrate the conditions necessary for an e.m.f. to be induced.</p>
+                <h4>1.2.1 Induction in a Straight Conductor</h4>
+                <p>A simple yet effective demonstration of electromagnetic induction involves a straight conductor moving within a magnetic field.</p>
+                <ul>
+                    <li><strong>Apparatus:</strong> This experiment typically uses a thick, straight electrical conductor (e.g., a copper wire segment AB), a strong U-shaped magnet to provide a relatively uniform magnetic field, a sensitive galvanometer to detect small currents, and connecting wires. The setup is arranged such that the conductor can be moved through the magnetic field between the poles of the magnet, with its ends connected to the galvanometer.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.1 (Setup for induction in a straight conductor).</div>
+                <ul>
+                    <li><strong>Procedure and Observations:</strong>
+                        <ol>
+                            <li>When the conductor AB is moved vertically downwards, cutting the magnetic field lines, the galvanometer shows a deflection, indicating an induced current.</li>
+                            <li>If the conductor is moved vertically upwards, the galvanometer deflects again, but in the opposite direction, signifying that the induced current has reversed.</li>
+                            <li>If the conductor is held stationary within the magnetic field, no deflection is observed on the galvanometer, meaning no current is induced.</li>
+                            <li>Similarly, if the conductor is moved parallel to the magnetic field lines (e.g., horizontally between the poles without cutting them), no deflection occurs.</li>
+                            <li>The magnitude of the induced current (and thus e.m.f.) is observed to be greatest when the conductor moves perpendicularly (at 90 degrees) to the field lines. As the angle of cutting decreases, the induced current also decreases, becoming zero when the motion is parallel to the field lines.</li>
+                            <li>If the conductor is held stationary and the magnet is moved (e.g., upwards or downwards, so its field lines are cut by the conductor), similar deflections are observed, confirming that it is the <em>relative motion</em> that matters.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Explanation:</strong> The induced current arises because the relative motion between the conductor and the magnetic field causes the conductor to "cut" through the magnetic flux lines. This interaction exerts a force on the free electrons within the conductor, causing them to move towards one end, thereby establishing an e.m.f. and driving a current if the circuit is complete.</li>
+                </ul>
+                <h4>1.2.2 Induction in a Coil</h4>
+                <p>Another common method to demonstrate electromagnetic induction involves a coil of wire and a bar magnet.</p>
+                <ul>
+                    <li><strong>Apparatus:</strong> This setup requires a coil with multiple turns of wire, a sensitive galvanometer, and a bar magnet. The coil is connected to the galvanometer.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.2 (Setup for induction in a coil with a magnet).</div>
+                <ul>
+                    <li><strong>Procedure and Observations:</strong>
+                        <ol>
+                            <li>When the north pole of the magnet is moved into the coil, the galvanometer deflects, indicating an induced current.</li>
+                            <li>When the magnet is moved out of the coil, the galvanometer deflects in the opposite direction.</li>
+                            <li>If the magnet is held stationary inside the coil, or outside the coil, there is no deflection.</li>
+                            <li>Similar effects are observed if the south pole of the magnet is used, but the directions of deflection for corresponding movements (into or out of the coil) will be reversed compared to using the north pole.</li>
+                            <li>If the coil is moved towards or away from a stationary magnet, the galvanometer also deflects, again demonstrating that relative motion is key.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Explanation:</strong> In this case, the induced e.m.f. is due to the change in magnetic flux linkage through the coil. As the magnet moves relative to the coil, the number of magnetic field lines passing through the cross-sectional area of the coil changes. This change in magnetic flux linkage induces an e.m.f. in the coil.</li>
+                </ul>
+                <p>Both experimental setups—the straight conductor and the coil—fundamentally illustrate that an induced e.m.f. is generated only when there is relative motion between a conductor and a magnetic field, leading to a change in the magnetic flux experienced by the conductor. The direction of this induced e.m.f. (and current) is dependent on the direction of the relative motion and the orientation of the magnetic field. These observations are crucial for understanding Faraday's Law of Induction.</p>
+            </section>
+
+            <section id="factors-emf" class="content-section hidden-section">
+                <h2>2. Factors Affecting the Magnitude of Induced EMF</h2>
+                <p>The magnitude of the electromotive force (e.m.f.) induced in a conductor is not constant but depends on several factors. Understanding these factors is essential for designing and optimizing devices that utilize electromagnetic induction, such as generators. Experiments demonstrate these dependencies clearly.</p>
+                <h3>2.1 Rate of Change of Magnetic Flux</h3>
+                <p>The speed at which the magnetic flux changes is a primary determinant of the induced e.m.f.</p>
+                <ul>
+                    <li><strong>Experimental Evidence:</strong> A magnet is withdrawn from a coil connected to a galvanometer at different speeds (e.g., very fast, moderate speed, very slowly).</li>
+                    <li><strong>Observation:</strong> The faster the magnet is withdrawn from the coil, the greater the induced e.m.f. This is evidenced by a larger deflection on the galvanometer.</li>
+                    <li><strong>Explanation:</strong> When a magnet is moved relative to a coil, the magnetic flux linking the coil changes. If the magnet is moved faster, the same total change in flux occurs over a shorter period. This means the <em>rate</em> of change of magnetic flux linkage is higher, leading to a proportionally larger induced e.m.f.</li>
+                </ul>
+                <h3>2.2 Strength of the Magnetic Field</h3>
+                <p>The intensity of the magnetic field also plays a significant role in the magnitude of the induced e.m.f.</p>
+                <ul>
+                    <li><strong>Experimental Evidence:</strong> Using a wire moving through the field of a U-shaped electromagnet. The strength of the electromagnet's field is varied by adjusting the current flowing through its coils.</li>
+                    <li><strong>Observation:</strong> Whenever current through the ammeter (powering the electromagnet) is increased, a greater deflection is obtained on the galvanometer (connected to the moving wire) when the wire cuts the field. This implies that the stronger the magnetic field, the higher the induced e.m.f.</li>
+                    <li><strong>Explanation:</strong> A stronger magnetic field is characterized by a greater density of magnetic flux lines. When a conductor moves at a certain speed through a stronger field, it cuts more flux lines per unit of time compared to moving through a weaker field. This results in a greater rate of change of magnetic flux linkage and, consequently, a larger induced e.m.f.</li>
+                </ul>
+                <h3>2.3 Number of Turns in the Coil</h3>
+                <p>For a coil, the number of turns significantly influences the total induced e.m.f.</p>
+                <ul>
+                    <li><strong>Experimental Evidence:</strong> Using solenoids with varying numbers of turns. A magnet is inserted into and withdrawn from each coil at a consistent steady speed.</li>
+                    <li><strong>Observation:</strong> Each time the number of turns of the coil is decreased, a lower deflection of the maximum reading of the galvanometer is noted. Conversely, increasing the number of turns leads to a higher induced e.m.f.</li>
+                    <li><strong>Explanation:</strong> An e.m.f. is induced in each individual turn of the coil as it experiences the changing magnetic flux. These individual e.m.f.s add up. Therefore, if a coil has N turns, and each turn links the same changing flux, the total induced e.m.f. will be N times the e.m.f. induced in a single turn. This introduces the important concept of "flux linkage," which is the product of the number of turns (N) and the magnetic flux ($\Phi$) passing through each turn.</li>
+                </ul>
+                <h3>2.4 Angle of Cutting Magnetic Flux</h3>
+                <p>The orientation of the conductor's motion relative to the magnetic field lines affects how effectively the flux is cut, and thus the magnitude of the induced e.m.f.</p>
+                <ul>
+                    <li><strong>Experimental Evidence:</strong> Observed when using a straight conductor. The magnitude of the induced current increases with the angle $\theta$ at which the conductor cuts the field, being maximum when $\theta$ is 90° and zero when $\theta$ is 0° (moving parallel to the magnetic field).</li>
+                    <li><strong>Explanation:</strong> The induced e.m.f. is proportional to the component of the conductor's velocity that is perpendicular to the magnetic field lines. When the conductor moves perpendicularly to the field (angle of 90 degrees), it cuts the flux lines at the maximum possible rate. If the conductor moves parallel to the field lines (angle of 0 degrees), it does not cut any flux lines, and no e.m.f. is induced. For other angles, the effective rate of cutting flux is reduced. This can be mathematically represented by including a $\sin(\theta)$ term in the e.m.f. equation for a straight conductor ($E = Blv \sin(\theta)$), where $\theta$ is the angle between the velocity vector and the magnetic field vector.</li>
+                </ul>
+                <p>All these factors are interconnected through their influence on the overall rate of change of magnetic flux linkage. These principles are paramount in the design of electrical generators.</p>
+            </section>
+
+            <section id="laws-emi" class="content-section hidden-section">
+                <h2>3. Fundamental Laws of Electromagnetic Induction</h2>
+                <p>The phenomena observed in experiments on electromagnetic induction are summarized and quantified by two fundamental laws: Faraday's Law of Electromagnetic Induction and Lenz's Law.</p>
+                <h3>3.1 Faraday's Law of Electromagnetic Induction</h3>
+                <ul>
+                    <li><strong>Statement:</strong> The law states that "The magnitude of the induced e.m.f. is directly proportional to the rate of change of magnetic flux linkage."</li>
+                    <li><strong>Key Terms:</strong>
+                        <ul>
+                            <li><strong>Magnetic Flux ($\Phi$):</strong> Measure of the total magnetic field passing through a given area.</li>
+                            <li><strong>Flux Linkage ($N\Phi$):</strong> For a coil with N turns, the total flux linkage is $N\Phi$.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Conceptual Mathematical Representation:</strong> $E \propto \frac{\Delta(N\Phi)}{\Delta t}$</li>
+                    <li><strong>Connection to Experimental Factors:</strong> This law summarizes how factors like rate of movement, field strength, number of turns, and angle of cutting influence the induced e.m.f.</li>
+                </ul>
+                <h3>3.2 Lenz's Law and Conservation of Energy</h3>
+                <p>While Faraday's Law quantifies the magnitude, Lenz's Law specifies its direction.</p>
+                <ul>
+                    <li><strong>Statement:</strong> Lenz's Law states that "The direction of the induced e.m.f. is such that the induced current which it causes to flow produces a magnetic effect that opposes the change producing it."</li>
+                    <li><strong>Explanation of "Opposing the Change":</strong> The induced current creates a magnetic field that tries to counteract the original change in flux.
+                        <ul>
+                            <li>Example: If a north pole moves towards a coil, the induced current creates a north pole at the facing end of the coil to repel the magnet.</li>
+                            <li>Example: If a north pole moves away, the induced current creates a south pole to attract the magnet.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lenz's Law as a Consequence of Conservation of Energy:</strong> If the induced current aided the change, it would lead to a perpetual motion machine. External work must be done against the opposition created by Lenz's Law, and this work is converted into electrical energy.</li>
+                </ul>
+                <h4>3.2.1 Experimental Demonstration of Lenz's Law</h4>
+                <p>An experiment can demonstrate this by noting the direction of galvanometer deflection when a magnet is moved relative to a coil, and then determining the polarity of the induced magnetic field.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.9 (Demonstrating Lenz's Law).</div>
+                <ul>
+                    <li><strong>Observations and Explanation:</strong>
+                        <ul>
+                            <li>Moving North pole towards coil: Induced current creates a North pole to oppose entry.</li>
+                            <li>Moving North pole away from coil: Induced current creates a South pole to oppose withdrawal.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="direction-current" class="content-section hidden-section">
+                <h2>4. Determining the Direction of Induced Current: Fleming's Right-Hand Rule (Dynamo Rule)</h2>
+                <p>Fleming's Right-Hand Rule offers a practical method for determining the direction of induced current, especially for a straight conductor.</p>
+                <h3>4.1 Statement and Application of the Rule</h3>
+                <p>Fleming's Right-Hand Rule is stated as follows: "if the thumb and the first two fingers of the right hand are held mutually at right angles with the first finger pointing in the direction of the field, the thumb pointing in the direction of motion, then the second finger points in the direction of the induced current."</p>
+                <ul>
+                    <li><strong>Visual Aid (Hand Gesture):</strong>
+                        <ul>
+                            <li><strong>Th</strong>umb: **M**otion of the conductor.</li>
+                            <li><strong>F</strong>irst finger: Magnetic **F**ield (N to S).</li>
+                            <li>Se**C**ond finger: Induced **C**urrent.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram illustrating Fleming's Right-Hand Rule.</div>
+                <h3>4.2 Experimental Verification</h3>
+                <p>Experiments involving moving a wire in a magnetic field and noting the galvanometer deflection verify this rule.</p>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.10 (Verifying Fleming's Right-Hand Rule).</div>
+                <ul>
+                    <li><strong>Observations and Explanation:</strong> The observed direction of current matches the prediction from Fleming's Right-Hand Rule. This rule is consistent with Lenz's Law, as the force experienced by the induced current (motor effect, Fleming's Left-Hand Rule) will oppose the original motion.</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.12 (Loop moving in a magnetic field).</div>
+            </section>
+
+            <section id="mutual-induction" class="content-section hidden-section">
+                <h2>5. Mutual Induction</h2>
+                <h3>5.1 Definition and Explanation</h3>
+                <p>Mutual induction occurs "when a changing current in one coil (primary) induces a current in another coil (secondary) placed close to it."</p>
+                <ol>
+                    <li>Current in primary coil creates a magnetic field.</li>
+                    <li>Changing primary current causes a changing magnetic field.</li>
+                    <li>This changing flux links with the secondary coil.</li>
+                    <li>An e.m.f. is induced in the secondary coil (Faraday's Law).</li>
+                </ol>
+                <h3>5.2 Experimental Demonstration of Mutual Induction</h3>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.18 (Setup for mutual induction).</div>
+                <ul>
+                    <li><strong>Apparatus:</strong> Two coils (P and S), power source for P (DC battery with switch, or AC source), galvanometer for S.</li>
+                    <li><strong>Observations and Explanation:</strong>
+                        <ol>
+                            <li><strong>Closing switch (DC):</strong> Momentary deflection in S as primary current grows.</li>
+                            <li><strong>Opening switch (DC):</strong> Momentary deflection in S (opposite direction) as primary current collapses. Often larger e.m.f. due to faster flux change.</li>
+                            <li><strong>Varying DC with rheostat:</strong> Deflection in S if primary current changes.</li>
+                            <li><strong>Using AC source in primary:</strong> Continuous alternating induced e.m.f. in S; galvanometer oscillates.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.19 (Direction of induced current in mutual induction).</div>
+                <h3>5.3 Factors Increasing Induced EMF in Mutual Induction</h3>
+                <ol>
+                    <li><strong>Winding Coils on a Soft Iron Rod/Core:</strong> Concentrates flux, increases linkage. (Figure 5.20, 5.21)</li>
+                     <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.20 & 5.21 (Coils on iron core/ring).</div>
+                    <li><strong>Increasing Number of Turns in Secondary Coil ($N_s$):</strong> Total e.m.f. is proportional to $N_s$. (Figure 5.22)</li>
+                     <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.22 (Effect of Ns).</div>
+                    <li><strong>Proximity and Orientation of Coils:</strong> Closer proximity and better alignment improve flux linkage.</li>
+                </ol>
+            </section>
+
+            <section id="applications-emi" class="content-section hidden-section">
+                <h2>6. Applications of Electromagnetic Induction</h2>
+                <h3>6.1 Alternating Current (AC) Generators (Alternators)</h3>
+                <p>Converts mechanical energy into alternating electrical energy.</p>
+                <h4>6.1.1 Working Principle and Construction</h4>
+                <ul>
+                    <li><strong>Principle:</strong> Coil rotating in a magnetic field (or vice-versa) experiences changing flux linkage, inducing an alternating e.m.f.</li>
+                    <li><strong>Construction:</strong> Armature/Coil, Magnetic Field System, Slip Rings, Carbon Brushes.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram similar to Figure 5.31 (Simple AC generator).</div>
+                <h4>6.1.2 Role of Slip Rings</h4>
+                <p>Maintain continuous connection to the rotating coil, allowing the alternating current to be transferred to the external circuit.</p>
+                <h4>6.1.3 Output Characteristics</h4>
+                <ul>
+                    <li><strong>Waveform:</strong> Sinusoidal e.m.f. and current. (Figure 5.32, 5.33, 5.34)</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagrams similar to Figure 5.32, 5.33, 5.34 (AC generator output).</div>
+                <ul>
+                    <li><strong>Equation (Conceptual):</strong> $E = E_0 \sin(\theta)$, $I = I_0 \sin(\theta)$.</li>
+                </ul>
+
+                <h3>6.2 Direct Current (DC) Generators</h3>
+                <p>Converts mechanical energy into direct electrical energy (flows in one direction).</p>
+                <h4>6.2.1 Working Principle and Construction</h4>
+                <ul>
+                    <li><strong>Principle:</strong> Same as AC generator (changing flux).</li>
+                    <li><strong>Construction:</strong> Similar to AC, but uses a Split-Ring Commutator instead of slip rings.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram similar to Figure 5.35 (Simple DC generator).</div>
+                <h4>6.2.2 Role of the Split-Ring Commutator</h4>
+                <p>Acts as a mechanical rectifier. Reverses the connection to the external circuit every half-turn, so current in the external circuit is unidirectional.</p>
+                <h4>6.2.3 Output Characteristics</h4>
+                <ul>
+                    <li><strong>Waveform:</strong> Pulsating direct current. (Figure 5.36)</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.36 (DC generator output).</div>
+                <p><strong>Factors to Increase EMF/Current (Common to AC/DC Generators):</strong>
+                    <ol>
+                        <li>Increasing speed of rotation.</li>
+                        <li>Increasing number of turns in the coil.</li>
+                        <li>Increasing strength of magnetic field.</li>
+                        <li>Winding coil on a laminated soft iron core.</li>
+                    </ol>
+                </p>
+                <h4>Table: Comparison of AC and DC Generators</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AC Generator (Alternator)</th>
+                            <th>DC Generator</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current Collection Mechanism</td>
+                            <td>Slip Rings (two continuous rings)</td>
+                            <td>Split-Ring Commutator (segmented ring)</td>
+                        </tr>
+                        <tr>
+                            <td>Output Current/EMF Nature</td>
+                            <td>Alternating (Sinusoidal - reverses direction periodically)</td>
+                            <td>Pulsating Direct (Unidirectional but varying magnitude)</td>
+                        </tr>
+                        <tr>
+                            <td>Output Waveform Diagram</td>
+                            <td><div class="placeholder-img w-full h-24">Sine wave sketch</div></td>
+                            <td><div class="placeholder-img w-full h-24">Pulsating DC sketch</div></td>
+                        </tr>
+                        <tr>
+                            <td>External Circuit Connection</td>
+                            <td>Brushes maintain contact with continuous, rotating slip rings</td>
+                            <td>Brushes switch contact between rotating commutator segments</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>6.3 Transformers</h3>
+                <p>Static devices transferring electrical energy between AC circuits, usually changing voltage/current levels, via mutual induction.</p>
+                <h4>6.3.1 Working Principle (Mutual Induction) and Construction</h4>
+                <ul>
+                    <li><strong>Principle:</strong> AC in primary coil creates changing flux, linked by soft iron core to secondary coil, inducing AC e.m.f. in secondary.</li>
+                    <li><strong>Construction:</strong> Primary Coil, Secondary Coil, Laminated Soft Iron Core. (Figure 5.23)</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram similar to Figure 5.23 (Simple transformer structure).</div>
+                <h4>6.3.2 Types: Step-up and Step-down Transformers</h4>
+                <ul>
+                    <li><strong>Step-down Transformer:</strong> $N_s \lt N_p \Rightarrow V_s \lt V_p$. (Figure 5.25) The turns ratio $n = \frac{N_s}{N_p}$ is less than 1.</li>
+                    <div class="placeholder-img w-full h-48 my-2">Placeholder: Diagram similar to Figure 5.25 (Step-down transformer).</div>
+                    <li><strong>Step-up Transformer:</strong> $N_s \gt N_p \Rightarrow V_s \gt V_p$. (Figure 5.26) The turns ratio $n = \frac{N_s}{N_p}$ is greater than 1.</li>
+                    <div class="placeholder-img w-full h-48 my-2">Placeholder: Diagram similar to Figure 5.26 (Step-up transformer).</div>
+                </ul>
+                <h4>6.3.3 Transformer Equations (Turns Ratio, Voltage, Current, Power)</h4>
+                <p>For an ideal transformer (100% efficiency):</p>
+                <ul>
+                    <li><strong>Turns Rule (Voltage Ratio):</strong> $\frac{V_s}{V_p} = \frac{N_s}{N_p}$</li>
+                    <li><strong>Power Relationship:</strong> $P_{in} = P_{out} \Rightarrow V_p I_p = V_s I_s$</li>
+                    <li><strong>Current Ratio:</strong> $\frac{V_s}{V_p} = \frac{I_p}{I_s} = \frac{N_s}{N_p}$ (Note: $n$ is typically defined as $\frac{N_s}{N_p}$ or $\frac{V_s}{V_p}$)</li>
+                </ul>
+                <h4>6.3.4 Efficiency of Transformers</h4>
+                <p>Efficiency ($\eta$) = $\frac{P_{out}}{P_{in}} \times 100\% = \frac{V_s I_s}{V_p I_p} \times 100\%$</p>
+                <h4>6.3.5 Energy Losses in Transformers and Their Minimization</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type of Loss</th>
+                            <th>Cause</th>
+                            <th>Method of Minimization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flux Leakage</td>
+                            <td>Not all primary flux links with secondary.</td>
+                            <td>Efficient core design (shell type, winding coils closely).</td>
+                        </tr>
+                        <tr>
+                            <td>Copper Losses ($I^2R$)</td>
+                            <td>Resistance of copper windings.</td>
+                            <td>Using thick, low-resistance copper wires.</td>
+                        </tr>
+                        <tr>
+                            <td>Eddy Currents</td>
+                            <td>Currents induced in the core itself.</td>
+                            <td>Using a laminated core (thin insulated sheets).</td>
+                        </tr>
+                        <tr>
+                            <td>Hysteresis Loss</td>
+                            <td>Energy used in magnetizing/demagnetizing core.</td>
+                            <td>Using soft magnetic materials (e.g., soft iron, silicon steel).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Practical Cooling:</strong> Small transformers are air-cooled; large ones are oil-immersed.</p>
+
+                <h3>6.4 Other Applications</h3>
+                <h4>6.4.1 Moving-Coil Microphone</h4>
+                <ul>
+                    <li><strong>Principle:</strong> Sound waves vibrate diaphragm and attached coil in a magnetic field, inducing e.m.f. (Figure 5.29)</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.29 (Moving-coil microphone).</div>
+                <h4>6.4.2 The Induction Coil</h4>
+                <ul>
+                    <li><strong>Principle:</strong> Mutual induction produces high output voltage from low DC input via rapid interruption of primary current. (Figure 5.30)</li>
+                    <li><strong>Uses:</strong> Spark generation in petrol engines, physics demonstrations.</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram similar to Figure 5.30 (Induction coil).</div>
+                <h4>6.4.3 Bicycle Dynamo</h4>
+                <ul>
+                    <li><strong>Principle:</strong> Small AC generator, often with rotating magnet and stationary coils, powers bicycle lights. (Figure 5.37)</li>
+                </ul>
+                <div class="placeholder-img w-full h-48 my-4">Placeholder: Diagram similar to Figure 5.37 (Bicycle dynamo).</div>
+            </section>
+
+            <section id="problems-transformers" class="content-section hidden-section">
+                <h2>7. Solving Numerical Problems Involving Transformers</h2>
+                <p>Key equations:</p>
+                <ol>
+                    <li>$\frac{V_s}{V_p} = \frac{N_s}{N_p}$</li>
+                    <li>Ideal: $V_p I_p = V_s I_s \Rightarrow \frac{V_s}{V_p} = \frac{N_s}{N_p} = \frac{I_p}{I_s}$</li>
+                    <li>Efficiency ($\eta$) = $\frac{V_s I_s}{V_p I_p} \times 100\%$</li>
+                </ol>
+                <p><strong>Problem-Solving Steps:</strong></p>
+                <ol>
+                    <li>Identify knowns and unknowns.</li>
+                    <li>Determine transformer type (step-up/step-down).</li>
+                    <li>Select appropriate formula(e). Assume ideal if efficiency not mentioned.</li>
+                    <li>Substitute values carefully.</li>
+                    <li>Calculate and check units and reasonableness.</li>
+                </ol>
+                <h4>Worked Examples:</h4>
+                <p><strong>Example A:</strong> A transformer steps down 240 V to 12 V. Primary has 1200 turns. Calculate secondary turns ($N_s$).</p>
+                <p><em>Solution:</em> $V_p = 240V, V_s = 12V, N_p = 1200$. Using $\frac{V_s}{V_p} = \frac{N_s}{N_p} \Rightarrow \frac{12}{240} = \frac{N_s}{1200} \Rightarrow N_s = \frac{12 \times 1200}{240} = 60$ turns.</p>
+                <p><strong>Example B:</strong> Transformer supplies 5A at 50V from 200V mains. Efficiency 90%. Calculate (i) input power ($P_{in}$) and (ii) primary current ($I_p$).</p>
+                <p><em>Solution:</em> (i) $P_{out} = V_s I_s = 50V \times 5A = 250W$. $\eta = \frac{P_{out}}{P_{in}} \times 100\% \Rightarrow 90 = \frac{250}{P_{in}} \times 100 \Rightarrow P_{in} = \frac{250 \times 100}{90} \approx 277.78W$.
+                <br>(ii) $P_{in} = V_p I_p \Rightarrow 277.78W = 200V \times I_p \Rightarrow I_p \approx 1.39A$.</p>
+                <p><strong>Example C:</strong> 100kW power generated at 10kV, stepped up by ideal T1 for transmission. Line resistance 5$\Omega$. Transmitted at 200kV. Calculate transmission current and power loss.</p>
+                <p><em>Solution:</em> $P_{gen} = 100kW, V_p(T1) = 10kV, V_s(T1) = 200kV, R_{line} = 5\Omega$.
+                <br>Current in primary of T1: $I_p = \frac{P_{gen}}{V_p} = \frac{100000W}{10000V} = 10A$.
+                <br>Transmission current (secondary of T1): $V_p I_p = V_s I_s \Rightarrow 10000V \times 10A = 200000V \times I_s \Rightarrow I_s = 0.5A$.
+                <br>Power loss in lines: $P_{loss} = I_s^2 R_{line} = (0.5A)^2 \times 5\Omega = 0.25 \times 5 = 1.25W$.</p>
+                <p><strong>Common Pitfalls:</strong> Confusing primary/secondary values, incorrect current relationship for ideal transformer, errors with efficiency percentage.</p>
+            </section>
+
+            <section id="conclusion-emi" class="content-section hidden-section">
+                <h2>8. Conclusion</h2>
+                <p>Electromagnetic induction, discovered by Michael Faraday, is a cornerstone of electrical science and technology. It describes the generation of an e.m.f. due to a change in magnetic flux linkage. This guide has covered its fundamental aspects as per the KCSE syllabus.</p>
+                <p>Key takeaways include:
+                    <ul>
+                        <li>The necessity of changing magnetic flux for induction.</li>
+                        <li>Faraday's Law quantifying the induced e.m.f. based on the rate of change of flux linkage.</li>
+                        <li>Lenz's Law determining the direction of induced current, upholding energy conservation.</li>
+                        <li>Fleming's Right-Hand Rule as a practical tool for direction.</li>
+                        <li>Mutual induction as the basis for transformers.</li>
+                    </ul>
+                </p>
+                <p>Applications are vast, from generators (AC and DC) converting mechanical to electrical energy, to transformers enabling efficient power transmission and voltage adaptation. Devices like moving-coil microphones and induction coils also rely on this principle. A solid understanding of these concepts, laws, and applications, including problem-solving for transformers, is vital for KCSE Physics.</p>
+            </section>
+
+            <section id="revision-questions-emi" class="content-section hidden-section">
+                <h2>9. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. Define electromagnetic induction.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Electromagnetic induction is the production of an electromotive force (e.m.f.) across an electrical conductor in a changing magnetic field, or when the conductor cuts magnetic flux lines.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. State Faraday's Law of Electromagnetic Induction.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The magnitude of the induced e.m.f. is directly proportional to the rate of change of magnetic flux linkage.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. State Lenz's Law.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The direction of the induced e.m.f. is such that the induced current which it causes to flow produces a magnetic effect that opposes the change producing it.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">4. List four factors that affect the magnitude of induced e.m.f.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> (i) The rate of change of magnetic flux (or speed of relative motion), (ii) The strength of the magnetic field, (iii) The number of turns in the coil (if applicable), (iv) The angle at which the conductor cuts the magnetic field lines (maximum at 90°).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. State Fleming's Right-Hand Rule (Dynamo Rule).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> If the thumb, first finger, and second finger of the right hand are held mutually at right angles, with the first finger pointing in the direction of the magnetic field and the thumb in the direction of motion of the conductor, then the second finger points in the direction of the induced current.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">6. What is mutual induction?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Mutual induction is the phenomenon where a changing current in one coil (the primary coil) creates a changing magnetic flux that links with a nearby coil (the secondary coil), inducing an electromotive force (e.m.f.) in the secondary coil.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. Describe the main difference in construction between an AC generator and a DC generator regarding current collection.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> An AC generator uses two continuous slip rings to collect the alternating current from the rotating armature. A DC generator uses a split-ring commutator which reverses the connections to the external circuit every half-cycle, resulting in a direct current output.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. What is the purpose of laminating the core of a transformer?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Laminating the core (using thin sheets of soft iron insulated from each other) is done to minimize energy losses due to eddy currents. The laminations increase the electrical resistance in the path of eddy currents, thereby reducing their magnitude and the associated heating effect.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">9. A transformer has 600 turns on the primary coil and 150 turns on the secondary coil. If the primary voltage is 240V AC, what is the secondary voltage? (Assume ideal transformer)</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Given $N_p = 600$, $N_s = 150$, $V_p = 240V$.
+                            <br>Using the transformer equation: $\frac{V_s}{V_p} = \frac{N_s}{N_p}$
+                            <br>$\frac{V_s}{240V} = \frac{150}{600}$
+                            <br>$\frac{V_s}{240V} = \frac{1}{4}$
+                            <br>$V_s = \frac{240V}{4} = 60V$.
+                            <br>The secondary voltage is 60V. This is a step-down transformer.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. If the transformer in question 9 is ideal and the secondary coil is connected to a device drawing 2A, what is the current in the primary coil?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Given $I_s = 2A$, $V_p = 240V$, $V_s = 60V$.
+                            <br>For an ideal transformer, Power In = Power Out ($V_p I_p = V_s I_s$).
+                            <br>$240V \times I_p = 60V \times 2A$
+                            <br>$240 I_p = 120$
+                            <br>$I_p = \frac{120}{240} = 0.5A$.
+                            <br>The current in the primary coil is 0.5A.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. Name one way to increase the e.m.f. induced in a generator.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any one of:
+                                <br>- Increasing the speed of rotation of the coil.
+                                <br>- Increasing the number of turns in the coil.
+                                <br>- Increasing the strength of the magnetic field.
+                                <br>- Winding the coil on a laminated soft iron core.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. What type of energy conversion takes place in a moving-coil microphone?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Sound energy is converted into electrical energy.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. Why is soft iron preferred for making transformer cores?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Soft iron is easily magnetized and demagnetized (has low retentivity and a narrow hysteresis loop), which minimizes hysteresis energy losses. It also has high magnetic permeability, which helps in concentrating the magnetic flux and ensuring good linkage between primary and secondary coils.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. An induction coil has a capacitor connected across the make-and-break contacts. What is the purpose of this capacitor?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The capacitor helps to make the break of current in the primary coil more rapid by providing an alternative path for current briefly, and it reduces sparking across the contacts. Both of these effects contribute to a higher rate of change of flux and thus a larger induced e.m.f. in the secondary coil.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">15. A transformer has an efficiency of 80%. If it draws 200W of power from the mains, how much power does it deliver to the load?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Given efficiency $\eta = 80\% = 0.8$, Input Power $P_{in} = 200W$.
+                            <br>Efficiency $\eta = \frac{P_{out}}{P_{in}}$
+                            <br>$0.8 = \frac{P_{out}}{200W}$
+                            <br>$P_{out} = 0.8 \times 200W = 160W$.
+                            <br>It delivers 160W to the load.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. Describe a simple experiment to demonstrate electromagnetic induction using a coil and a bar magnet. What key observations would you make regarding the galvanometer deflection when the magnet is moved in different ways relative to the coil?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br><strong>Apparatus:</strong> A coil of wire, a sensitive galvanometer, a bar magnet, and connecting wires. Connect the coil to the galvanometer.
+                                <br><strong>Procedure & Observations:</strong>
+                                <br>1. Move the North pole of the magnet into the coil: Galvanometer deflects (e.g., to the right).
+                                <br>2. Hold the magnet stationary inside the coil: Galvanometer shows no deflection.
+                                <br>3. Move the North pole of the magnet out of the coil: Galvanometer deflects in the opposite direction (e.g., to the left).
+                                <br>4. Repeat with the South pole: Deflections will be in the reverse directions compared to the North pole for corresponding movements.
+                                <br>5. Move the magnet faster: Larger deflections are observed.
+                                <br>6. Move the coil instead of the magnet: Similar deflections are observed, indicating relative motion is key.
+                                <br><strong>Conclusion:</strong> An e.m.f. (and current) is induced when there is a change in magnetic flux linking the coil, and its direction depends on the direction of change and polarity of the magnet.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">17. Explain the role of a soft iron core in (a) a transformer and (b) an AC/DC generator's armature.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br><strong>(a) Transformer:</strong> The soft iron core in a transformer serves to concentrate and guide the magnetic flux produced by the primary coil so that almost all of it links with the secondary coil. Soft iron has high magnetic permeability, which means it allows magnetic flux to pass through it easily, thus minimizing flux leakage and increasing the efficiency of mutual induction.
+                                <br><strong>(b) AC/DC Generator Armature:</strong> The soft iron core in the armature of a generator concentrates the magnetic field lines from the field magnets, increasing the magnetic flux density through the rotating coils. This leads to a greater change in flux linkage as the coil rotates, resulting in a larger induced e.m.f.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. How is Lenz's Law a consequence of the principle of conservation of energy?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> If the induced current flowed in a direction that *aided* the change in flux causing it, the magnetic force produced would further assist the motion or change. This would lead to an increase in the induced current and its energy without any additional external work being done, effectively creating energy from nothing (a perpetual motion machine), which violates the principle of conservation of energy. Lenz's Law states that the induced current *opposes* the change, meaning external work must be done against this opposition to cause the change in flux. This external work done is then converted into the electrical energy of the induced current, thus conserving energy.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. State four ways in which energy is lost in a practical transformer and briefly explain how each loss can be minimized.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>1. <strong>Copper Losses ($I^2R$ losses):</strong> Caused by the resistance of the copper windings. Minimized by using thick copper wires of low resistance.
+                                <br>2. <strong>Eddy Current Losses:</strong> Currents induced in the iron core itself due to changing magnetic flux, causing heating. Minimized by using a laminated core (thin sheets of iron insulated from each other).
+                                <br>3. <strong>Hysteresis Losses:</strong> Energy used in the repeated magnetization and demagnetization of the iron core as the AC current reverses. Minimized by using soft magnetic materials (like soft iron or silicon steel) which have narrow hysteresis loops.
+                                <br>4. <strong>Flux Leakage:</strong> Not all magnetic flux produced by the primary coil links with the secondary coil. Minimized by efficient core design (e.g., shell type) and winding the coils closely together, often one over the other.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. What is the main difference in the output waveform of an AC generator compared to a DC generator? Sketch simple diagrams for each.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>- <strong>AC Generator Output:</strong> The output e.m.f. (and current) is sinusoidal, meaning it continuously changes direction (alternates) and magnitude over time.
+                                <br>  <div class="placeholder-img w-full h-24 my-2">Sketch: Sine wave oscillating above and below the time axis.</div>
+                                <br>- <strong>DC Generator Output (simple):</strong> The output e.m.f. (and current) is pulsating direct current. It flows in only one direction but its magnitude varies, typically from zero to a maximum and back to zero.
+                                <br>  <div class="placeholder-img w-full h-24 my-2">Sketch: Series of positive "humps" (half-sine waves) all above the time axis.</div>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. Explain the working principle of a bicycle dynamo.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> A bicycle dynamo is a small AC generator. Its working principle is electromagnetic induction. Typically, a knurled wheel on the dynamo is pressed against the bicycle tyre. As the bicycle wheel rotates, it turns the dynamo's wheel, which in turn rotates a permanent magnet inside a stationary coil (or rotates a coil within a stationary magnetic field). This relative motion causes a continuous change in magnetic flux linkage through the coil, inducing an alternating electromotive force (AC e.m.f.) in the coil, which is then used to power the bicycle lights.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. A straight conductor of length $l$ moves with velocity $v$ at an angle $\theta$ to a uniform magnetic field of flux density $B$. Write down the expression for the induced e.m.f. When is this e.m.f. maximum and when is it minimum?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br>The expression for the induced e.m.f. ($E$) is: $E = Blv \sin(\theta)$
+                                <br>Where:
+                                <br>  $B$ = magnetic flux density
+                                <br>  $l$ = length of the conductor in the field
+                                <br>  $v$ = velocity of the conductor
+                                <br>  $\theta$ = angle between the direction of velocity ($v$) and the direction of the magnetic field ($B$).
+                                <br>
+                                <br>- The e.m.f. is <strong>maximum</strong> when $\sin(\theta)$ is maximum, i.e., when $\theta = 90^\circ$ (conductor moves perpendicular to the field lines). Then $E_{max} = Blv$.
+                                <br>- The e.m.f. is <strong>minimum</strong> (zero) when $\sin(\theta)$ is minimum, i.e., when $\theta = 0^\circ$ or $\theta = 180^\circ$ (conductor moves parallel to the field lines). Then $E_{min} = 0$.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">23. In an experiment demonstrating mutual induction with two coils (primary P and secondary S) and a DC supply to P:
+                                <br>a) What is observed in S's galvanometer when the primary switch is closed?
+                                <br>b) What is observed when the primary switch is then opened?
+                                <br>c) What is observed if a steady DC current flows in P? Explain.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong>
+                                <br><strong>a) Switch Closed:</strong> The galvanometer in S shows a momentary deflection and then returns to zero. This is because as current builds up in P (from zero to a steady value), its magnetic flux also builds up, causing a *changing* flux linkage with S, inducing an e.m.f. Once the current in P is steady, the flux is steady, and no e.m.f. is induced in S.
+                                <br><strong>b) Switch Opened:</strong> The galvanometer in S shows a momentary deflection in the *opposite direction* to when the switch was closed, and then returns to zero. This is because as current in P collapses (from steady value to zero), its magnetic flux also collapses, causing a *changing* flux linkage (in the opposite sense) with S, inducing an e.m.f.
+                                <br><strong>c) Steady DC Current in P:</strong> If a steady DC current flows in P, the magnetic flux it produces is also steady. Since there is no *change* in magnetic flux linking S, no e.m.f. is induced in S, and the galvanometer shows no deflection. Electromagnetic induction requires a changing magnetic flux.
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Electromagnetic Induction. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0;
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer');
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    answerContainer.classList.remove('hidden-answer');
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+    </script>
+</body>
+</html>

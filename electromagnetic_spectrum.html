@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Electromagnetic Spectrum: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams' // Automatic equation numbering for AMS environments
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1F2937; /* Tailwind gray-800 */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6; /* Tailwind blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .content-section h3 {
+            font-size: 1.5rem; 
+            font-weight: 600;
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section h4 { 
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4B5563; /* Tailwind gray-600 */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section p, .content-section ul, .content-section ol {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .content-section ul:not(.revision-questions-list) {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-section ol:not(.revision-questions-list):not(.problem-solving-steps) {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        .problem-solving-steps li { 
+            margin-bottom: 0.5rem;
+        }
+        .content-section strong {
+            color: #111827; /* Tailwind gray-900 */
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 0.375rem;
+            color: #374151; /* Tailwind gray-700 */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            color: white;
+        }
+        .placeholder-img {
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280; /* Tailwind gray-500 */
+            font-style: italic;
+            min-height: 150px; 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; /* Tailwind gray-300 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #F3F4F6; /* Tailwind gray-100 */
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6; /* Tailwind blue-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB; /* Tailwind blue-600 */
+        }
+        .mobile-sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .body-no-scroll {
+            overflow: hidden;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .revision-questions-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .revision-questions-list li {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .revision-questions-list li:last-child {
+            border-bottom: none;
+        }
+        .question-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .question-container:hover {
+            background-color: #f3f4f6;
+        }
+        .question-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+        .toggle-icon {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3B82F6;
+            transition: transform 0.2s ease-in-out;
+        }
+        .answer-container {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #3B82F6;
+        }
+        .hidden-answer {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .answer-container.expanded {
+            display: block;
+            max-height: 2000px; 
+            padding: 0.75rem;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50 flex items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center flex-grow">The Electromagnetic Spectrum: KCSE Guide</h1>
+            <button id="hamburgerButton" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8 mt-6">
+
+        <nav id="sidebarNav" class="fixed inset-y-0 left-0 transform -translate-x-full bg-white p-4 shadow-xl z-40 mobile-sidebar-transition
+                                   lg:relative lg:translate-x-0 lg:w-1/4 lg:sticky lg:top-24 lg:rounded-lg lg:shadow-lg lg:mb-0 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto
+                                   w-64 sm:w-72">
+            <button id="closeSidebarButton" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 mt-8 lg:mt-0">Table of Contents</h2>
+            <ul>
+                <li><a href="#intro-ems" class="nav-link">1. Introduction</a></li>
+                <li><a href="#properties-emw" class="nav-link">2. Properties of EM Waves</a></li>
+                <li><a href="#components-ems" class="nav-link">3. Components Overview</a></li>
+                <li><a href="#radio-waves" class="nav-link">4. Radio Waves</a></li>
+                <li><a href="#microwaves" class="nav-link">5. Microwaves</a></li>
+                <li><a href="#infrared" class="nav-link">6. Infrared Radiation</a></li>
+                <li><a href="#visible-light" class="nav-link">7. Visible Light</a></li>
+                <li><a href="#ultraviolet" class="nav-link">8. Ultraviolet Radiation</a></li>
+                <li><a href="#x-rays" class="nav-link">9. X-Rays</a></li>
+                <li><a href="#gamma-rays" class="nav-link">10. Gamma Rays</a></li>
+                <li><a href="#problem-solving-ems" class="nav-link">11. Problem Solving ($c=f\lambda$)</a></li>
+                <li><a href="#revision-questions-ems" class="nav-link">12. Revision Questions</a></li>
+            </ul>
+        </nav>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <main class="lg:w-3/4 w-full">
+            <section id="intro-ems" class="content-section">
+                <h2>1. Introduction to the Electromagnetic Spectrum</h2>
+                <p>The electromagnetic (EM) spectrum is the complete range of all types of electromagnetic radiation. Electromagnetic radiation consists of waves of energy that travel and spread out as they go. Examples include visible light from a lamp, radio waves from a radio station, microwaves, infrared light, ultraviolet light, X-rays, and gamma rays.</p>
+                <p>These waves are formed by oscillating electric and magnetic fields at right angles to each other and to the direction of wave propagation. [1] Electromagnetic radiation can also be described as a stream of massless particles called photons, each traveling in a wave-like pattern at the speed of light and carrying a specific amount of energy. The different types of radiation are defined by the energy of their photons.</p>
+                <p>The spectrum is a continuous range, typically arranged by wavelength or frequency. Radio waves have the longest wavelengths and lowest frequencies (lowest energy), while gamma rays have the shortest wavelengths and highest frequencies (highest energy). All these waves travel at the same speed in a vacuum, the speed of light ($c \approx 3.0 \times 10^8$ m/s).</p>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Diagram illustrating the full Electromagnetic Spectrum, showing the relative positions of different types of radiation, and indicating increasing wavelength, frequency, and energy.[1]</div>
+            </section>
+
+            <section id="properties-emw" class="content-section hidden-section">
+                <h2>2. General Properties of Electromagnetic Waves</h2>
+                <p>All types of electromagnetic radiation share several fundamental properties [1, 1]:</p>
+                <ul>
+                    <li><strong>Transverse Waves:</strong> The oscillations of the electric and magnetic fields are perpendicular to each other and to the direction of wave propagation. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram of a transverse EM wave showing electric field, magnetic field, and direction of propagation.</div>
+                    </li>
+                    <li><strong>Travel at the Speed of Light in Vacuum:</strong> All EM waves travel at $c \approx 3.0 \times 10^8$ m/s in a vacuum. Their speed decreases in a medium.</li>
+                    <li><strong>Can Travel Through a Vacuum:</strong> They do not require a medium for propagation. [1]</li>
+                    <li><strong>Carry Energy:</strong> They transport energy. The energy of a photon is given by $E = hf$, where $h$ is Planck's constant and $f$ is the frequency. Higher frequency waves carry more energy. [1]</li>
+                    <li><strong>Exhibit Wave Phenomena:</strong> They undergo reflection, refraction, diffraction, interference, and polarization. [1]</li>
+                    <li><strong>Unaffected by Electric and Magnetic Fields:</strong> Being uncharged, their path is not deflected by static electric or magnetic fields. [1]</li>
+                    <li><strong>Obey the Wave Equation:</strong> The speed ($c$), frequency ($f$), and wavelength ($\lambda$) are related by $c = f\lambda$. [1, 1]</li>
+                    <li><strong>Production:</strong> Generally produced by accelerating electric charges or by energy changes in atoms and nuclei. [1]</li>
+                </ul>
+            </section>
+
+            <section id="components-ems" class="content-section hidden-section">
+                <h2>3. Components of the Electromagnetic Spectrum: An Overview</h2>
+                <p>The electromagnetic spectrum is divided into regions based on wavelength and frequency. The main components, in order of increasing frequency (decreasing wavelength), are [[1], 34.2.1; S_R1]:</p>
+                <ol>
+                    <li>Radio waves</li>
+                    <li>Microwaves</li>
+                    <li>Infrared radiation</li>
+                    <li>Visible light</li>
+                    <li>Ultraviolet radiation</li>
+                    <li>X-rays</li>
+                    <li>Gamma rays</li>
+                </ol>
+                <p>The boundaries between these regions are not sharply defined.</p>
+                <div class="placeholder-img w-full h-64 my-4">Placeholder: Detailed chart of the EM Spectrum showing approximate wavelength and frequency ranges for each component, common sources, and applications (Similar to S_R1 table and [1], Fig 4.2).</div>
+                
+                <h4>Table: Overview of Electromagnetic Spectrum Components]</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Radiation Type</th>
+                            <th>Typical Wavelength (m)</th>
+                            <th>Typical Frequency (Hz)</th>
+                            <th>Primary Sources</th>
+                            <th>Common Uses</th>
+                            <th>Hazards</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Radio Waves</td>
+                            <td>$> 10^{-1}$ (e.g., 1m to kms)</td>
+                            <td>$< 3 \times 10^9$</td>
+                            <td>Oscillating circuits, transmitters, astronomical objects</td>
+                            <td>Broadcasting (TV, radio), communication (phones, Wi-Fi), radar</td>
+                            <td>High intensity can heat tissue</td>
+                        </tr>
+                        <tr>
+                            <td>Microwaves</td>
+                            <td>$10^{-3}$ to $10^{-1}$ (e.g., $1 \times 10^{-2}$)</td>
+                            <td>$3 \times 10^9$ to $3 \times 10^{11}$</td>
+                            <td>Magnetrons, klystrons, Gunn diodes</td>
+                            <td>Cooking, satellite communication, radar, cell phones</td>
+                            <td>Internal heating of body tissue</td>
+                        </tr>
+                        <tr>
+                            <td>Infrared (IR)</td>
+                            <td>$7 \times 10^{-7}$ to $10^{-3}$ (e.g., $1 \times 10^{-4}$)</td>
+                            <td>$3 \times 10^{11}$ to $4.3 \times 10^{14}$</td>
+                            <td>Hot objects, Sun, flames, IR lamps</td>
+                            <td>Heating, thermal imaging, remote controls, physiotherapy</td>
+                            <td>Skin burns, eye damage (intense IR)</td>
+                        </tr>
+                        <tr>
+                            <td>Visible Light</td>
+                            <td>$4 \times 10^{-7}$ to $7 \times 10^{-7}$</td>
+                            <td>$4.3 \times 10^{14}$ to $7.5 \times 10^{14}$</td>
+                            <td>Sun, lamps, lasers, flames</td>
+                            <td>Vision, photography, illumination, optical fibers</td>
+                            <td>Retinal damage (intense light)</td>
+                        </tr>
+                        <tr>
+                            <td>Ultraviolet (UV)</td>
+                            <td>$10^{-8}$ to $4 \times 10^{-7}$ (e.g., $1 \times 10^{-8}$)</td>
+                            <td>$7.5 \times 10^{14}$ to $3 \times 10^{16}$</td>
+                            <td>Sun, electric arcs, mercury vapor lamps</td>
+                            <td>Sterilization, fluorescence, tanning, Vitamin D production</td>
+                            <td>Sunburn, skin cancer, eye damage</td>
+                        </tr>
+                        <tr>
+                            <td>X-Rays</td>
+                            <td>$10^{-11}$ to $10^{-8}$ (e.g., $1 \times 10^{-10}$)</td>
+                            <td>$3 \times 10^{16}$ to $3 \times 10^{19}$</td>
+                            <td>X-ray tubes (decelerating electrons), inner electron transitions</td>
+                            <td>Medical imaging, industrial inspection, crystallography, airport security</td>
+                            <td>Ionizing radiation; cell damage, cancer</td>
+                        </tr>
+                        <tr>
+                            <td>Gamma Rays</td>
+                            <td>$< 10^{-11}$ (e.g., $1 \times 10^{-12}$)</td>
+                            <td>$> 3 \times 10^{19}$</td>
+                            <td>Radioactive nuclei, nuclear reactions, astronomical events</td>
+                            <td>Cancer treatment, sterilization, industrial radiography</td>
+                            <td>Highly dangerous ionizing radiation; severe cell damage, cancer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="radio-waves" class="content-section hidden-section">
+                <h2>4. Radio Waves</h2>
+                <p>Radio waves have the longest wavelengths and lowest frequencies in the EM spectrum.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> From millimeters to many kilometers (e.g., $> 10^{-1}$ m).</li>
+                    <li><strong>Frequency Range:</strong> Typically below $3 \times 10^9$ Hz (3 GHz).</li>
+                    <li><strong>Sources:</strong> Oscillating electric currents in antennas (transmitters); natural sources like lightning and astronomical objects. [1]</li>
+                    <li><strong>Properties:</strong> Travel long distances; can be reflected by the ionosphere (certain bands); diffract around obstacles., p.83]</li>
+                    <li><strong>Detection:</strong> Aerials (antennas) connected to tuned electrical circuits in radio receivers. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram of a radio receiver antenna and tuning circuit.</div>
+                    </li>
+                    <li><strong>Uses:</strong> Broadcasting (AM/FM radio, TV), communication (mobile phones, Wi-Fi, Bluetooth), radar systems, radio astronomy., p.83]</li>
+                    <li><strong>Hazards:</strong> Generally safe at low power; high intensity can cause tissue heating., p.85]</li>
+                </ul>
+            </section>
+
+            <section id="microwaves" class="content-section hidden-section">
+                <h2>5. Microwaves</h2>
+                <p>Microwaves have shorter wavelengths and higher frequencies than radio waves.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Roughly 1 mm to 1 m (e.g., $1 \times 10^{-2}$ m).</li>
+                    <li><strong>Frequency Range:</strong> Approximately $3 \times 10^8$ Hz (300 MHz) to $3 \times 10^{11}$ Hz (300 GHz).</li>
+                    <li><strong>Sources:</strong> Electronic devices like klystrons, magnetrons (in microwave ovens), Gunn diodes. [1]</li>
+                    <li><strong>Properties:</strong> Pass through Earth's atmosphere (good for satellite communication); absorbed by water molecules (used in cooking)., p.84]</li>
+                    <li><strong>Detection:</strong> Specialized antennas (dish, horn), crystal detectors, solid-state diodes. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram of a dish antenna for microwaves.</div>
+                    </li>
+                    <li><strong>Uses:</strong> Cooking (microwave ovens), communication (mobile phones, Wi-Fi, satellite TV, GPS), radar., p.84]</li>
+                    <li><strong>Hazards:</strong> High intensity can cause internal heating of body tissues. Microwave ovens have safety features., p.85]</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Diagram of a microwave oven showing magnetron and stirrer.[1]</div>
+            </section>
+
+            <section id="infrared" class="content-section hidden-section">
+                <h2>6. Infrared Radiation (IR)</h2>
+                <p>Infrared radiation lies between microwaves and visible light, often associated with heat.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Approx. 700 nm to 1 mm (e.g., $1 \times 10^{-4}$ m).</li>
+                    <li><strong>Frequency Range:</strong> Roughly $3 \times 10^{11}$ Hz to $4.3 \times 10^{14}$ Hz.</li>
+                    <li><strong>Sources:</strong> All objects above absolute zero (thermal radiation), Sun, flames, IR lamps. [1]</li>
+                    <li><strong>Properties:</strong> Absorbed by many materials causing heating; detected as heat by skin; can penetrate haze.</li>
+                    <li><strong>Detection:</strong> Thermometers (blackened bulb), thermopiles, bolometers, IR-sensitized photographic film, thermal imaging cameras. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram of a thermopile or blackened bulb thermometer.</div>
+                    </li>
+                    <li><strong>Uses:</strong> Heating/cooking, remote controls, thermal imaging (night vision), physiotherapy, drying paints, astronomy., p.83] The greenhouse effect involves trapping of infrared radiation by atmospheric gases, leading to warming. [1]</li>
+                    <li><strong>Hazards:</strong> Intense IR can cause skin burns and eye damage., p.85]</li>
+                </ul>
+            </section>
+
+            <section id="visible-light" class="content-section hidden-section">
+                <h2>7. Visible Light</h2>
+                <p>The portion of the EM spectrum detectable by the human eye.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Approx. 400 nm (violet) to 700 nm (red).</li>
+                    <li><strong>Frequency Range:</strong> Roughly $4.3 \times 10^{14}$ Hz (red) to $7.5 \times 10^{14}$ Hz (violet).</li>
+                    <li><strong>Sources:</strong> Sun, lamps (incandescent, fluorescent, LED), lasers, flames. [1]</li>
+                    <li><strong>Properties:</strong> Can be dispersed into colors (ROYGBIV); essential for vision and photosynthesis.</li>
+                    <li><strong>Detection:</strong> Human eye, photographic film, photocells, CCD/CMOS sensors, LDRs. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram of dispersion of white light by a prism.</div>
+                    </li>
+                    <li><strong>Uses:</strong> Vision, photography, illumination, optical instruments (microscopes, telescopes), optical fibers., p.83]</li>
+                    <li><strong>Hazards:</strong> Intense light (sun, lasers) can damage the retina.</li>
+                </ul>
+            </section>
+
+            <section id="ultraviolet" class="content-section hidden-section">
+                <h2>8. Ultraviolet (UV) Radiation</h2>
+                <p>Shorter wavelengths and higher frequencies than visible light.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Approx. 10 nm to 400 nm (e.g., $1 \times 10^{-8}$ m).</li>
+                    <li><strong>Frequency Range:</strong> Roughly $7.5 \times 10^{14}$ Hz to $3 \times 10^{16}$ Hz.</li>
+                    <li><strong>Sources:</strong> Sun, electric arcs (welding), mercury vapor lamps, UV lamps. [1]</li>
+                    <li><strong>Properties:</strong> Causes fluorescence; tanning/sunburn; germicidal; initiates chemical reactions; absorbed by ordinary glass., p.83]</li>
+                    <li><strong>Detection:</strong> Photographic film, fluorescent materials, UV photocells, photoelectric effect. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Diagram illustrating fluorescence under UV light (e.g., banknote).</div>
+                    </li>
+                    <li><strong>Uses:</strong> Sterilization, detecting forged banknotes, sun tanning, Vitamin D production, forensic science., p.83]</li>
+                    <li><strong>Hazards:</strong> Sunburn, skin cancer, eye damage (e.g., snow blindness). Ozone layer absorbs most harmful UV., p.85]</li>
+                </ul>
+            </section>
+
+            <section id="x-rays" class="content-section hidden-section">
+                <h2>9. X-Rays</h2>
+                <p>High-energy EM waves with much shorter wavelengths than UV.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Approx. 0.01 nm to 10 nm (e.g., $1 \times 10^{-10}$ m).</li>
+                    <li><strong>Frequency Range:</strong> Roughly $3 \times 10^{16}$ Hz to $3 \times 10^{19}$ Hz.</li>
+                    <li><strong>Sources:</strong> X-ray tubes (decelerating high-speed electrons hitting a metal target); inner electron transitions in atoms; astronomical objects. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Simplified diagram of an X-ray tube.</div>
+                    </li>
+                    <li><strong>Properties:</strong> Highly penetrating (pass through soft tissue, absorbed by bone/metal); affect photographic film; cause ionization; cause fluorescence. [1]</li>
+                    <li><strong>Detection:</strong> Photographic film, fluorescent screens, Geiger-Müller tubes, semiconductor detectors. [1]</li>
+                    <li><strong>Uses:</strong> Medical imaging (radiography, CT scans), cancer treatment, industrial inspection, airport security, X-ray crystallography., p.82, 148-149]</li>
+                    <li><strong>Hazards:</strong> Ionizing radiation; can damage cells and DNA, leading to cancer. Shielding (lead) and controlled exposure are crucial., p.85, 149]</li>
+                </ul>
+                <div class="placeholder-img w-full h-56 my-4">Placeholder: Example of an X-ray image.[1]</div>
+            </section>
+
+            <section id="gamma-rays" class="content-section hidden-section">
+                <h2>10. Gamma Rays ($\gamma$-rays)</h2>
+                <p>Shortest wavelengths, highest frequencies, and highest energies in the EM spectrum.</p>
+                <ul>
+                    <li><strong>Wavelength Range:</strong> Typically $< 0.01$ nm (e.g., $1 \times 10^{-12}$ m or shorter).</li>
+                    <li><strong>Frequency Range:</strong> Generally $> 3 \times 10^{19}$ Hz.</li>
+                    <li><strong>Sources:</strong> Emitted from nuclei of radioactive atoms during decay; nuclear reactions (fission, fusion); high-energy astronomical events. [1]</li>
+                    <li><strong>Properties:</strong> Extremely penetrating; highly ionizing; affect photographic film; cause fluorescence. [1]</li>
+                    <li><strong>Detection:</strong> Geiger-Müller tubes, scintillation counters, cloud/bubble chambers, solid-state detectors. [1]
+                        <div class="placeholder-img w-1/2 h-48 my-2 mx-auto">Placeholder: Simplified diagram of a Geiger-Müller tube.</div>
+                    </li>
+                    <li><strong>Uses:</strong> Cancer treatment (radiotherapy), sterilization of medical equipment and food, industrial radiography., p.82, 181-182]</li>
+                    <li><strong>Hazards:</strong> Highly dangerous ionizing radiation; severe cell/DNA damage, radiation sickness, cancer. Strict safety (shielding, controlled exposure) required., p.85, 182]</li>
+                </ul>
+            </section>
+
+            <section id="problem-solving-ems" class="content-section hidden-section">
+                <h2>11. Problem Solving ($c = f\lambda$)</h2>
+                <p>The relationship between the speed of light ($c$), frequency ($f$), and wavelength ($\lambda$) is crucial for calculations involving electromagnetic waves. [1]</p>
+                <p>The wave equation is: $$c = f\lambda$$</p>
+                Where:
+                <ul>
+                    <li>$c$ = speed of light in vacuum $\approx 3.0 \times 10^8$ m/s.</li>
+                    <li>$f$ = frequency in Hertz (Hz).</li>
+                    <li>$\lambda$ = wavelength in meters (m).</li>
+                </ul>
+                <p>Rearrangements: $f = \frac{c}{\lambda}$ and $\lambda = \frac{c}{f}$.</p>
+                <h4>Problem-Solving Steps:</h4>
+                <ol class="problem-solving-steps">
+                    <li>Identify knowns ($c, f,$ or $\lambda$).</li>
+                    <li>Identify the unknown variable.</li>
+                    <li>Ensure units are consistent (SI units: m for $\lambda$, Hz for $f$, m/s for $c$). Perform conversions if necessary (e.g., nm to m, MHz to Hz).</li>
+                    <li>Apply the correct form of the wave equation.</li>
+                    <li>Calculate the result, paying attention to powers of ten.</li>
+                    <li>State the answer with correct units.</li>
+                </ol>
+                <h4>Worked Examples [1]:</h4>
+                <p><strong>Example 1:</strong> Green light has a wavelength of $5 \times 10^{-7}$ m. Calculate the energy it emits. (Also requires $E=hf$, $h = 6.63 \times 10^{-34} Js$)</p>
+                <p><em>Solution:</em> First find frequency: $f = \frac{c}{\lambda} = \frac{3.0 \times 10^8 \text{ m/s}}{5 \times 10^{-7} \text{ m}} = 0.6 \times 10^{15} \text{ Hz} = 6 \times 10^{14} \text{ Hz}$.
+                <br>Then energy: $E = hf = (6.63 \times 10^{-34} \text{ Js}) \times (6 \times 10^{14} \text{ Hz}) = 3.978 \times 10^{-19} \text{ J}$.</p>
+
+                <p><strong>Example 2:</strong> A radio station is transmitting at a frequency of 15.42 MHz. Calculate the wavelength of the transmission.</p>
+                <p><em>Solution:</em> $f = 15.42 \text{ MHz} = 15.42 \times 10^6 \text{ Hz}$.
+                <br>$\lambda = \frac{c}{f} = \frac{3.0 \times 10^8 \text{ m/s}}{15.42 \times 10^6 \text{ Hz}} \approx 19.46 \text{ m}$.</p>
+
+                <p><strong>Example 3:</strong> An X-ray machine produces radiation of wavelength $1.0 \times 10^{-11}$ m. Calculate: (a) the frequency of the radiation. (b) its energy content.</p>
+                <p><em>Solution:</em> (a) $f = \frac{c}{\lambda} = \frac{3.0 \times 10^8 \text{ m/s}}{1.0 \times 10^{-11} \text{ m}} = 3.0 \times 10^{19} \text{ Hz}$.
+                <br>(b) $E = hf = (6.63 \times 10^{-34} \text{ Js}) \times (3.0 \times 10^{19} \text{ Hz}) = 1.989 \times 10^{-14} \text{ J}$.</p>
+            </section>
+
+            <section id="revision-questions-ems" class="content-section hidden-section">
+                <h2>12. Revision Questions</h2>
+                <ol class="revision-questions-list">
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">1. What is the electromagnetic spectrum?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The electromagnetic spectrum is the continuous range of all types of electromagnetic radiation, arranged according to their frequency and wavelength.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">2. State five general properties common to all electromagnetic waves.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any five of: They are transverse waves; they travel at the speed of light ($3.0 \times 10^8$ m/s) in a vacuum; they can travel through a vacuum; they carry energy; they exhibit reflection, refraction, diffraction, and interference; they are unaffected by static electric or magnetic fields; they obey $c = f\lambda$. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">3. List the main components of the electromagnetic spectrum in order of increasing frequency.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Radio waves, Microwaves, Infrared radiation, Visible light, Ultraviolet radiation, X-rays, Gamma rays.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">4. State the wave equation that relates the speed, frequency, and wavelength of an electromagnetic wave. Define each term.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $c = f\lambda$, where $c$ is the speed of light in a vacuum (approx. $3.0 \times 10^8$ m/s), $f$ is the frequency of the wave (in Hz), and $\lambda$ is the wavelength of the wave (in m). [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">5. How are radio waves typically produced? Give one method of detection.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Produced by oscillating electric circuits and transmitted through antennae (aerials). Detected by resonant circuits in radio receivers with diodes and earphones (or simply, aerials connected to tuned circuits). [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">6. State two distinct uses of radio waves.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: Radio and television broadcasting, mobile phone communication, Wi-Fi, Bluetooth, radar systems., p.83]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">7. Explain the principle of microwave cooking.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Microwaves are absorbed by water and fat molecules in food. This absorption causes the molecules to vibrate rapidly, generating heat which cooks the food., p.84]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">8. List two applications of microwaves.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: Cooking (microwave ovens), satellite communication, mobile phone networks, GPS, radar., p.84]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">9. What is the main natural source of infrared radiation, and how is it commonly detected by humans?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Main natural source: The Sun. All objects with a temperature above absolute zero also emit IR. Detected by humans as the sensation of heat on the skin. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">10. State three uses of infrared radiation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any three from: Heating/cooking, thermal imaging (night vision), remote controls, physiotherapy, drying paints, optical fibre communication., p.83]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">11. Name the colors of visible light in order of increasing wavelength.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Violet, Indigo, Blue, Green, Yellow, Orange, Red (VIBGYOR). (Order of increasing wavelength is reverse of decreasing wavelength: Red has longest, Violet shortest).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">12. State two methods of detecting visible light.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: The human eye, photographic film, photocells, CCD/CMOS sensors in digital cameras. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">13. What is fluorescence? Which type of EM radiation is commonly associated with causing it?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Fluorescence is the phenomenon where certain materials absorb radiation (often invisible) and re-emit energy as visible light. Ultraviolet (UV) radiation is commonly associated with causing fluorescence. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">14. Give two uses and one major hazard of ultraviolet radiation.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Uses (any two): Sterilization of medical equipment/water, detecting forged banknotes, stimulating Vitamin D production in skin, sun tanning. Hazard: Overexposure can cause sunburn, skin cancer, and eye damage., p.83, 85]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">15. Briefly describe how X-rays are produced.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> X-rays are produced when high-speed electrons, accelerated by a high voltage in an X-ray tube, strike a metal target and are suddenly stopped or decelerated. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">16. State two properties of X-rays that make them useful for medical imaging of bones.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> 1. They are highly penetrating and can pass through soft tissues. 2. They are differentially absorbed by materials of different densities (e.g., absorbed more by dense bones than by less dense soft tissues), creating contrast. [1]</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">17. List two applications of X-rays other than medical imaging.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: Industrial inspection (detecting flaws in welds/castings), airport security (luggage scanning), X-ray crystallography (studying crystal structures). [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">18. Name two common sources of gamma rays.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: Radioactive decay of atomic nuclei (e.g., Cobalt-60), nuclear reactions (fission and fusion), high-energy astronomical phenomena. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">19. State two distinct properties of gamma rays.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Any two from: Extremely penetrating, highly ionizing, carry the most energy per photon, not deflected by electric or magnetic fields. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">20. Give one specific use of gamma rays and state one major hazard associated with them.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Use: Cancer treatment (radiotherapy), sterilization of medical equipment or food. Hazard: Highly dangerous ionizing radiation that can cause severe damage to living cells, leading to radiation sickness, cancer, or death. [1]</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">21. A radio station broadcasts at a frequency of 95.5 MHz. Calculate the wavelength of these radio waves. (Take $c = 3.0 \times 10^8$ m/s).</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $f = 95.5 \text{ MHz} = 95.5 \times 10^6 \text{ Hz}$. $\lambda = \frac{c}{f} = \frac{3.0 \times 10^8 \text{ m/s}}{95.5 \times 10^6 \text{ Hz}} \approx 3.14 \text{ m}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">22. The wavelength of a certain microwave is 2.5 cm. What is its frequency?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $\lambda = 2.5 \text{ cm} = 0.025 \text{ m}$. $f = \frac{c}{\lambda} = \frac{3.0 \times 10^8 \text{ m/s}}{0.025 \text{ m}} = 1.2 \times 10^{10} \text{ Hz}$ (or 12 GHz).</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">23. An X-ray has a frequency of $5.0 \times 10^{17}$ Hz. Calculate its wavelength.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> $\lambda = \frac{c}{f} = \frac{3.0 \times 10^8 \text{ m/s}}{5.0 \times 10^{17} \text{ Hz}} = 0.6 \times 10^{-9} \text{ m} = 0.6 \text{ nm}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">24. Which type of electromagnetic radiation has wavelengths just shorter than visible light and can cause sunburn?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Ultraviolet (UV) radiation.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="question-container">
+                            <span class="question-text">25. Explain briefly the greenhouse effect in relation to the electromagnetic spectrum.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The greenhouse effect involves solar radiation (largely visible light) passing through the Earth's atmosphere and warming the surface. The Earth then re-radiates this energy as infrared radiation. Greenhouse gases in the atmosphere (like carbon dioxide, methane) absorb some of this outgoing infrared radiation, trapping heat and warming the planet. [1]</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">26. Why are X-rays more penetrating than ultraviolet rays?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> X-rays have shorter wavelengths and higher frequencies than ultraviolet rays, meaning each X-ray photon carries more energy ($E=hf$). This higher energy allows them to penetrate materials more effectively.</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">27. Name one method of detecting infrared radiation and one method for detecting X-rays.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Infrared: Thermopile, bolometer, thermometer with blackened bulb, thermal imaging camera. X-rays: Photographic film, fluorescent screen, Geiger-Müller tube. [1]</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">28. What property of radio waves allows them to be used for long-distance communication via reflection from the ionosphere?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Certain frequencies of radio waves (especially medium and short waves) can be reflected by the ionosphere, a layer of charged particles in the Earth's upper atmosphere. [1]</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">29. How does the energy of a photon relate to its frequency? State the formula.</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> The energy ($E$) of a photon is directly proportional to its frequency ($f$). The formula is $E = hf$, where $h$ is Planck's constant. [1]</p>
+                        </div>
+                    </li>
+                     <li>
+                        <div class="question-container">
+                            <span class="question-text">30. Why are lead shields often used when working with X-rays and gamma rays?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="answer-container hidden-answer">
+                            <p><strong>Answer:</strong> Lead is a dense material that is effective at absorbing X-rays and gamma rays, thus protecting individuals from the harmful effects of these ionizing radiations. [1]</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <div id="pageNavigation" class="mt-8 flex justify-between items-center">
+                <button id="prevButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    &larr; Previous
+                </button>
+                <span id="currentPageIndicator" class="text-gray-700 font-medium"></span>
+                <button id="nextButton" class="nav-button bg-blue-500 hover:bg-blue-600 text-white">
+                    Next &rarr;
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-700 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 KCSE Physics Guide: Electromagnetic Spectrum. For educational purposes.</p>
+    </footer>
+
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const closeSidebarButton = document.getElementById('closeSidebarButton');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        const contentSections = Array.from(document.querySelectorAll('main > section[id]'));
+        const navLinks = Array.from(sidebarNav.querySelectorAll('.nav-link'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageIndicator = document.getElementById('currentPageIndicator');
+
+        let currentIndex = 0;
+
+        function openSidebar() {
+            sidebarNav.classList.remove('-translate-x-full');
+            sidebarNav.classList.add('translate-x-0');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('body-no-scroll');
+        }
+
+        function closeSidebar() {
+            sidebarNav.classList.add('-translate-x-full');
+            sidebarNav.classList.remove('translate-x-0');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('body-no-scroll');
+        }
+
+        hamburgerButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        function updateNavigationState(newIndex) {
+            if (newIndex < 0 || newIndex >= contentSections.length) {
+                return;
+            }
+            currentIndex = newIndex;
+
+            contentSections.forEach((section, index) => {
+                section.classList.toggle('hidden-section', index !== currentIndex);
+            });
+
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentIndex);
+                if (index === currentIndex && window.innerWidth >= 1024 && link.closest('#sidebarNav')) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            prevButton.disabled = (currentIndex === 0);
+            nextButton.disabled = (currentIndex === contentSections.length - 1);
+            if(currentPageIndicator) {
+                 currentPageIndicator.textContent = `Page ${currentIndex + 1} of ${contentSections.length}`;
+            }
+            window.scrollTo(0, 0);
+            if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        navLinks.forEach((anchor, index) => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                updateNavigationState(index);
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < contentSections.length - 1) {
+                updateNavigationState(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                updateNavigationState(currentIndex - 1);
+            }
+        });
+        
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const answerContainer = container.nextElementSibling;
+                const toggleIcon = container.querySelector('.toggle-icon');
+
+                if (answerContainer.classList.contains('expanded')) {
+                    answerContainer.classList.remove('expanded');
+                    answerContainer.classList.add('hidden-answer');
+                    toggleIcon.textContent = '+';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    answerContainer.classList.remove('hidden-answer');
+                    answerContainer.classList.add('expanded');
+                    toggleIcon.textContent = '-';
+                    toggleIcon.style.transform = 'rotate(45deg)';
+                    if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise([answerContainer]);
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (contentSections.length > 0) {
+                const initialHash = window.location.hash;
+                let initialIndex = 0;
+                if (initialHash) {
+                    const targetId = initialHash.substring(1);
+                    const foundIndex = contentSections.findIndex(section => section.id === targetId);
+                    if (foundIndex !== -1) {
+                        initialIndex = foundIndex;
+                    }
+                }
+                updateNavigationState(initialIndex);
+            } else {
+                if(prevButton) prevButton.disabled = true;
+                if(nextButton) nextButton.disabled = true;
+                if(currentPageIndicator) currentPageIndicator.textContent = "No content";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics Learning Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-page {
+            display: none;
+        }
+        .content-page.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active-link {
+            background-color: #4A5568; /* gray-700 */
+            color: #FFFFFF;
+            transform: translateX(5px);
+        }
+        .diagram-placeholder {
+            width: 100%;
+            max-width: 480px; 
+            height: 260px; 
+            background-color: #E2E8F0; /* gray-200 */
+            border: 2px dashed #A0AEC0; /* gray-400 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4A5568; /* gray-700 */
+            font-style: italic;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #1A202C; /* gray-900 */
+            border-bottom: 2px solid #718096; /* gray-500 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2D3748; /* gray-800 */
+        }
+         h4 {
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #374151; /* gray-700 */
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: #4A5568; /* gray-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+         ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        strong {
+            color: #1E40AF; 
+        }
+        .question-container {
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; 
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        .question-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background-color: #F9FAFB; 
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid #E2E8F0; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .question-toggle:hover {
+            background-color: #F3F4F6; 
+        }
+        .question-toggle span {
+            font-weight: 600; 
+            color: #1F2937; 
+        }
+        .question-toggle svg {
+            width: 1.25rem; 
+            height: 1.25rem; 
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .answer-content {
+            background-color: #FFFFFF; 
+            padding: 1rem; 
+            border-top: 1px solid #E2E8F0;
+        }
+        .answer-content.hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid #D1D5DB; 
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+            color: #374151; 
+        }
+        th {
+            background-color: #F3F4F6; 
+            font-weight: 600; 
+            color: #111827; 
+        }
+        code, .math-inline { 
+            background-color: #EFF6FF; 
+            color: #1D4ED8; 
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        .math-display { 
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+        .citation-note {
+            font-size: 0.9rem;
+            color: #6B7280; 
+            font-style: italic;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background-color: #F9FAFB; 
+            border-left: 4px solid #D1D5DB; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
+        <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">Electronics Guide</h1>
+        <nav class="flex-grow overflow-y-auto">
+            <ul>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="0">1. Introduction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="1">2. KCSE Syllabus</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="2">3. Energy Band Theory</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="3">4. Semiconductors</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="4">5. The p-n Junction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="5">6. Semiconductor Diode</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="6">7. Diode I-V Characteristics</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="7">8. Diode Applications: Rectification</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="8">9. Key Concepts Elaboration</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="9">10. Conclusion</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="10">11. Revision Questions</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <button id="hamburger-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>1. Introduction to Electronics</h2>
+            <h3>1.1 The Ubiquity and Importance of Electronics</h3>
+            <p>Electronics permeate nearly every facet of contemporary existence, fundamentally shaping communication, healthcare, industrial processes, and entertainment. Devices such as radios, televisions, and cellular phones, alongside sophisticated medical diagnostic equipment and automated industrial systems, all rely on electronic principles. At the heart of these technologies are semiconductor components, primarily diodes and integrated circuits (ICs), which control and manipulate electrical currents in intricate ways. The study of electronics, therefore, is not merely an academic pursuit but a gateway to understanding and contributing to the technological fabric of the modern world.</p>
+            <h3>1.2 Electronics in the KCSE Physics Curriculum</h3>
+            <p>Within the Kenya Certificate of Secondary Education (KCSE) Physics syllabus, "Electronics" is designated as Topic 41.0.0 and is typically introduced in Form 4. This strategic placement suggests that a comprehensive understanding of electronics builds upon foundational physics concepts like atomic structure, electric fields, current electricity, and basic circuit theory. The topic serves as a capstone, integrating these earlier concepts into the study of semiconductor devices and their applications.</p>
+             <div class="citation-note">
+                <p>Note: This guide draws upon typical content found in resources like the KLB Physics Book 4 (Chapter 11) and aligns with the KCSE Physics Syllabus (Topic 41.0.0). References to specific figures (e.g., Fig 11.X) are illustrative of common textbook structures.</p>
+            </div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>2. KCSE Physics Syllabus Requirements (Topic 41.0.0: ELECTRONICS)</h2>
+            <h3>Specific Learning Objectives:</h3>
+            <p>By the end of this topic, the learner should be able to:</p>
+            <ul>
+                <li>(a) state the differences between conductors and insulators;</li>
+                <li>(b) define intrinsic and extrinsic semi-conductors;</li>
+                <li>(c) explain doping in semi-conductors;</li>
+                <li>(d) explain the working of a p-n junction diode;</li>
+                <li>(e) sketch current-voltage characteristics for a diode;</li>
+                <li>(f) explain the application of diodes in rectification.</li>
+            </ul>
+            <h3>Content Points:</h3>
+            <ul>
+                <li>41.2.1 Conductors, semi-conductors, insulators</li>
+                <li>41.2.2 Intrinsic and extrinsic semi-conductors</li>
+                <li>41.2.3 Doping</li>
+                <li>41.2.4 p-n junction diode</li>
+                <li>41.2.5 applications of diodes: half wave rectification and full wave rectification</li>
+            </ul>
+        </div>
+        
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>3. Energy Band Theory</h2>
+            <p>The Energy Band Theory explains the electrical conductivity of materials. When atoms form a crystal lattice, their discrete atomic energy levels split into bands. The key bands are the <strong>valence band</strong> (containing valence electrons) and the <strong>conduction band</strong>. The energy difference between them is the <strong>forbidden energy gap</strong>.</p>
+            
+            <h3>Insulators</h3>
+            <div class="diagram-placeholder">Diagram: Energy bands for an Insulator (Large forbidden gap, filled valence band, empty conduction band). (Similar to KLB Fig 11.2)</div>
+            <p>Insulators have a very large forbidden energy gap (e.g., \(\approx 3 \text{ eV}\) or more). Electrons require substantial energy to jump from the filled valence band to the empty conduction band. Thus, they have very few free charge carriers and high resistivity.</p>
+
+            <h3>Conductors</h3>
+            <div class="diagram-placeholder">Diagram: Energy bands for a Conductor (Overlapping valence and conduction bands). (Similar to KLB Fig 11.3)</div>
+            <p>In conductors (metals), the valence and conduction bands overlap, meaning no forbidden energy gap. Electrons move freely, resulting in many free charge carriers and high conductivity. Resistance increases with temperature due to increased atomic vibrations.</p>
+
+            <h3>Semiconductors</h3>
+            <div class="diagram-placeholder">Diagram: Energy bands for a Semiconductor (Small forbidden gap, filled valence band, empty conduction band at 0K). (Similar to KLB Fig 11.4)</div>
+            <p>Semiconductors have a small forbidden energy gap (e.g., Si \(\approx 1.1 \text{ eV}\), Ge \(\approx 0.7 \text{ eV}\)). At 0K, they act as insulators. At room temperature, thermal energy excites some electrons from the valence band to the conduction band, creating free electrons and leaving <strong>holes</strong> (vacancies) in the valence band. Conduction occurs via both electrons and holes. Conductivity increases with temperature.</p>
+            
+            <h4>Comparison Table:</h4>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Insulator</th>
+                            <th>Semiconductor</th>
+                            <th>Conductor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Forbidden Energy Gap</strong></td>
+                            <td>Large (\(>3 \text{ eV}\))</td>
+                            <td>Small (\(0.7-1.1 \text{ eV}\))</td>
+                            <td>Overlapping (Zero gap)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Charge Carriers</strong></td>
+                            <td>Very few</td>
+                            <td>Electrons and Holes</td>
+                            <td>Electrons</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conductivity vs. Temp.</strong></td>
+                            <td>Negligible change</td>
+                            <td>Increases</td>
+                            <td>Decreases</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>4. Intrinsic and Extrinsic Semiconductors</h2>
+            <h3>Intrinsic Semiconductors</h3>
+            <div class="diagram-placeholder">Diagram: Covalent bonding in pure Silicon (Si) or Germanium (Ge). (Similar to KLB Fig 11.5)</div>
+            <p>An intrinsic semiconductor is pure (e.g., Si, Ge). Atoms form covalent bonds. At room temperature, thermal energy creates electron-hole pairs, which are the charge carriers. The number of free electrons equals the number of holes.</p>
+            
+            <h3>Doping and Extrinsic Semiconductors</h3>
+            <p><strong>Doping</strong> is adding controlled amounts of specific impurities to an intrinsic semiconductor to enhance conductivity and control the type of majority charge carriers. The result is an <strong>extrinsic semiconductor</strong>.</p>
+            
+            <h4>n-type Semiconductors</h4>
+            <div class="diagram-placeholder">Diagram: Doping Si with a Pentavalent atom (e.g., Phosphorus), showing the fifth free electron. (Similar to KLB Fig 11.6)</div>
+            <p>Formed by doping with <strong>pentavalent</strong> impurities (5 valence electrons, e.g., Phosphorus, Arsenic). Four electrons bond, the fifth becomes a free electron. These impurities are <strong>donor atoms</strong>.
+            <strong>Majority carriers: Electrons.</strong> Minority carriers: Holes.
+            Donor atoms become fixed positive ions.</p>
+            
+            <h4>p-type Semiconductors</h4>
+            <div class="diagram-placeholder">Diagram: Doping Si with a Trivalent atom (e.g., Boron), showing the created hole. (Similar to KLB Fig 11.7)</div>
+            <p>Formed by doping with <strong>trivalent</strong> impurities (3 valence electrons, e.g., Boron, Gallium). Three electrons bond, creating a deficiency (a <strong>hole</strong>). These impurities are <strong>acceptor atoms</strong>.
+            <strong>Majority carriers: Holes.</strong> Minority carriers: Electrons.
+            Acceptor atoms become fixed negative ions.</p>
+
+            <h4>Fixed Ions and Overall Neutrality</h4>
+            <div class="diagram-placeholder">Diagram: Illustrating fixed positive ions in n-type and fixed negative ions in p-type material, emphasizing overall neutrality. (Similar to KLB Fig 11.8)</div>
+            <p>Despite doping, both n-type and p-type semiconductors remain electrically neutral overall. The fixed ions (positive donors in n-type, negative acceptors in p-type) balance the charge of the introduced majority carriers.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>5. The p-n Junction</h2>
+            <h3>Formation</h3>
+            <div class="diagram-placeholder">Diagram: Formation of a p-n junction, showing p-type and n-type regions meeting. (Similar to KLB Fig 11.9)</div>
+            <p>A p-n junction is formed by creating a boundary within a single semiconductor crystal, with one side p-type and the other n-type (e.g., via diffusion or ion implantation).</p>
+            
+            <h3>Diffusion, Recombination, Depletion Layer, and Potential Barrier</h3>
+            <div class="diagram-placeholder">Diagram: Stages of depletion layer formation: (a) Initial diffusion of majority carriers. (b) Recombination and formation of fixed ions, creating the depletion layer and potential barrier. (Similar to KLB Fig 11.10)</div>
+            <ol>
+                <li><strong>Diffusion:</strong> Electrons from n-region diffuse to p-region; holes from p-region diffuse to n-region due to concentration gradients.</li>
+                <li><strong>Recombination:</strong> Diffusing electrons and holes recombine near the junction.</li>
+                <li><strong>Depletion Layer:</strong> A region near the junction becomes depleted of mobile charge carriers, leaving behind uncompensated fixed positive ions (on n-side) and fixed negative ions (on p-side).</li>
+                <li><strong>Potential Barrier (\(V_B\)):</strong> The fixed ions create an electric field and a potential difference across the junction, opposing further diffusion. \(V_B \approx 0.7V\) for Silicon, \(V_B \approx 0.3V\) for Germanium at room temperature.
+                <div class="diagram-placeholder">Diagram: Potential barrier diagram across a p-n junction. (Similar to KLB Fig 11.11)</div>
+                </li>
+            </ol>
+            <p>An unbiased p-n junction is in dynamic equilibrium: diffusion current = drift current (of minority carriers).</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>6. The Semiconductor Diode</h2>
+            <p>A p-n junction with two terminals (anode: p-type, cathode: n-type) is a semiconductor diode. It acts as a one-way valve for current.</p>
+            
+            <h3>Forward Biasing</h3>
+            <div class="diagram-placeholder">Diagram: Forward-biased p-n junction: (a) Circuit connection. (b) Effect on depletion layer (narrowed) and potential barrier (lowered). (Similar to KLB Fig 11.12)</div>
+            <div class="diagram-placeholder">Diagram: Energy band diagram of a forward-biased p-n junction. (Similar to KLB Fig 11.13)</div>
+            <p>Positive terminal of external voltage to p-type, negative to n-type.
+            External voltage opposes the potential barrier (\(V_B\)).
+            Depletion layer narrows, potential barrier height decreases.
+            If applied voltage \(> V_B\), substantial forward current (majority carriers) flows; low forward resistance.</p>
+
+            <h3>Reverse Biasing</h3>
+            <div class="diagram-placeholder">Diagram: Reverse-biased p-n junction: (a) Circuit connection. (b) Effect on depletion layer (widened) and potential barrier (increased). (Similar to KLB Fig 11.14)</div>
+            <p>Negative terminal of external voltage to p-type, positive to n-type.
+            External voltage aids the potential barrier (\(V_B\)).
+            Depletion layer widens, potential barrier height increases.
+            Majority carrier flow is blocked; very high reverse resistance.
+            A small <strong>reverse saturation current</strong> (leakage current) due to minority carriers flows (µA or nA range).</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>7. Current-Voltage (I-V) Characteristics of a p-n Junction Diode</h2>
+            <p>The I-V characteristic curve graphically shows the relationship between current (I) through the diode and voltage (V) across it.</p>
+            <div class="diagram-placeholder">Diagram: Experimental setup to determine diode I-V characteristics. (Similar to KLB Fig 11.15)</div>
+            
+            <h3>Forward Bias Characteristics</h3>
+            <ul>
+                <li>Small current below potential barrier (\(V_B\)).</li>
+                <li><strong>Knee Voltage (Threshold Voltage):</strong> Around \(0.7V\) for Si, \(0.3V\) for Ge. Current increases sharply beyond this point.</li>
+                <li>Low resistance region after knee voltage.</li>
+            </ul>
+
+            <h3>Reverse Bias Characteristics</h3>
+            <ul>
+                <li>Very small, constant <strong>reverse saturation current</strong> (minority carriers).</li>
+                <li><strong>Breakdown Voltage:</strong> If reverse voltage is too high, current increases dramatically (avalanche or Zener breakdown). Can damage standard diodes.</li>
+            </ul>
+            <div class="diagram-placeholder">Diagram: I-V Characteristic Curve of a p-n junction diode. Label axes, forward bias region, knee voltage, reverse bias region, reverse saturation current, breakdown voltage. (Similar to KLB Fig 11.16)</div>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>8. Applications of Junction Diodes: Rectification</h2>
+            <p><strong>Rectification</strong> is converting alternating current (a.c.) into direct current (d.c.).</p>
+            
+            <h3>Half-Wave Rectification</h3>
+            <div class="diagram-placeholder">Diagram: Half-wave rectifier circuit and input/output waveforms. (Similar to KLB Figs 11.17, 11.18)</div>
+            <p>Uses a single diode.
+            During positive a.c. half-cycle: Diode forward biased, conducts. Output across load \(R_L\).
+            During negative a.c. half-cycle: Diode reverse biased, blocks current. No output.
+            Output: Pulsating d.c. (only positive half-cycles). Inefficient, high ripple.</p>
+
+            <h3>Full-Wave Rectification</h3>
+            <p>Utilizes both halves of the a.c. cycle for more efficient and smoother d.c. output.</p>
+            <h4>1. Using Two Diodes and a Center-Tapped Transformer</h4>
+            <div class="diagram-placeholder">Diagram: Full-wave rectifier circuit using two diodes and a center-tapped transformer, with input/output waveforms.</div>
+            <p>Requires a center-tapped transformer. Two diodes conduct on alternate half-cycles. Current through load is always in the same direction.</p>
+            <h4>2. Using Four Diodes in a Bridge Rectifier Configuration</h4>
+            <div class="diagram-placeholder">Diagram: Full-wave bridge rectifier circuit using four diodes, with input/output waveforms.</div>
+            <p>Four diodes in a bridge. Two pairs of diodes conduct on alternate half-cycles. Current through load is always in the same direction. Does not require a center-tapped transformer.</p>
+            <p>Full-wave output is smoother and often filtered (e.g., with capacitors) for practical d.c. power supplies.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>9. Elaboration on Key Electronics Concepts</h2>
+            <h3>The Quantum Nature of Energy Bands</h3>
+            <p>Energy band formation is a quantum mechanical effect. Due to the Pauli Exclusion Principle, when atoms form a crystal, discrete atomic energy levels split into bands (valence and conduction bands), separated by a forbidden energy gap.</p>
+            <h3>Electron vs. Hole Current</h3>
+            <p>Electron current is the movement of free electrons in the conduction band. Hole current is the apparent movement of a positive charge (vacancy left by an electron) in the valence band, due to sequential movement of valence electrons filling these vacancies.</p>
+            <h3>The p-n Junction as a Dynamic Equilibrium</h3>
+            <p>An unbiased p-n junction is in dynamic equilibrium: the diffusion current of majority carriers across the junction is balanced by the drift current of minority carriers in the opposite direction, resulting in no net current.</p>
+            <h3>Practical Considerations for Rectifier Circuits</h3>
+            <p>Rectified output (especially half-wave) is pulsating. Filter circuits (e.g., capacitors) are used to smooth the d.c. voltage for practical use. Full-wave rectification is more efficient and easier to filter.</p>
+            <h3>Exploiting Diode Breakdown: The Zener Diode</h3>
+            <p>Zener diodes are designed to operate reliably in the reverse breakdown region. They maintain a constant voltage across them, making them useful for voltage regulation.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>10. Conclusion and Recommendations</h2>
+            <h3>Summary of Principal Findings</h3>
+            <p>Standard physics textbooks like KLB Physics Book 4, Chapter 11, offer substantial coverage of the KCSE Electronics syllabus, excelling in fundamental semiconductor physics, p-n junction operation, and half-wave rectification. Full-wave rectification coverage needs careful verification and potential supplementation by educators.</p>
+            <h3>Recommendations for Educators</h3>
+            <ol>
+                <li>Utilize textbook strengths for core concepts.</li>
+                <li>Verify and supplement full-wave rectification coverage (center-tapped and bridge methods).</li>
+                <li>Use analogies and visual aids for abstract concepts.</li>
+                <li>Emphasize the practical importance of I-V characteristics.</li>
+            </ol>
+            <h3>Recommendations for Students</h3>
+            <ol>
+                <li>Master concepts of energy bands, semiconductor types, doping, and p-n junction physics.</li>
+                <li>Understand forward/reverse biasing and interpret I-V curves.</li>
+                <li>Study rectification principles thoroughly, especially full-wave methods.</li>
+                <li>Use diagrams to visualize processes and seek clarification on abstract topics.</li>
+            </ol>
+            <p>A solid foundation in basic electronics is crucial for further STEM studies and understanding modern technology.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>11. Revision Questions</h2>
+            <p><em>(Constants: \(e = 1.6 \times 10^{-19} \text{ C}\); \(V_B(Si) \approx 0.7V\); \(V_B(Ge) \approx 0.3V\))</em></p>
+            
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>1.</strong> Define what a conductor is, explaining its electrical conductivity in terms of energy bands.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A conductor is a material with high electrical conductivity. Its valence and conduction bands overlap, meaning no forbidden energy gap, allowing free electron movement.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>2.</strong> Define what an insulator is, explaining its electrical conductivity in terms of energy bands.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>An insulator has very high resistivity. It has a large forbidden energy gap between a filled valence band and an empty conduction band, preventing electron movement.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>3.</strong> Define what a semiconductor is, explaining its electrical conductivity in terms of energy bands.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A semiconductor has a small forbidden energy gap. At 0K, it's an insulator. At room temperature, some electrons jump to the conduction band, leaving holes in the valence band, allowing conduction by both.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>4.</strong> State and explain the main difference in the forbidden energy gap between conductors and insulators.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Conductors have overlapping bands (zero gap). Insulators have a very large gap (e.g., >3 eV).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>5.</strong> Explain the significance of the valence band.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Contains valence electrons. Its fullness and proximity to the conduction band determine electrical properties. In semiconductors, hole movement in the valence band contributes to current.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>6.</strong> Explain the significance of the conduction band.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electrons in this band are free to move and contribute to electrical current.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>7.</strong> Describe the forbidden energy gap.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The energy range between the valence band and conduction band where electrons cannot exist. Its size classifies materials.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>8.</strong> How does temperature affect conductor conductivity?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Increased temperature decreases conductivity (increases resistance) due to increased atomic vibrations impeding electron flow.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>9.</strong> How does temperature affect semiconductor conductivity?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Increased temperature increases conductivity by generating more electron-hole pairs.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>10.</strong> Define an intrinsic semiconductor and give two examples.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A semiconductor in its extremely pure form. Examples: Silicon (Si), Germanium (Ge).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>11.</strong> Describe covalent bonding in pure silicon.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Each Si atom (4 valence electrons) forms covalent bonds with four neighboring Si atoms.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>12.</strong> Identify primary charge carriers in an intrinsic semiconductor at room temperature.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electron-hole pairs (equal numbers of free electrons and holes).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>13.</strong> Define doping.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Intentionally adding a small, controlled amount of specific impurity atoms into a pure semiconductor crystal lattice.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>14.</strong> What is an extrinsic semiconductor?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A semiconductor that has been doped with impurities.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>15.</strong> Explain the fundamental purpose of doping.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>To enhance conductivity and, more importantly, to control the type and concentration of majority charge carriers (either electrons or holes), which is essential for forming p-n junctions and creating semiconductor devices.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>16.</strong> How is an n-type semiconductor formed?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>By doping an intrinsic semiconductor with pentavalent impurity atoms.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>17.</strong> What type of impurity atoms create an n-type semiconductor?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Pentavalent impurity atoms (having 5 valence electrons).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>18.</strong> Give an example of a pentavalent impurity.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Phosphorus (P), Arsenic (As), or Antimony (Sb).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>19.</strong> Why do pentavalent impurities result in excess free electrons?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Four of their five valence electrons form covalent bonds with neighboring semiconductor atoms; the fifth electron is loosely bound and easily becomes a free electron.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>20.</strong> Identify majority charge carriers in an n-type semiconductor.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electrons.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>21.</strong> Identify minority charge carriers in an n-type semiconductor.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Holes (thermally generated).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>22.</strong> Why is an n-type semiconductor electrically neutral overall?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Because when a donor atom donates an electron, it becomes a fixed positive ion. The total positive charge (protons + fixed ions) equals the total negative charge (electrons).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>23.</strong> How is a p-type semiconductor formed?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>By doping an intrinsic semiconductor with trivalent impurity atoms.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>24.</strong> What type of impurity atoms create a p-type semiconductor?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Trivalent impurity atoms (having 3 valence electrons).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>25.</strong> Give an example of a trivalent impurity.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Boron (B), Gallium (Ga), or Indium (In).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>26.</strong> Why do trivalent impurities result in the creation of holes?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Their three valence electrons form three covalent bonds, leaving a deficiency of one electron in the fourth bond, creating a vacancy or hole.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>27.</strong> Identify majority charge carriers in a p-type semiconductor.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Holes.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>28.</strong> Identify minority charge carriers in a p-type semiconductor.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electrons (thermally generated).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>29.</strong> Why is a p-type semiconductor electrically neutral overall?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Because when an acceptor atom accepts an electron (fills a hole), it becomes a fixed negative ion. The total positive charge (protons) equals the total negative charge (electrons + fixed ions).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>30.</strong> What are donor atoms? Are they mobile or fixed?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Pentavalent impurity atoms that donate electrons. They become fixed positive ions in the crystal lattice.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>31.</strong> What are acceptor atoms? Are they mobile or fixed?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Trivalent impurity atoms that create holes (accept electrons). They become fixed negative ions in the crystal lattice.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>32.</strong> What is a p-n junction? Describe one formation method.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A boundary within a single semiconductor crystal where a p-type region meets an n-type region. Formed by methods like diffusion or ion implantation of impurities.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>33.</strong> Explain diffusion of charge carriers at p-n junction formation.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Electrons from the n-region (high concentration) diffuse to the p-region (low concentration), and holes from the p-region diffuse to the n-region.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>34.</strong> Describe recombination near the p-n junction.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Diffusing electrons and holes meet and recombine, neutralizing mobile charge carriers in that area.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>35.</strong> Define the depletion layer of a p-n junction.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A region near the junction depleted of mobile charge carriers, containing fixed positive ions on the n-side and fixed negative ions on the p-side.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>36.</strong> How are fixed ions created in the depletion layer?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>On the n-side, donor atoms lose electrons and become fixed positive ions. On the p-side, acceptor atoms gain electrons (fill holes) and become fixed negative ions.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>37.</strong> What is the potential barrier (\(V_B\)) across a p-n junction?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A potential difference established across the junction due to the fixed ions in the depletion layer, opposing further diffusion of majority carriers.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>38.</strong> State approximate \(V_B\) for Silicon at room temperature.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Approximately 0.7V.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>39.</strong> State approximate \(V_B\) for Germanium at room temperature.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Approximately 0.3V.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>40.</strong> What is a semiconductor diode structurally?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A p-n junction with two terminals: anode (connected to p-type) and cathode (connected to n-type).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>41.</strong> How does a p-n junction diode act as a one-way valve?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>It allows current to flow easily in one direction (forward bias) and offers high resistance to current flow in the opposite direction (reverse bias).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>42.</strong> How do you forward bias a p-n junction diode?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Connect the positive terminal of an external voltage source to the p-type region (anode) and the negative terminal to the n-type region (cathode).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>43.</strong> Effect of forward biasing on depletion layer and potential barrier?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The depletion layer narrows, and the potential barrier height decreases.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>44.</strong> Why does a large current flow when forward voltage exceeds \(V_B\)?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The opposition to current flow is significantly reduced, and the diode exhibits low forward resistance, allowing majority carriers to flow easily.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>45.</strong> How do you reverse bias a p-n junction diode?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Connect the negative terminal of the external voltage source to the p-type region (anode) and the positive terminal to the n-type region (cathode).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>46.</strong> Effect of reverse biasing on depletion layer and potential barrier?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The depletion layer widens, and the potential barrier height increases.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>47.</strong> Why does very little current flow under reverse bias?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The widened depletion layer and increased potential barrier effectively block the flow of majority carriers.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>48.</strong> What is reverse saturation current and what causes it?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>A very small current that flows under reverse bias. It is primarily due to the drift of minority charge carriers.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>49.</strong> Sketch the I-V characteristic curve for a silicon p-n diode. Label key features.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The sketch should show: Axes (I vs V). Forward bias region (1st quadrant): small current then sharp rise at knee voltage (~0.7V for Si). Reverse bias region (3rd quadrant): small, constant reverse saturation current, then sharp increase at breakdown voltage.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>50.</strong> What is breakdown voltage in a reverse-biased diode?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The reverse voltage at which the reverse current suddenly increases dramatically due to mechanisms like avalanche or Zener breakdown.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>51.</strong> Define rectification.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The process of converting alternating current (a.c.) into direct current (d.c.).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>52.</strong> What is the main purpose of diodes in rectification?</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>To allow current to flow in only one direction, thus converting a.c. to pulsating d.c.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>53.</strong> Draw a circuit for a half-wave rectifier.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>Circuit should show an a.c. source, a single diode in series with a load resistor (\(R_L\)). Output voltage is across \(R_L\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>54.</strong> Describe half-wave rectifier operation during the positive a.c. half-cycle.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The diode is forward biased and conducts, allowing current through the load. Output voltage follows the input.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>55.</strong> Describe half-wave rectifier operation during the negative a.c. half-cycle.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The diode is reverse biased and blocks current. No output voltage across the load.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle"><span><strong>56.</strong> Sketch the output voltage waveform for a half-wave rectifier with sinusoidal input.</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></button>
+                <div class="answer-content hidden"><p>The output waveform consists of only the positive half-cycles of the input sine wave, with the negative half-cycles clipped off (zero voltage).</p></div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-between">
+            <button id="prev-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.content-page');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            sidebarLinks.forEach((link) => { 
+                link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
+            });
+            currentPageIndex = index;
+            updateNavButtons();
+            window.scrollTo(0, 0); 
+            if (typeof MathJax !== 'undefined' && pages[index]) {
+                MathJax.typesetPromise([pages[index]]).catch(function (err) {
+                    console.error('MathJax typesetting error: ' + err.message);
+                });
+            }
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === pages.length - 1;
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
+                showPage(pageIndex);
+                if (window.innerWidth < 768) { 
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                showPage(currentPageIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < pages.length - 1) {
+                showPage(currentPageIndex + 1);
+            }
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        mainContent.addEventListener('click', () => {
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        const questionToggles = document.querySelectorAll('.question-toggle');
+        questionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const answerContent = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                answerContent.classList.toggle('hidden');
+                if (answerContent.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        showPage(0);
+    </script>
+
+</body>
+</html>

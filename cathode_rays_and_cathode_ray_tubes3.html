@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathode Rays & CRT Learning Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-page {
+            display: none;
+        }
+        .content-page.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active-link {
+            background-color: #4A5568; /* gray-700 */
+            color: #FFFFFF;
+            transform: translateX(5px);
+        }
+        .diagram-placeholder {
+            width: 100%;
+            max-width: 500px;
+            height: 250px;
+            background-color: #E2E8F0; /* gray-200 */
+            border: 2px dashed #A0AEC0; /* gray-400 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4A5568; /* gray-700 */
+            font-style: italic;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #1A202C; /* gray-900 */
+            border-bottom: 2px solid #718096; /* gray-500 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2D3748; /* gray-800 */
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: #4A5568; /* gray-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        strong {
+            color: #2C5282; /* blue-800 */
+        }
+        .question-container {
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; /* gray-200 */
+            border-radius: 8px;
+            overflow: hidden; /* Ensures rounded corners are respected by children */
+        }
+        .question-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background-color: #F7FAFC; /* gray-50 */
+            padding: 0.75rem 1rem; /* p-3 */
+            border-bottom: 1px solid #E2E8F0; /* gray-200 */
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .question-toggle:hover {
+            background-color: #EDF2F7; /* gray-100 */
+        }
+        .question-toggle span {
+            font-weight: 600; /* semibold */
+            color: #2D3748; /* gray-800 */
+        }
+        .question-toggle svg {
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+            transition: transform 0.3s ease;
+        }
+        .answer-content {
+            background-color: #FFFFFF; /* white */
+            padding: 1rem; /* p-4 */
+            border-top: 1px solid #E2E8F0; 
+        }
+        .answer-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-6 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-lg flex flex-col">
+        <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3 flex-shrink-0">Cathode Rays Guide</h1>
+        <nav class="flex-grow overflow-y-auto">
+            <ul>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="0">Introduction</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="1">Production of Cathode Rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="2">Properties of Cathode Rays</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="3">The CRO: Structure & Function</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="4">Uses of the CRO</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="5">Problem Solving (CRO)</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="6">The Television (TV) Tube</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="7">Conclusion</a></li>
+                <li><a href="#" class="sidebar-link block py-2 px-3 rounded-md" data-page="8">Revision Questions</a></li>
+                </ul>
+        </nav>
+    </div>
+
+    <button id="hamburger-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="md:ml-64 p-4 md:p-8 transition-all duration-300 ease-in-out">
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 1: Introduction</h2>
+            <p>The study of cathode rays is a crucial part of physics that significantly changed our understanding of matter and electricity. Cathode rays are invisible rays that originate from the negative electrode (cathode) in evacuated tubes. They were discovered to be streams of electrons. This discovery led to important technological developments, such as early display devices and scientific instruments. Chapter 7 of the KLB Physics Book 4 covers this topic on pages 131 to 142. Topic 37.0.0 of the KCSE Physics Syllabus is dedicated to "CATHODE RAYS AND CATHODE RAY TUBE". Understanding cathode rays is foundational for later topics in modern physics like X-rays and the Photoelectric Effect, both of which involve electron behavior.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 2: Production of Cathode Rays</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (a) describe the production of cathode rays; Content 37.2.1 Production of cathode rays, cathode ray tube.</em></p>
+            <p>Cathode rays are primarily generated through a process called <strong>thermionic emission</strong> within a specialized vacuum tube known as a cathode ray tube (CRT).</p>
+
+            <h3>Thermionic Emission</h3>
+            <p>This phenomenon involves the liberation of electrons from the surface of a material, typically a metal or coated metal, when it is heated to a sufficiently high temperature. Electrons are normally bound to atoms by attractive forces, and they need to acquire enough energy, called the <strong>work function</strong>, to escape the surface. Heating provides the necessary thermal energy. When the thermal energy equals or exceeds the work function, electrons are emitted.</p>
+            
+            <h3>Experimental Setup for Thermionic Emission</h3>
+            <p>A typical setup (as illustrated in Figure 7.1 of KLB Physics Book 4) involves:</p>
+            <ul>
+                <li>An <strong>evacuated glass bulb</strong> to prevent electron collisions with air molecules.</li>
+                <li>A <strong>cathode</strong>, which is the electron-emitting electrode. It is often coated with materials like barium and strontium oxides because they have a relatively low work function, allowing electron emission at lower temperatures.</li>
+                <li>A <strong>heater filament</strong> which heats the cathode, either directly or indirectly, driven by a low voltage.</li>
+                <li>An <strong>anode</strong> maintained at a positive potential relative to the cathode.</li>
+                <li><strong>Power supplies</strong> for the heater and for the potential difference between the anode and cathode.</li>
+            </ul>
+            <div class="diagram-placeholder">Placeholder for Diagram: Experimental Setup for Thermionic Emission (similar to KLB Fig 7.1)</div>
+            <p>When the cathode is heated sufficiently, it emits electrons. If the anode is positive, these electrons are attracted to it, creating a current flow that can be measured. The magnitude of the heater current affects the cathode temperature and thus the rate of thermionic emission, which in turn controls the electron beam current and screen brightness in CRTs.</p>
+
+            <h3>Basic Cathode Ray Tube (CRT) for Production</h3>
+            <p>A simple CRT designed for producing cathode rays (as illustrated in Figure 7.2 of KLB Physics Book 4) includes:</p>
+            <ul>
+                <li><strong>Heated Cathode</strong>: The source of electrons via thermionic emission.</li>
+                <li><strong>Anode</strong>: Maintained at a very high positive potential using an Extra High Tension (EHT) supply to accelerate the electrons.</li>
+                <li><strong>Evacuated Glass Tube</strong>: Essential for preventing collisions between accelerated electrons and air molecules, which would cause energy loss, scattering, and potential ionization of gas molecules. The vacuum ensures electrons travel unimpeded.</li>
+                <li><strong>Fluorescent Screen</strong>: The end of the tube coated with a fluorescent material (e.g., zinc sulphide) that emits light when struck by the accelerated electrons, making the path of the cathode rays visible as a glowing spot or pattern.</li>
+            </ul>
+            <div class="diagram-placeholder">Placeholder for Diagram: Basic Cathode Ray Tube for Production (similar to KLB Fig 7.2)</div>
+            <p>In operation, electrons from the heated cathode are accelerated to high velocities by the electric field between the anode and cathode, forming the cathode rays.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 3: Properties of Cathode Rays</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (b) state the properties of cathode rays; Content 37.2.2 Properties of cathode rays.</em></p>
+            <p>Cathode rays possess several distinct properties that helped identify them as streams of fast-moving electrons. These properties are detailed on pages 132-133 of the KLB Physics Book 4.</p>
+            <ul>
+                <li><strong>Travel in Straight Lines</strong>: In the absence of external electric or magnetic fields, cathode rays move in straight lines. This is demonstrated by placing an opaque object, like a Maltese cross, in the beam's path, which casts a sharp shadow on the screen. This property is important for focused beams in devices like oscilloscopes and TV tubes.
+                    <div class="diagram-placeholder">Placeholder for Diagram: Maltese Cross Experiment (similar to KLB Fig 7.3)</div>
+                </li>
+                <li><strong>Cause Fluorescence</strong>: Cathode rays can cause certain materials (phosphors like zinc sulphide) to emit visible light when struck. This property is used in CRT screens to visualize the beam.</li>
+                <li><strong>Are Negatively Charged</strong>: Cathode rays consist of negatively charged particles.
+                    <ul>
+                        <li>In an electric field, the beam is deflected towards the positive plate.
+                            <div class="diagram-placeholder">Placeholder for Diagram: Deflection in Electric Field (similar to KLB Fig 7.4a)</div>
+                        </li>
+                        <li>In a magnetic field, the beam is deflected according to Fleming's Left-Hand Rule (considering electron flow).
+                            <div class="diagram-placeholder">Placeholder for Diagram: Deflection in Magnetic Field (similar to KLB Fig 7.4b)</div>
+                        </li>
+                    </ul>
+                    These deflections confirm their negative charge. The direction of deflection allowed scientists like J.J. Thomson to determine the charge-to-mass ratio (\(e/m\)) and identify them as electrons.
+                </li>
+                <li><strong>Possess Kinetic Energy</strong>: Cathode rays, being particles with mass moving at high velocities, have kinetic energy (\(KE = \frac{1}{2}mv^2\)). This energy is converted into light when they cause fluorescence and into heat when they strike a target.</li>
+                <li><strong>Produce X-rays</strong>: When fast-moving cathode rays (electrons) are suddenly stopped or decelerated by hitting a dense metal target in an X-ray tube, their kinetic energy is converted into X-rays. This is the basis of X-ray generation (covered in Chapter 8).</li>
+            </ul>
+            <p>These properties arise from the fact that cathode rays are electrons. Their particulate nature allows them to gain kinetic energy and be deflected by fields. This energy can be converted into light or X-rays upon interaction with matter.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 4: The Cathode Ray Oscilloscope (CRO): Structure and Functioning</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (c) explain the functioning of a Cathode Ray Oscilloscope (C.R.O)...; Content 37.2.3 C.R.O... tubes.</em></p>
+            <p>The CRO is an advanced instrument based on the CRT, used for displaying, measuring, and analyzing electrical signals, often showing voltage versus time. The main components, shown in Figures 7.5 and 7.6 (KLB p.134), are the electron gun, deflection system, evacuated glass envelope, and fluorescent screen.</p>
+            <div class="diagram-placeholder">Placeholder for Diagram: Main Components of a CRO (similar to KLB Fig 7.5 & 7.6)</div>
+
+            <h3>4.1 The Electron Gun</h3>
+            <p>Produces a narrow, focused, and accelerated beam of electrons. It includes:</p>
+            <ul>
+                <li><strong>Heated Cathode</strong>: Source of electrons via thermionic emission, often coated with low work function oxides.</li>
+                <li><strong>Grid (Control Grid)</strong>: A cylindrical electrode with a negative potential relative to the cathode. It controls the number of electrons in the beam, thus regulating the <strong>brightness</strong> of the spot on the screen.</li>
+                <li><strong>Anodes (Accelerating and Focusing)</strong>: Cylindrical electrodes at high positive potentials from an EHT supply via a potential divider (KLB Fig 7.7). They accelerate electrons and form an <strong>electrostatic lens</strong> system (KLB Fig 7.8) to focus the beam to a sharp spot. The "Focus" knob adjusts the potential difference between these anodes.
+                    <div class="diagram-placeholder">Placeholder for Diagram: Potential Divider for Anodes (similar to KLB Fig 7.7)</div>
+                    <div class="diagram-placeholder">Placeholder for Diagram: Electrostatic Lens System (similar to KLB Fig 7.8)</div>
+                </li>
+            </ul>
+
+            <h3>4.2 The Deflection System</h3>
+            <p>Directs the electron beam across the screen. It has two pairs of plates:</p>
+            <ul>
+                <li><strong>Vertical Deflection Plates (Y-plates)</strong>: Horizontal plates (KLB Fig 7.9). An input signal voltage applied here creates a vertical electric field, deflecting the beam vertically in proportion to the signal's instantaneous magnitude. An AC voltage produces a vertical line if the time base is off.
+                    <div class="diagram-placeholder">Placeholder for Diagram: Y-plates deflection (similar to KLB Fig 7.9)</div>
+                </li>
+                <li><strong>Horizontal Deflection Plates (X-plates)</strong>: Vertical plates (KLB Fig 7.10). A voltage here causes horizontal deflection.
+                    <div class="diagram-placeholder">Placeholder for Diagram: X-plates deflection (similar to KLB Fig 7.10)</div>
+                </li>
+                <li><strong>Time Base Circuit</strong>: Typically applies a sawtooth voltage (KLB Fig 7.11) to the X-plates. This voltage linearly sweeps the beam horizontally across the screen at a constant speed (sweep phase) and then rapidly returns it (flyback phase). The "Time/Div" control adjusts the sweep speed. A fast sweep creates a continuous horizontal line (KLB Fig 7.12).
+                    <div class="diagram-placeholder">Placeholder for Diagram: Sawtooth Voltage Waveform (similar to KLB Fig 7.11)</div>
+                    <div class="diagram-placeholder">Placeholder for Diagram: Horizontal Line from Time Base (similar to KLB Fig 7.12)</div>
+                </li>
+            </ul>
+            <p>The CRO displays waveforms by using the Y-plates for vertical (signal) deflection and the X-plates (with the time base) for horizontal (time) deflection simultaneously. This creates a visual graph of voltage versus time.</p>
+
+            <h3>4.3 The Fluorescent Screen and Graphite Coating</h3>
+            <ul>
+                <li><strong>Fluorescent Screen</strong>: Coated with phosphor (e.g., zinc sulphide) which emits light when struck by the electron beam, creating a luminous spot. Screen persistence (glowing briefly after the beam moves) and human vision persistence help perceive rapidly changing spots as continuous lines or waveforms.</li>
+                <li><strong>Graphite Coating (Aquadag)</strong>: A conductive layer on the inner walls of the tube. It collects secondary electrons and primary beam electrons and returns them to earth. It also provides electrostatic shielding from external fields and can act as a post-deflection accelerating electrode.</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 5: Uses of the Cathode Ray Oscilloscope (CRO)</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (d) explain the uses of a Cathode Ray Oscilloscope; Content 37.2.4 Uses of C.R.O.</em></p>
+            <p>The CRO is a versatile tool.</p>
+            <h3>5.1 As a Voltmeter</h3>
+            <p>Can measure DC and AC voltages.</p>
+            <ul>
+                <li><strong>Procedure</strong>: Time base is off, voltage applied to Y-input.</li>
+                <li><strong>Measurement</strong>: DC voltage is found by vertical deflection (in divisions) multiplied by the Y-gain setting (V/div). \(Voltage = displacement \times sensitivity\). For AC voltage, a vertical line is seen, and the peak voltage is found by measuring the deflection from the center to the top/bottom and multiplying by the Y-gain.</li>
+                <li><strong>Advantages over Conventional Voltmeters</strong>:
+                    <ul>
+                        <li><strong>High Input Impedance</strong>: Draws negligible current from the circuit, not altering conditions.</li>
+                        <li><strong>Measures Both DC and AC</strong>: Can handle both voltage types.</li>
+                        <li><strong>Instantaneous Response</strong>: Electron beam has low inertia, allowing rapid response to voltage changes.</li>
+                        <li><strong>Wide Voltage Range and Safety</strong>: Adjustable Y-gain allows measurement of various voltages without risk of damage.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>5.2 Displaying Waveforms</h3>
+            <p>Most common use. Shows a voltage vs. time graph of a signal. Allows observation of shape, distortions, and measurement of parameters like amplitude and period.</p>
+            <h3>5.3 Determining Frequency</h3>
+            <p>Convenient for AC signals.</p>
+            <ul>
+                <li><strong>Procedure</strong>: Apply signal to Y-input, turn on time base, adjust "Time/Div" until clear cycles are visible (KLB Fig 7.14).
+                    <div class="diagram-placeholder">Placeholder for Diagram: Waveform for Frequency Measurement (similar to KLB Fig 7.14)</div>
+                </li>
+                <li><strong>Calculation</strong>: Measure the horizontal length (divisions) of one cycle (period, \(T\)). Calculate \(T\) by multiplying this length by the time base setting (s/div). Frequency \(f = \frac{1}{T}\). Accurate frequency measurement depends on correctly reading the time base setting and measuring the period on the screen.</li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 6: Problem Solving Involving the Cathode Ray Oscilloscope</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (e) solve problems involving Cathode Ray Oscilloscope; Content 37.2.5 Problems involving C.R.O.</em></p>
+            <p>Solving numerical problems involving voltage and frequency calculations from CRO traces is an important skill. These problems use the graticule and the calibrated Y-gain and time base settings.</p>
+            <div class="diagram-placeholder">Placeholder for Diagram: Example CRO Trace for Problem Solving (similar to KLB Fig 7.17)</div>
+            <h3>6.1 Calculating Voltage from CRO Trace</h3>
+            <p>When measuring voltage, the Y-gain setting (sensitivity in Volts/division) is crucial. The formula is: \(Voltage = Vertical~deflection~(divisions) \times Y-gain~(V/div)\).</p>
+            <p><strong>Worked Example (based on KLB Example 2, p.140):</strong></p>
+            <ul>
+                <li><strong>Part (a):</strong> A DC voltage applied to the Y-plates causes a deflection of 2.5 divisions. If this DC voltage is 50 V, determine the sensitivity of the Y-gain.
+                    <ul><li>\(Sensitivity = \frac{Voltage}{Number~of~divisions} = \frac{50~V}{2.5~div} = 20~V/div\).</li></ul>
+                </li>
+                <li><strong>Part (b):</strong> If an AC voltage with a peak value of 40 V is fed onto the Y-plates, and the Y-gain is set to 20 V/div, show what will be observed on the screen (assuming time base is off).
+                    <ul><li>\(Peak~deflection = \frac{Peak~Voltage}{Y-gain} = \frac{40~V}{20~V/div} = 2~divisions\). A vertical line of 4 divisions total length will be seen.</li></ul>
+                </li>
+            </ul>
+
+            <h3>6.2 Calculating Frequency from CRO Trace</h3>
+            <p>To calculate frequency, the period of the waveform must first be determined using the time base setting (seconds/division or milliseconds/division). The steps are:</p>
+            <ol>
+                <li>Measure the horizontal length (number of divisions, L) for one complete cycle of the waveform.</li>
+                <li>Note the time base setting (S, in s/div or ms/div).</li>
+                <li>Calculate the Period (T) of the waveform: \(T = L \times S\).</li>
+                <li>Calculate the Frequency (f) of the waveform: \(f = \frac{1}{T}\).</li>
+            </ol>
+            <p><strong>Worked Example (based on KLB Example 1, p.139):</strong></p>
+            <ul>
+                <li>Given: The time base control is set at 10 ms/div. One complete cycle of the AC signal displayed covers 8 horizontal divisions. Determine the frequency.
+                    <ul>
+                        <li>Period \(T = 8~div \times 10~ms/div = 80~ms = 0.08~s\).</li>
+                        <li>Frequency \(f = \frac{1}{T} = \frac{1}{0.08~s} = 12.5~Hz\).</li>
+                    </ul>
+                </li>
+            </ul>
+             <h3>6.3 Combined Problems (Voltage and Frequency)</h3>
+            <p><strong>Worked Example (based on KLB Example 3, p.141):</strong></p>
+            <p>Figure 7.17 shows a trace on a CRO screen. The time base control is set at 5 ms/div, and the Y-gain is at 100 V/div. The trace shows 2 complete cycles covering 8 horizontal divisions. The peak vertical deflection from the zero level is 3 divisions. Determine: (a) the frequency of the AC signal, and (b) the peak voltage of the input signal.</p>
+            <ul>
+                <li><strong>(a) Frequency of the AC signal:</strong>
+                    <ul>
+                        <li>Time for 2 cycles = \(8~div \times 5~ms/div = 40~ms\).</li>
+                        <li>Period T (time for 1 cycle) = \(\frac{40~ms}{2} = 20~ms = 0.02~s\).</li>
+                        <li>Frequency \(f = \frac{1}{T} = \frac{1}{0.02~s} = 50~Hz\).</li>
+                    </ul>
+                </li>
+                <li><strong>(b) Peak voltage of the input signal:</strong>
+                    <ul>
+                        <li>Peak Voltage = Peak deflection \(\times\) Y-gain = \(3~div \times 100~V/div = 300~V\).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 7: The Television (TV) Tube</h2>
+            <p><em>KCSE Syllabus Alignment: Objective 37.1.0 (c)... explain the functioning of a... Television tube (TV tube); Content 37.2.3... TV tubes.</em></p>
+            <p>The TV tube is a modified CRT specifically for displaying moving images. It shares the basic principle of an electron gun and fluorescent screen but has significant differences.</p>
+            <div class="diagram-placeholder">Placeholder for Diagram: Structure of a Television Tube (similar to KLB Fig 7.18)</div>
+            <h3>Key Modifications from a Standard CRO:</h3>
+            <ul>
+                <li><strong>Magnetic Deflection Coils</strong>: Unlike the electrostatic plates in a typical CRO, TV tubes use magnetic deflection coils around the tube's neck. These coils, carrying currents, create magnetic fields that deflect the electron beam. Magnetic deflection is more effective for large deflection angles and high-energy beams, allowing for wider screens with shorter tubes.</li>
+                <li><strong>Modulation of Beam Intensity by Video Signal</strong>: The incoming video signal is applied to the control grid of the electron gun. As the electron beam rapidly scans the screen in a <strong>raster scan</strong> pattern (series of horizontal lines), the video signal's voltage changes the grid's potential, modulating the beam's intensity (number of electrons). A stronger signal (bright part of the image) leads to higher beam intensity and a brighter spot; a weaker signal (dark part) leads to lower intensity and a dimmer spot.</li>
+                <li><strong>Image Formation</strong>: The rapid variation in brightness, synchronized with the scanning motion, "paints" the image on the screen. High scanning speed and persistence of vision/screen persistence create the illusion of a continuous moving picture.</li>
+                <li><strong>Color TV Tube</strong>: More complex, using three electron guns (for Red, Green, Blue) and a screen with corresponding phosphor dots. Varying the intensity of each beam creates different colors through additive mixing.</li>
+            </ul>
+            <p>The TV tube is an example of how the basic CRT has been developed into a complex technology for visual display by precisely controlling the electron beam's position and intensity.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 8: Conclusion</h2>
+            <p>In conclusion, Chapter 7 of the KLB Physics Book 4 aligns well with KCSE Syllabus Topic 37.0.0, covering the production, properties, and applications (CRO and TV tube) of cathode rays. A strong understanding of electron beam generation, control, the operation of CROs and TV tubes, and interpreting CRO displays are key learning outcomes. This knowledge forms a foundation for further studies in physics and electronics.</p>
+        </div>
+
+        <div class="content-page bg-white p-6 rounded-lg shadow-md">
+            <h2>Section 9: Revision Questions</h2>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>1.</strong> What are cathode rays, based on the descriptions in the sources?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Cathode rays are described as invisible rays emanating from the negative electrode (cathode) in evacuated tubes. They are streams of electrons moving from the cathode to the anode.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>2.</strong> From which electrode inside an evacuated tube do cathode rays originate?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Cathode rays originate from the negative electrode (cathode) inside an evacuated tube.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>3.</strong> Identify the primary physical phenomenon responsible for the emission of electrons that form cathode rays.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The primary physical phenomenon responsible is thermionic emission.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>4.</strong> Define thermionic emission as described in the sources.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Thermionic emission is the phenomenon where electrons are liberated from the surface of a material (typically a metal or coated metal) when it is heated to a sufficiently high temperature.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>5.</strong> Explain the role of heating the cathode material in the process of thermionic emission.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Heating the cathode material provides thermal energy to the electrons within the material. When this thermal energy is equal to or greater than the material's work function, the electrons can escape from the surface. A higher temperature leads to a greater rate of electron emission.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>6.</strong> Why are materials like barium and strontium oxides often used as coatings on cathodes in CRTs?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>These materials are used because they have a relatively low work function, meaning they emit electrons at lower temperatures than pure metals.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>7.</strong> According to the sources, what is the significance of the "work function" of a material in the context of thermionic emission?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The work function is the minimum energy an electron must acquire to overcome the attractive forces binding it to the parent atom and escape the surface of the material. Heating provides the energy to overcome this barrier.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>8.</strong> Describe the essential components of an experimental setup used to demonstrate thermionic emission as illustrated in Figure 7.1.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The essential components include an evacuated glass bulb, a cathode (coated with materials like barium/strontium oxides), a heater filament driven by a low voltage supply (e.g., 6V), an anode at a positive potential relative to the cathode, and power supplies for both the heater and the anode. A milliammeter is used to register the resulting current flow.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>9.</strong> In a basic cathode ray tube designed for producing cathode rays, what is the main function of the anode?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The main function of the anode is to accelerate the thermionically emitted electrons towards the other end of the tube by being maintained at a very high positive potential relative to the cathode.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>10.</strong> What specific type of power supply is typically used to create the high potential difference between the anode and cathode in a CRT, and what is its purpose?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>An Extra High Tension (EHT) power supply is used. Its purpose is to create a strong electric field that accelerates the electrons to very high velocities.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>11.</strong> Why is a high vacuum essential inside the glass envelope of a cathode ray tube?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A high vacuum is essential to prevent the emitted electrons from colliding with air molecules.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>12.</strong> List two negative consequences that would arise if significant air molecules were present inside a CRT.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Two negative consequences are: The electrons would lose kinetic energy due to collisions. The electrons would be scattered in various directions, preventing the formation of a focused beam. Air molecules might be ionized, creating charged particles that interfere with the tube's operation.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>13.</strong> What is the primary role of the fluorescent screen at the end of a CRT?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The primary role is to make the invisible cathode rays visible. When the electrons strike the screen, it emits light (fluoresces), creating a visible spot or pattern.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>14.</strong> Name an example of a material commonly used for the fluorescent screen coating, as mentioned in the sources.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>An example of a material used is zinc sulphide.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>15.</strong> State the property of cathode rays regarding their path of travel in the absence of external electric or magnetic fields.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>In the absence of external fields, cathode rays travel in straight lines.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>16.</strong> Describe the Maltese cross experiment and what conclusion can be drawn from its results regarding cathode ray behavior.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The Maltese cross experiment involves placing an opaque object (the Maltese cross) in the path of the cathode rays. It casts a sharp, well-defined shadow on the fluorescent screen. The conclusion is that cathode rays propagate in straight lines.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>17.</strong> Which property of cathode rays is directly utilized to make the invisible electron beam visible as a glowing spot or pattern on a screen?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The property utilized is their ability to cause fluorescence.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>18.</strong> Explain how observing the deflection of cathode rays when passing through an electric field provides evidence about their electrical charge.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>When cathode rays pass between two charged plates, they are deflected towards the positively charged plate. This attraction to the positive plate is evidence that they carry a negative charge.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>19.</strong> If cathode rays pass between two charged parallel plates, with the top plate positive and the bottom plate negative, towards which plate will the rays be deflected?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The rays will be deflected towards the top plate.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>20.</strong> How does the deflection of cathode rays when passing through a magnetic field support the conclusion that they are negatively charged?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The direction of deflection in a magnetic field is consistent with the force exerted on negatively charged particles moving in that field.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>21.</strong> Which rule, related to the direction of force on a current-carrying conductor in a magnetic field, is applicable to the deflection of cathode rays in a magnetic field?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Fleming's Left-Hand Rule is applicable.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>22.</strong> What does the ability of cathode rays to cause fluorescence, heating effects, and produce X-rays indicate about them?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>It indicates that they possess kinetic energy.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>23.</strong> Describe the process by which X-rays are produced using cathode rays, as mentioned in the sources.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>X-rays are produced when cathode rays (fast-moving electrons) are suddenly stopped or decelerated by impacting a dense metal target (an anticathode or target). Their kinetic energy is converted into X-rays.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>24.</strong> Name the sophisticated electronic instrument that is an evolution of the basic cathode ray tube and is used for displaying electrical signals.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The instrument is the Cathode Ray Oscilloscope (CRO).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>25.</strong> Identify the four main components of a Cathode Ray Oscilloscope (CRO).</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The four main components are: An electron gun. A system of plates for deflecting the electron beam (deflection system). An evacuated strong glass envelope. A fluorescent screen at one end of the glass envelope.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>26.</strong> What is the primary function of the electron gun assembly within a CRO?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The primary function of the electron gun is to produce a narrow, focused, and accelerated beam of electrons.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>27.</strong> Describe the function of the control grid within the electron gun and explain how its potential affects the electron beam.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The control grid is a cylindrical electrode surrounding the cathode. It is maintained at a negative potential relative to the cathode. Its function is to control the flow of electrons (and thus the intensity of the beam) passing through its aperture. A more negative potential repels more electrons, reducing the beam current and brightness; a less negative potential allows more electrons through, increasing brightness.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>28.</strong> How does adjusting the brightness knob on a CRO control the display's intensity?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Adjusting the brightness knob controls the negative potential of the control grid. By varying this potential, it regulates the number of electrons reaching the screen, thus controlling the intensity (brightness) of the spot.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>29.</strong> Explain the two main functions of the anodes in the electron gun of a CRO.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The two main functions are acceleration of the electrons to high velocities and focusing the electron beam into a sharp spot.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>30.</strong> What creates the "electrostatic lens" or "electronic lens" effect used for focusing the electron beam in a CRO?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The anodes, particularly those at different potentials (like A1 and A2), create an electric field configuration that acts as an "electrostatic lens" or "electronic lens" to converge the electron beam.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>31.</strong> What is the purpose of the deflection system in a CRO?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The purpose of the deflection system is to manipulate the path of the electron beam, allowing it to be directed to any point on the screen.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>32.</strong> Explain the function of the vertical deflection plates (Y-plates) in a CRO and what type of signal is typically applied to them.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The Y-plates are a pair of horizontal plates. Their function is to provide vertical deflection of the electron beam. The input signal (voltage to be displayed) is typically applied across them.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>33.</strong> If an alternating voltage is applied to the Y-plates of a CRO with the time base switched off, what kind of trace would be observed on the screen?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A vertical line would be observed.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>34.</strong> What is the function of the horizontal deflection plates (X-plates) in a CRO?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The function of the X-plates (a pair of vertical plates) is to provide horizontal deflection of the electron beam when a voltage is applied across them.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>35.</strong> Describe the role of the time base circuit in a CRO when displaying a waveform against time.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The time base circuit generates a special voltage (a sawtooth waveform) that is applied to the X-plates. This voltage causes the electron beam to sweep horizontally across the screen at a constant speed, providing the time axis for the display.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>36.</strong> What specific type of voltage waveform is generated by the time base circuit and applied to the X-plates?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A sawtooth voltage waveform is generated and applied.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>37.</strong> Explain the terms "sweep" and "flyback" in the context of the time base operation.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>"Sweep" refers to the phase where the sawtooth voltage increases linearly with time, causing the electron beam to move horizontally across the screen from left to right at a constant speed. "Flyback" refers to the rapid drop of the sawtooth voltage to its initial value, causing the beam to quickly return to the left side of the screen to start the next sweep.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>38.</strong> How does the synchronized operation of the vertical and horizontal deflection systems result in the display of a signal waveform?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The Y-plates provide vertical deflection proportional to the instantaneous signal voltage, while the time base on the X-plates provides horizontal deflection proportional to time. The combination of these simultaneous movements traces the waveform of the input signal on the screen, showing voltage on the vertical axis and time on the horizontal axis.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>39.</strong> What is persistence as it relates to the CRO screen, and why is this property important for viewing rapidly changing signals?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Persistence is the property of the fluorescent screen where it continues to glow for a short duration (around 0.05 seconds) after the electron beam has moved past a point. It is important because, combined with human persistence of vision, it allows rapidly changing spots or fast sweeps to be perceived as continuous lines or waveforms, enabling the visualization of dynamic signals.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>40.</strong> What is the name given to the conductive coating on the inner walls of the CRO tube, and state two purposes it serves.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The conductive coating is called graphite or Aquadag. Two purposes it serves are: It collects secondary electrons emitted from the screen and conducts them, along with the primary beam electrons, back to the power supply (earth), preventing charge build-up on the screen. It shields the electron beam from external stray electric fields that could distort its path. It can act as a post-deflection accelerating electrode.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>41.</strong> List two distinct advantages of using a CRO to measure voltage compared to a conventional voltmeter.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Two advantages are: High input impedance: The CRO draws negligible current from the circuit, not affecting the circuit conditions. Can measure both DC and AC voltages (including peak/peak-to-peak for AC). Instantaneous response due to low inertia of the electron beam. Wide voltage range measurement with less risk of damage.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>42.</strong> Explain how to determine the peak voltage of an AC signal displayed as a vertical line on a CRO screen (time base off) using the Y-gain setting.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>With the time base off and an AC signal on the Y-input, a vertical line is displayed. The length of this line corresponds to twice the peak voltage. Measure the vertical displacement from the center (zero-volt level) to the maximum extent of the line in divisions. Multiply this vertical displacement (in divisions) by the Y-gain setting (in V/div) to find the peak voltage.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>43.</strong> Outline the steps involved in determining the frequency of an AC signal using a CRO and its time base control.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The steps are: Apply the AC signal to the Y-input and switch on the time base. Adjust the Time/Div control until a few complete, stable cycles are clearly displayed. Carefully measure the horizontal length (number of divisions) corresponding to one complete cycle of the waveform from the screen's graticule. Note the time base setting (e.g., in ms/div or µs/div). Calculate the period (T) of the waveform by multiplying the number of divisions for one cycle by the time base setting (T = number of divisions × time base setting). Convert the period to seconds if necessary. Calculate the frequency (f) using the relationship \(f = 1/T\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>44.</strong> If a CRO's time base setting is 10 ms/div and one complete cycle of a waveform occupies 5 horizontal divisions, calculate the period of the waveform.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Period T = (number of divisions for one cycle) × (time base setting) = 5 divisions × 10 ms/div = 50 ms.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>45.</strong> Using the result from the previous question (period = 50 ms), calculate the frequency of the waveform.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Convert period to seconds: T = 50 ms = 0.05 s. Frequency \(f = 1 / T = 1 / 0.05 s = 20 Hz\).</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>46.</strong> A DC voltage is applied to the Y-input of a CRO with the Y-gain set to 5 V/div, causing the spot to deflect upwards by 4 divisions. Calculate the magnitude of the DC voltage.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Voltage = vertical displacement × Y-gain = 4 divisions × 5 V/div = 20 V.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>47.</strong> What is the main difference in the deflection system between a standard CRO and a television (TV) tube, as described in the sources?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A standard CRO typically uses electrostatic deflection plates (X and Y plates), while a television tube employs magnetic deflection coils.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>48.</strong> State one advantage of using magnetic deflection coils, as in TV tubes, compared to the electrostatic deflection plates used in many CROs.</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>Magnetic deflection systems are generally more effective for achieving large deflection angles with high-energy electron beams. This allows TV tubes to have wider screens while maintaining a relatively shorter tube length.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>49.</strong> In a monochrome TV tube, how is the brightness of the picture controlled point by point to create an image?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>The incoming video signal is applied to the control grid of the electron gun. As the electron beam scans the screen, the instantaneous voltage of the video signal varies the potential of the grid, which in turn modulates the intensity (number of electrons) of the electron beam. This causes the screen to glow with varying brightness at each point, creating the image.</p></div>
+            </div>
+            <div class="question-container">
+                <button class="question-toggle">
+                    <span><strong>50.</strong> According to the source, what is the basic principle behind the production of color on the screen of a color television tube?</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content hidden"><p>A color TV tube typically uses three separate electron guns (for Red, Green, and Blue). The screen is coated with tiny phosphor dots that emit red, green, or blue light when struck by electrons. By varying the intensities of the three electron beams, the brightness of the respective color phosphors is controlled at each point, and a full spectrum of colors is reproduced through additive color mixing.</p></div>
+            </div>
+            </div>
+
+        <div class="mt-8 flex justify-between">
+            <button id="prev-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.content-page');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            sidebarLinks.forEach((link) => { 
+                link.classList.toggle('active-link', parseInt(link.dataset.page) === index);
+            });
+            currentPageIndex = index;
+            updateNavButtons();
+            window.scrollTo(0, 0); 
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex === pages.length - 1;
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(e.target.closest('.sidebar-link').dataset.page);
+                showPage(pageIndex);
+                if (window.innerWidth < 768) { 
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                showPage(currentPageIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPageIndex < pages.length - 1) {
+                showPage(currentPageIndex + 1);
+            }
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        mainContent.addEventListener('click', () => {
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        const questionToggles = document.querySelectorAll('.question-toggle');
+        questionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const answerContent = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                answerContent.classList.toggle('hidden');
+                if (answerContent.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        showPage(0);
+    </script>
+
+</body>
+</html>
